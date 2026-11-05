@@ -1,1 +1,59 @@
+name: 每日简报
 
+on:
+  schedule:
+    # UTC 23:20 = 北京时间次日 07:20
+    # GitHub 免费定时任务会延迟几分钟到半小时，属正常
+    - cron: "20 23 * * *"
+  workflow_dispatch:      # 支持手动触发，方便首次测试
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-briefing
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 安装 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 安装依赖
+        run: pip install --quiet requests markdown
+
+      - name: 生成简报
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+          # 微信推送（Server酱），不填则跳过
+          SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
+
+          # 邮件推送，不填则跳过。默认 QQ 邮箱 465 端口
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+        run: python scripts/generate.py
+
+      - name: 提交并推送
+        run: |
+          git config user.name  "briefing-bot"
+          git config user.email "briefing-bot@users.noreply.github.com"
+          git add docs
+          if git diff --cached --quiet; then
+            echo "没有新内容，跳过提交"
+          else
+            git commit -m "简报 $(date -u +%Y-%m-%d)"
+            git push
+          fi
