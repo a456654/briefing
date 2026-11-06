@@ -68,6 +68,9 @@ SYSTEM_PROMPT = """你是一名严谨的新闻简报编辑，服务对象是一�
 ## 一句话
 
 ## 今日主线
+### 发生了什么
+### 为什么重要
+### 接下来看什么
 
 ## 国内
 
@@ -76,9 +79,7 @@ SYSTEM_PROMPT = """你是一名严谨的新闻简报编辑，服务对象是一�
 ## 数据与日程
 
 ## 两个判断
-
 ### 判断一 · 往回看（因果）
-
 ### 判断二 · 往前看（预测）
 
 ## 纠偏
@@ -93,12 +94,26 @@ SYSTEM_PROMPT = """你是一名严谨的新闻简报编辑，服务对象是一�
 - 两个判断各 150–200 字
 - 正文合计 2300–2700 字
 
-【长度规则】
-新闻正文不许为了给 → 腾地方而压缩。→ 是加在外面的。
-每条控制在 80–150 字：宁可少写一个背景，也不要写成 200 字的小文章。
-变长的唯一理由是具体信息增加：数字、日期、人名、条款、限定条件、各方说法。
-形容词、排比、背景铺陈不算信息，出现即删。
-15 条是死指标：装不下的进"本期未覆盖"，只留标题。
+【排版铁律 · 最高优先级】
+读者是在手机微信里读，屏幕窄、注意力短。密集的大段落会直接导致不读。
+
+1. **每条新闻 = 一个独立段落，段落之间必须空一行。** 绝不允许把多条挤成一坨。
+2. **每条新闻的开头必须是 10–18 字的加粗短句**，概括这条是什么；细节放在后面。
+3. **任何段落不得超过 3 行（约 70 字）。** 超了就拆成两段。宁可多空一行，不许写长段。
+4. **每条事实后面另起一行，写「> → 后果句」。** 用引用块 + 箭头，让它从正文里跳出来。
+5. **栏目之间用「---」分隔。** 主线内部三个小节之间也要各用一次。
+6. **数字、日期、关键主体一律加粗。** 读者扫一眼就能抓到。
+7. 一句话栏目：第一行加粗给结论，第二行补一句背景。
+
+正确示范：
+
+**得州翻蓝，1988 年以来首次**
+
+民主党拿下得州参议院席位，并拉下三任州长阿博特。堪萨斯自大萧条以来首次选出民主党参议员。
+
+> → 深红州失守，说明这是全国性惩罚，不是局部波动。
+
+错误示范（禁止）：把上面三段压成一段 200 字、没有加粗、没有空行、没有引用块。
 
 【硬性规则】
 1. 只能使用我提供的条目作为事实来源。严禁引入你记忆中的新闻，严禁编造事件、数字、人名、机构名。
@@ -320,7 +335,8 @@ PAGE_TEMPLATE = """<!doctype html>
     width: 3px; border-radius: 2px; background: var(--accent); opacity: .55;
   }}
   h3 {{ font-size: 1.02em; font-weight: 650; margin: 1.7em 0 .55em; }}
-  p, li {{ margin: .6em 0; }}
+  p {{ margin: 1.05em 0; }}
+  li {{ margin: .55em 0; }}
   strong {{ font-weight: 650; }}
   a {{
     color: var(--accent); text-decoration: none;
@@ -331,6 +347,13 @@ PAGE_TEMPLATE = """<!doctype html>
     margin: 1.2em 0; padding: .7em 1em; color: var(--muted);
     border-left: 3px solid var(--line); font-size: .94em;
   }}
+  /* 「> → 后果句」的引用块：让后果从正文里跳出来 */
+  blockquote.soq {{
+    margin: .75em 0 .2em; padding: .18em 0 .18em .95em;
+    border-left: 2px solid var(--accent);
+    color: var(--fg-soft); font-size: .95em; line-height: 1.7;
+  }}
+  blockquote.soq p {{ margin: .15em 0; }}
   hr {{ border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }}
   code {{
     background: var(--pill); padding: .12em .4em;
@@ -503,12 +526,18 @@ def render_html(
         extensions=["tables", "fenced_code", "sane_lists", "nl2br"],
     )
 
-    # 「→」独立成块
+    # 「→」独立成块（正文里裸箭头的老格式）
     body = re.sub(
         r"^\s*→\s*(.+?)(?=</li>|</p>|<br\s*/?>|$)",
         r'<span class="so">→ \1</span>',
         body,
         flags=re.M,
+    )
+    # 引用块形式的后果句：「> → …」标上 soq
+    body = re.sub(
+        r"<blockquote>\s*(<p>\s*→)",
+        r'<blockquote class="soq">\1',
+        body,
     )
     body = style_tags(body)
     body = tidy_sources(body)
