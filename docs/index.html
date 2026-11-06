@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>每日简报 · 2026-11-06</title>
+<style>
+  :root {
+    --fg:#1c1c1e; --fg-soft:#3d3d40; --bg:#ffffff; --muted:#8a8a8e;
+    --line:#e4e4e7; --line-soft:#f1f1f3; --accent:#b3352b; --pill:rgba(120,120,128,.10);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fg:#e9e9eb; --fg-soft:#c6c6ca; --bg:#111112; --muted:#8e8e93;
+      --line:#26262a; --line-soft:#1d1d20; --accent:#e37a6e; --pill:rgba(150,150,160,.14);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0 auto; padding: 26px 20px 76px; max-width: 720px;
+    background: var(--bg); color: var(--fg);
+    font: 16.5px/1.8 -apple-system, BlinkMacSystemFont, "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  }
+  @media (max-width: 480px) {
+    body { font-size: 16px; padding: 22px 16px 64px; }
+  }
+  h1 {
+    font-size: 1.5em; font-weight: 700; line-height: 1.32;
+    letter-spacing: -.015em; margin: 0 0 .12em;
+  }
+  h2 {
+    position: relative;
+    font-size: .95em; font-weight: 650; letter-spacing: .1em; color: var(--fg-soft);
+    margin: 2.8em 0 1.05em; padding: 0 0 .5em .8em;
+    border-bottom: 1px solid var(--line);
+  }
+  h2::before {
+    content: ""; position: absolute; left: 0; top: .16em; bottom: .62em;
+    width: 3px; border-radius: 2px; background: var(--accent); opacity: .55;
+  }
+  h3 { font-size: 1.02em; font-weight: 650; margin: 1.7em 0 .55em; }
+  p, li { margin: .6em 0; }
+  strong { font-weight: 650; }
+  a {
+    color: var(--accent); text-decoration: none;
+    border-bottom: 1px solid rgba(128,128,128,.34);
+  }
+  a:hover { border-bottom-color: var(--accent); }
+  blockquote {
+    margin: 1.2em 0; padding: .7em 1em; color: var(--muted);
+    border-left: 3px solid var(--line); font-size: .94em;
+  }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
+  code {
+    background: var(--pill); padding: .12em .4em;
+    border-radius: 4px; font-size: .88em;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: .9em; margin: 1.2em 0; }
+  th, td { border: 1px solid var(--line); padding: .5em .65em; text-align: left; vertical-align: top; }
+
+  /* 顶部时间戳 */
+  .stamp {
+    color: var(--muted); font-size: .78em; letter-spacing: .03em;
+    margin: 0 0 1.5em; display: flex; align-items: center; gap: .5em;
+  }
+  .stamp::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); flex: none;
+  }
+
+  /* 可信度标签 */
+  .tag {
+    display: inline-block; font-size: .75em; font-weight: 500; line-height: 1.6;
+    padding: .06em .5em; border-radius: 4px; margin-right: .45em;
+    vertical-align: .1em; white-space: nowrap;
+    background: var(--pill); color: var(--muted);
+  }
+  .tag.ev  { color: #2f7d4f; background: rgba(47,125,79,.13); }
+  .tag.off { color: #3a6ea5; background: rgba(58,110,165,.13); }
+  .tag.chk { color: #96660f; background: rgba(150,102,15,.15); }
+  @media (prefers-color-scheme: dark) {
+    .tag.ev  { color: #79d3a2; background: rgba(121,211,162,.15); }
+    .tag.off { color: #8dbdee; background: rgba(141,189,238,.15); }
+    .tag.chk { color: #e2b562; background: rgba(226,181,98,.16); }
+  }
+
+  /* 「→」后果句 */
+  .so {
+    display: block; margin: .55em 0 .15em; padding: .1em 0 .1em .8em;
+    border-left: 2px solid var(--accent);
+    color: var(--fg-soft); font-size: .95em; line-height: 1.7;
+  }
+
+  /* 新闻列表：去符号，用细分隔线 */
+  ul.news { list-style: none; padding: 0; margin: 0; }
+  ul.news > li {
+    margin: 0; padding: 1.1em 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  ul.news > li:first-child { border-top: none; padding-top: .15em; }
+  ul.news > li > p { margin: 0; }
+
+  /* 来源 */
+  .src {
+    display: block; margin-top: .55em;
+    font-size: .76em; color: var(--muted); letter-spacing: .03em;
+  }
+  .src a {
+    color: var(--muted); border-bottom: 1px dotted rgba(128,128,128,.45);
+  }
+  .src a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* 归档 */
+  nav.archive {
+    margin-top: 3.4em; padding-top: 1.4em;
+    border-top: 1px solid var(--line);
+  }
+  nav.archive h2 { margin: 0 0 .9em; border: none; padding: 0; }
+  .arcrow {
+    display: flex; align-items: baseline; gap: 1em;
+    padding: .55em 0; border-bottom: 1px solid var(--line-soft);
+  }
+  .arcrow:last-child { border-bottom: none; }
+  .ym { color: var(--muted); font-size: .8em; white-space: nowrap; min-width: 6.6em; }
+  .chips { display: flex; flex-wrap: wrap; gap: .4em; }
+  .chips a {
+    display: inline-block; min-width: 2em; text-align: center;
+    padding: .06em .35em; border-radius: 5px;
+    font-size: .86em; font-variant-numeric: tabular-nums;
+    color: var(--fg-soft); background: var(--pill); border-bottom: none;
+  }
+  .chips a:hover { color: #fff; background: var(--accent); }
+  .empty { color: var(--muted); font-size: .86em; }
+
+  nav.back { margin-top: 3.4em; font-size: .9em; }
+</style>
+</head>
+<body>
+<p class="stamp">2026-11-06 15:13 更新 · 北京时间</p>
+<h1>每日简报 · 2026-11-06</h1>
+<h2>一句话</h2>
+<p>美国中期选举民主党夺回两院，全球科技股应声暴跌；同一天，香港与澳门国安案分别宣判十年与十二年半。</p>
+<h2>今日主线</h2>
+<p><span class="tag ev">已证实</span>美国中期选举结果落定，民主党同时拿下众议院与参议院，为2023年以来首次全面控制国会。共和党内部随即出现公开追责，多名共和党人向BBC表示特朗普只顾个人政治遗产、漠视选民议题；副总统万斯发长文与特朗普切割，美媒解读为2028年布局。市场反应集中在监管预期而非财政预期：投资者担心民主党国会加强对数据中心建设与AI产业的审查，标普500录得近两年最大单日跌幅，韩国股市触发熔断。国会层面的具体动作已经出现：众议院三名共和党领导人要求英伟达CEO黄仁勋自愿出席闭门简报会，说明其与一名被认定向中国情报机构输送信息的中国高管的往来。外交上，民主党国会能改变什么仍受限——特朗普依旧掌握外交主导权，但调查权与拨款权已换手。同日，防长赫格塞思面临最快下周的弹劾表决，白宫否认其与国务卿卢比奥将离任。<span class="src">来源：<a href="https://www.npr.org/2026/11/04/g-s1-151745/up-first-newsletter-midterms-democrats-congress-control">NPR</a> · <a href="https://www.bbc.com/zhongwen/articles/ckreyrxvg3xyo/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a> · <a href="https://www.bbc.com/zhongwen/articles/cw5ynld35e3ro/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a> · <a href="https://news.google.com/rss/articles/CBMiZkFVX3lxTFBjQ0hObFRPaWVxMUdMZ1pDQW1XZDhKUC10U1o4aTQ4MEw3S3V2WWE4RldHODJ6WW5HdjlzZF8zZ29Ec0F6WjB5NUh5ZVRpbkszbDdIc21wOGMxUFJkQ044ajJFTXlKUQ?oc=5">东方财富</a> · <a href="https://cn.nytimes.com/business/20261106/stocks-midterms-artificial-intelligence/?utm_source=RSS">纽约时报中文网</a> · <a href="https://www.bbc.com/zhongwen/articles/cqlyeen0z8x2o/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a> · <a href="https://cn.nytimes.com/usa/20261106/house-republicans-nvidia-jensen-huang-china/?utm_source=RSS">纽约时报中文网</a> · <a href="https://www.npr.org/2026/11/05/nx-s1-6028977/democrats-foreign-policy-iran-war-ukraine">NPR</a> · <a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxQTVdVY0pabDFMMlhUbURQOUUtblUyblN6LXowQ3lLalJTdlJReFpXdy0xTENPb3Z4Uzk4ZjhZc3BwVmRxMHYza2JWNFVtOEZjYUZic2R3amlVS1lRdGNLTGQyOU5DWFlpRno2MzcxZHI2SUNOcEdhcnc0VnJUa3ZxUlZLUWtQUkg4NldGWERsYzRDenNDMWE0bmJnalNwX3VrUHVxanF0ZXlSXzdfc0xUenNB0gG3AUFVX3lxTE1KSE43bVFVWU9Zc3NkeHQ2Zzd2NHJGa2pRZFVyYkVuczBmQjdyanVod3RxZGprQVQ5bm1UQTdZZUhBcThIWW0xNnlfNDY1eTRmWWVOWlYwVzBWaEVIa3c5aEotS3dyTDhxVEgyUEJUZ2NHRjZzYnFfTmIxeGRCWFVMY2IwV1JLSTlXVjYtTG9tbDFoMGVWa2Z6QzYxYmh3WXZ5M0VUTk0xM055NWxpQ2tYUWE3U0dZUQ?oc=5">Al Jazeera</a> · <a href="https://www.bbc.co.uk/news/articles/cqg7xxg4jdv5o?at_medium=RSS&amp;at_campaign=rss">BBC World</a> · <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE9RTldBS1Fickl3LVRPYTNyVXlYcnNTcGlUVTRpckNSUUNzMEZRVzRVYXA5MGpQS0tUc3lnZ1pIczNjX1RWZ1RlaWpSR0ppODMyemJHeG9zZzdwZVhmUE9Uak9YdVJpM0EtYVdvVHVVR3k?oc=5">中华网</a></span></p>
+<h2>国内</h2>
+<ul class="news">
+<li>
+<p><span class="tag ev">已证实</span>香港国安案宣判，黄之锋因"勾结外国势力"被判10年监禁，法官裁定"罪行重大"；其此前已因另案服刑近六年，出狱时约40岁。<br />
+<span class="so">→ 同一被告第二次被国安法量刑，后续同类案件的刑期基准被抬高。</span></p>
+<span class="src">来源：<a href="https://cn.nytimes.com/china/20261105/joshua-wong-hong-kong-sentenced/?utm_source=RSS">纽约时报中文网</a> · <a href="https://www.npr.org/2026/11/05/g-s1-152032/hong-kong-activist-wong-sentenced">NPR</a></span></li>
+<li>
+<p><span class="tag sig">单一来源</span>澳门首宗国安案宣判，区锦新被判12年6个月，罪名"颠覆国家政权"；审理不公开，由其"指派律师"辩护，法官与律师身份未披露。<br />
+<span class="so">→ 澳门国安司法先例落地，此后澳门涉政治案件的不公开审理成默认程序。</span></p>
+<span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/cw62yyejjrlro/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a> · <a href="https://www.bbc.co.uk/news/articles/cmdx33v9vvr2o?at_medium=RSS&amp;at_campaign=rss">BBC World</a></span></li>
+<li>
+<p><span class="tag sig">单一来源</span>中国监管机构否决软银以54亿美元收购ABB机器人业务的交易。ABB表示中国是其机器人业务最大市场，为中国客户生产的机器绝大部分在华制造。<br />
+<span class="so">→ 外资并购涉在华产能的机器人资产，先过中国反垄断这一关，交易对价重估。</span></p>
+<span class="src">来源：<a href="https://cn.nytimes.com/business/20261106/softbank-robotics-china-block/?utm_source=RSS">纽约时报中文网</a></span></li>
+<li>
+<p><span class="tag sig">单一来源</span>中国空间站制备出铷原子云，温度降至9.7皮开尔文，为目前已知最冷人造物质。<br />
+<span class="so">→ 超冷原子实验平台在轨可用，量子传感与冷原子钟的太空标定不再依赖地面。</span></p>
+<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiTEFVX3lxTFB1U0FFeTlvVXNka1hrb0tzWk94UXdSS2xLWHZOYjJOQXRXakNpYTVLM3drb19BYV95SnM3SXdiOVBNLWltSk9WV1VQWVI?oc=5">IT之家</a> · <a href="https://news.google.com/rss/articles/CBMiTEFVX3lxTFB1U0FFeTlvVXNka1hrb0tzWk94UXdSS2xLWHZOYjJOQXRXakNpYTVLM3drb19BYV95SnM3SXdiOVBNLWltSk9WV1VQWVI?oc=5">新华网</a></span></li>
+<li>
+<p><span class="tag sig">单一来源</span>中央气象台发布预警，北京、河北等地有中到大雪或雨夹雪，河北发布暴雪橙色预警，多地雨雪天气影响交通。<br />
+<span class="so">→ 立冬前后首场雨雪落在华北，周末公路与航班改签成本先涨。</span></p>
+<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE9HWVU0X0FGd0dCMlVndGxabTBIRVlYUjB5Q0ZwWVZSeG50ZTVaMTQyOVh1d1RjYTdTRFdYYWktS01qVzA4TDhnSnR5c0hFSDQzX2RRbjFaaGRjNHRFekpVYlBsZlVPazdEaDFib1dWcTA?oc=5">ThePaper.cn</a> · <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE9HWVU0X0FGd0dCMlVndGxabTBIRVlYUjB5Q0ZwWVZSeG50ZTVaMTQyOVh1d1RjYTdTRFdYYWktS01qVzA4TDhnSnR5c0hFSDQzX2RRbjFaaGRjNHRFekpVYlBsZlVPazdEaDFib1dWcTA?oc=5">北京市人民政府门户网站</a></span></li>
+</ul>
+<h2>国际</h2>
+<ul class="news">
+<li>
+<p><span class="tag ev">已证实</span>巴拉圭总统培尼亚在银行危机后辞职，随后数分钟内遭国会弹劾；与政府关联的数字银行Ueno倒闭冻结数百万储户存款。<br />
+<span class="so">→ 存款冻结到总统下台只用数日，拉美数字银行的挤兑传导速度被重新定价。</span></p>
+<span class="src">来源：<a href="https://www.npr.org/2026/11/05/nx-s1-6030842/paraguay-president-impeached-bank-collapse">NPR</a> · <a href="https://www.theguardian.com/world/2026/nov/05/paraguay-president-santiago-pena-resigns">卫报</a></span></li>
+<li>
+<p><span class="tag ev">已证实</span>法国工会联合发起抗议，内政部估计全法60万人参与，工会称人数远高于此，为多年来最大规模一日抗议，诉求聚焦生活成本。<br />
+<span class="so">→ 内政部与工会口径差一倍，罢工规模之争本身成了下一轮谈判的筹码。</span></p>
+<span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/ckx2qzv835pgo?at_medium=RSS&amp;at_campaign=rss">BBC World</a> · <a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxPTUNHazBUU1dRMnFWUUstOGlQTzdrN3Z5eGNZRjZkTjZZcUtmRVlpRmZ2NDlPbmlWYzBMNjRkcUNuWWJ4VXVmYWFLSktxeFRzUS13eXFyb0VUN0lsMW9WNjRfdWEtV3dOWGxPa2g3aHVVQmV1YlllQkxBN2ZPdzJrMkFvcWJmaURuV2ZacG9JWDJLWERJ?oc=5">CNN</a></span></li>
+<li>
+<p><span class="tag ev">已证实</span>欧洲至少21个航班受虚假炸弹威胁影响，为一周内第二波；英国政府称属"恶意虚假威胁"。<br />
+<span class="so">→ 一周两次，航司的改航与安检成本按周计，欧洲短途票价先承压。</span></p>
+<span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/cmpqg08nz3pqo?at_medium=RSS&amp;at_campaign=rss">BBC World</a> · <a href="https://news.google.com/rss/articles/CBMijAFBVV95cUxPd1dQVzVYREM5dVl3NWhjSVFwT2k5N3JtcjVwUXppaXBYZWhicVVTRU5UTDFTQ2pZNjJRZmt5R2YwcXdwSVB3TWFFUUtNWmdycXdFdVp1QUt3OXFWZnREUnRDR1otUXBsbVlBd1BIMWliX0hMM0NsQ0t3VDRhNTVaX212cDFHbllyd1o0SQ?oc=5">纽约时报</a></span></li>
+<li>
+<p><span class="tag sig">单一来源</span>伊朗经卡塔尔向美国转交核问题提案，一名伊朗高级官员向路透社确认；同时特朗普威胁"摧毁"伊朗。<br />
+<span class="so">→ 提案走卡塔尔而非阿曼渠道，海湾国家在美伊之间的中介位次重排。</span></p>
+<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiywFBVV95cUxOSlJZVlphdWhPcDNGc1E5eDVNdDdMQkJNTXVDS0RYSVRqaC1tblFqQy1FekRQdldnV0FsMU5RdnVHNEI3UEZWMC1MY1l5cnRtcjBlcDlpUXdvX0hXbV91S1UxajV1TEx1VmJ2SzNLNElXSjc3YkdmYWw4VGNXZEl5NXR4RFNjRXBxeEZMLWpBT1Z5X2JRc3NEdkdMZDljQ0dkZXZRbzc3U1NmNkhnaFN5QzNhVmRzSmhsM0Q5VzU3Mm11OWZBa3M1V1lvaw?oc=5">Reuters</a> · <a href="https://news.google.com/rss/articles/CBMiywFBVV95cUxOSlJZVlphdWhPcDNGc1E5eDVNdDdMQkJNTXVDS0RYSVRqaC1tblFqQy1FekRQdldnV0FsMU5RdnVHNEI3UEZWMC1MY1l5cnRtcjBlcDlpUXdvX0hXbV91S1UxajV1TEx1VmJ2SzNLNElXSjc3YkdmYWw4VGNXZEl5NXR4RFNjRXBxeEZMLWpBT1Z5X2JRc3NEdkdMZDljQ0dkZXZRbzc3U1NmNkhnaFN5QzNhVmRzSmhsM0Q5VzU3Mm11OWZBa3M1V1lvaw?oc=5">NDTV</a></span></li>
+<li>
+<p><span class="tag sig">单一来源</span>伊朗宣布印度、中国、卡塔尔、伊拉克四国船只可自由通过霍尔木兹海峡，分析人士称相关安排带政治风险。<br />
+<span class="so">→ 中国船只获豁免，但豁免由德黑兰单方给，随时可单方收回。</span></p>
+<span class="src">来源：<a href="https://www.aljazeera.com/news/2026/11/6/why-is-iran-exempting-india-china-qatar-iraq-from-hormuz-restrictions?traffic_source=rss">Al Jazeera</a></span></li>
+<li>
+<p><span class="tag sig">单一来源</span>以色列总统赫尔佐格将于周日提名组阁人选，此前多数议员支持艾森科特而非内塔尼亚胡。<br />
+<span class="so">→ 组阁授权换人，以色列对伊与对加沙政策在周日前进入观望期。</span></p>
+<span class="src">来源：<a href="https://www.aljazeera.com/news/2026/11/6/israels-herzog-to-name-a-candidate-to-form-government-on-sunday?traffic_source=rss">Al Jazeera</a></span></li>
+</ul>
+<h2>数据与日程</h2>
+<ul class="news">
+<li>
+<p>标普500录得近两年最大单日跌幅，韩国股市触发熔断。<br />
+<span class="so">→ 亚洲开盘先看韩股能否止跌，A股AI算力链跟跌幅度是观察点。</span></p>
+<span class="src">来源：<a href="https://cn.nytimes.com/business/20261106/stocks-midterms-artificial-intelligence/?utm_source=RSS">纽约时报中文网</a> · <a href="https://www.bbc.com/zhongwen/articles/cqlyeen0z8x2o/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a></span></li>
+<li>
+<p>新西兰11月7日举行大选，生活成本为首要议题。<br />
+<span class="so">→ 结果影响新西兰对华乳制品与教育出口的谈判节奏。</span></p>
+<span class="src">来源：<a href="https://www.bbc.co.uk/news/videos/cr86zxe1q5j3o?at_medium=RSS&amp;at_campaign=rss">BBC World</a></span></li>
+<li>
+<p>长征系列完成第675次飞行，长二丙一箭送遥感五十一号07-09星入轨。<br />
+<span class="so">→ 遥感组网密度上升，商业卫星数据采购价继续下探。</span></p>
+<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE8zTGZSNDVwOFJYYXNvaDVvQ3ZNeXF1NTFBQUJEeHRzVFZ2Q1RwUE9jd2NPNHZNZFY5d2ExMHBDTG1zY3FmSG5Rd2hUaUZ5a2swSHpFX1ZHa2ViazE1REszVTZXR0p3VGdNenR5QWh2ZWw?oc=5">中国科技网</a></span></li>
+</ul>
+<h2>两个判断</h2>
+<h3>判断一 · 往回看（因果）</h3>
+<p>（判断）这一轮市场下跌的触发点不是选举结果本身，而是"分裂政府"改变了AI资本开支的监管折现率。此前数据中心建设与算力补贴处在行政宽松期，投资者按"无审查"定价；民主党拿下两院后，听证权与拨款权换手，众议院共和党人要求黄仁勋闭门说明对华往来，说明审查压力不只来自民主党一侧，而是两党在"对华技术"议题上同时收紧。于是估值调整先落在最依赖监管容忍度的环节——数据中心、电力、芯片出口许可，而不是全面衰退定价。特朗普仍掌握外交主导权，但产业政策的具体闸门在国会手里，这是市场今天真正在算的账。</p>
+<h3>判断二 · 往前看（预测）</h3>
+<p>（判断）如果民主党国会的审查压力真实落地而非仅停留在听证层面，那么在2027年1月31日之前，应该看到英伟达或至少一家美国主要AI芯片企业披露对华销售许可被附加新条件，或众议院相关委员会发出正式传票（而非"自愿出席"邀请）。可证伪点：若到该日期仍只有自愿简报会、无正式传票、无许可条款变更，则说明这轮监管预期被市场过度定价，今天的跌幅属于情绪而非机制变化。</p>
+<h2>纠偏</h2>
+<p>今日条目中，法国抗议人数存在两个口径：内政部估计60万人，工会称"远高于此"，两者差距约一倍，本简报并列呈现，不取单一数字。巴拉圭总统"辞职"与"弹劾"的先后顺序，NPR称弹劾在辞职后数分钟内进行，卫报称辞职发生在危机之后，两说并不矛盾但时序表述不同，以NPR的时序为准。黄之锋案BBC中文与NPR、纽约时报中文网三家独立报道一致，故标<span class="tag ev">已证实</span>；澳门区锦新案目前仅BBC一家中文与英文稿，属同一机构，按规则仍标<span class="tag sig">单一来源</span>。</p>
+<h2>本期未覆盖</h2>
+<ul>
+<li>二十届五中全会精神传达的后续政策文件（仅有地方传达报道，无中央文件原文）</li>
+<li>第九届进博会开幕式丁薛祥讲话的具体开放措施（仅有会议报道，无条款）</li>
+<li>2026世界互联网大会乌镇峰会"成果共识"的具体文本</li>
+<li>习近平复信澳大利亚青年学生的信件内容</li>
+<li>印尼窃听丑闻案的庭审进展与涉案警官层级</li>
+<li>美国司法部起诉宾州州立大学无证学生学费政策的法律依据</li>
+<li>苏丹裔侨民反对阿联酋候选人出任联合国要职的进展</li>
+</ul><nav class="archive"><h2>往期归档</h2><div class="arcrow"><span class="ym">2026 年 11 月</span><span class="chips"><a href="archive/2026-11-06.html">6</a></span></div></nav>
+</body>
+</html>
