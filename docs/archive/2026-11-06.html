@@ -42,7 +42,8 @@
     width: 3px; border-radius: 2px; background: var(--accent); opacity: .55;
   }
   h3 { font-size: 1.02em; font-weight: 650; margin: 1.7em 0 .55em; }
-  p, li { margin: .6em 0; }
+  p { margin: 1.05em 0; }
+  li { margin: .55em 0; }
   strong { font-weight: 650; }
   a {
     color: var(--accent); text-decoration: none;
@@ -53,6 +54,13 @@
     margin: 1.2em 0; padding: .7em 1em; color: var(--muted);
     border-left: 3px solid var(--line); font-size: .94em;
   }
+  /* 「> → 后果句」的引用块：让后果从正文里跳出来 */
+  blockquote.soq {
+    margin: .75em 0 .2em; padding: .18em 0 .18em .95em;
+    border-left: 2px solid var(--accent);
+    color: var(--fg-soft); font-size: .95em; line-height: 1.7;
+  }
+  blockquote.soq p { margin: .15em 0; }
   hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
   code {
     background: var(--pill); padding: .12em .4em;
@@ -139,60 +147,115 @@
 </style>
 </head>
 <body>
-<p class="stamp">2026-11-06 15:23 更新 · 北京时间</p>
+<p class="stamp">2026-11-06 15:41 更新 · 北京时间</p>
 <h1>每日简报 · 2026-11-06</h1>
 <h2>一句话</h2>
-<p>美国中期选举民主党夺回国会两院，全球科技股以近两年最大单日跌幅回应AI监管预期，同一天香港与澳门各有一宗国安案落判。</p>
+<p><strong>民主党夺回国会两院，全球科技股应声暴跌、韩国股市熔断。</strong><br />
+市场怕的不是选举结果本身，是分裂政府下 AI 监管与数据中心审查同时收紧。</p>
+<hr />
 <h2>今日主线</h2>
-<p><span class="tag ev">已证实</span>美国中期选举结果落地：民主党赢下众议院全部435席改选与参议院35席改选中的多数，自2023年以来首次完整掌控国会；共和党内部将败因指向特朗普本人，多名共和党人向BBC表示其只顾政治遗产、漠视选民议题。市场反应先于政策反应：标普500录得近两年最惨单日跌幅，投资者担心民主党国会收紧数据中心建设与AI行业审查，叠加此前对科技企业支出失控、债务攀升的忧虑。韩国股市触发熔断。<span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/cw5ynld35e3ro/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a> · <a href="https://www.npr.org/2026/11/04/g-s1-151745/up-first-newsletter-midterms-democrats-congress-control">NPR</a> · <a href="https://cn.nytimes.com/business/20261106/stocks-midterms-artificial-intelligence/?utm_source=RSS">纽约时报中文网</a> · <a href="https://www.bbc.co.uk/news/articles/cmn04705rd8jo?at_medium=RSS&amp;at_campaign=rss">BBC World</a> · <a href="https://www.bbc.com/zhongwen/articles/cqlyeen0z8x2o/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a></span></p>
-<p>三件事同时发生，构成今天真正的信息量。第一，这是"分裂政府"的回归，但方向与2018年相反：当年是民主党夺众议院、共和党守参议院，这次是两院同时易手，意味着调查权与议程设置权合并，特朗普的否决权成为唯一防线，他本人已公开强调这一点。第二，市场把"监管风险"提前定价到AI板块，而不是等法案文本——这说明过去两年AI资本开支的估值里，本来就含着一个"华盛顿不会动手"的假设，现在这个假设被抽掉了。第三，外交层面出现明确的分权预期：NPR请历史学者拆解民主党国会能改变什么、不能改变什么，结论是外交仍主要握在总统手里，这与市场对AI监管的激烈反应形成对照——钱先动了，但制度上真正能动的部分还没动。<span class="src">来源：<a href="https://cn.nytimes.com/usa/20261105/trump-new-role-lame-duck/?utm_source=RSS">纽约时报中文网</a> · <a href="https://www.npr.org/2026/11/05/nx-s1-6028977/democrats-foreign-policy-iran-war-ukraine">NPR</a></span></p>
-<p>（判断）真正被重估的不是政策，是"确定性溢价"。过去两年流入美国AI基础设施的资金，一部分定价的是监管真空；国会易手把这个真空填上了一半，哪怕最终法案很温和，折现率也已经变了。</p>
+<h3>发生了什么</h3>
+<p><strong>中期选举民主党全面胜利，国会两院易手</strong></p>
+<p>民主党赢下众议院与参议院，为 <strong>2023 年</strong>以来首次完全掌控国会。<span class="src">来源：<a href="https://www.npr.org/2026/11/04/g-s1-151745/up-first-newsletter-midterms-democrats-congress-control">NPR</a> · <a href="https://www.bbc.com/zhongwen/articles/ckreyrxvg3xyo/trad?at_medium=RSS&amp;at_campaign=rss">BBC</a></span></p>
+<p>特朗普成为跛脚鸭，称愿合作但强调手握否决权。<span class="src">来源：<a href="https://cn.nytimes.com/usa/20261105/trump-new-role-lame-duck/?utm_source=RSS">纽约时报中文网</a></span></p>
+<p>共和党内怒火指向特朗普本人。<span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/cw5ynld35e3ro/trad?at_medium=RSS&amp;at_campaign=rss">BBC</a></span></p>
+<hr />
+<h3>为什么重要</h3>
+<p><strong>市场先给 AI 板块投了不信任票</strong></p>
+<p>投资人担心民主党收紧数据中心建设与 AI 监管，叠加此前对科技企业支出失控、债务攀升的忧虑。<span class="src">来源：<a href="https://cn.nytimes.com/business/20261106/stocks-midterms-artificial-intelligence/?utm_source=RSS">纽约时报中文网</a></span></p>
+<p>美股创近两年最惨单日跌幅，亚洲市场周五跟跌，<strong>韩国股市触发熔断</strong>。<span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/cqlyeen0z8x2o/trad?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://www.aljazeera.com/video/newsfeed/2026/11/6/global-tech-stocks-plunge-over-fears-of-ai-curbs-in-us?traffic_source=rss">半岛电视台</a></span></p>
+<p>国会控制权一变，监管预期就重定价——这是估值问题，不是基本面问题。</p>
+<hr />
+<h3>接下来看什么</h3>
+<p><strong>三条线同时走：弹劾、调查、外交</strong></p>
+<p>众议院最早下周表决弹劾防长赫格塞思，特朗普已公开力挺。<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiTEFVX3lxTE00ZnVhbndJbl83X0JXYkRoUXBVQjItYnNsVkpjUy14QmpvTjZRUkFKVk5wVllIclI2SFgtSkFRVjRySmVVQnB0OWRleFU?oc=5">凤凰网</a></span></p>
+<p>民主党已列出一长串针对特朗普的调查清单。<span class="src">来源：<a href="https://www.npr.org/2026/11/05/g-s1-152046/up-first-newsletter-democrats-congress-control-house-senate-trump-reaction">NPR</a></span></p>
+<p>外交上国会能改的和改不了的，本周就会有第一轮信号。<span class="src">来源：<a href="https://www.npr.org/2026/11/05/nx-s1-6028977/democrats-foreign-policy-iran-war-ukraine">NPR</a></span></p>
+<hr />
 <h2>国内</h2>
-<p><span class="tag sig">单一来源</span>澳门首宗国安案宣判，民主派人士区锦新因"颠覆国家政权"罪被判囚12年6个月。案件预审、开审到宣判全程不公开，区锦新由指派律师辩护，审理法官与律师身份均未公开，外界只能通过政府新闻稿获知进展；其妻称这是"莫须有迫害"。<br />
-<span class="so">→ 澳门国安司法先例落地，程序不公开本身成为后续案件的默认模板。</span><span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/cw62yyejjrlro/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a> · <a href="https://www.bbc.co.uk/news/articles/cmdx33v9vvr2o?at_medium=RSS&amp;at_campaign=rss">BBC World</a></span></p>
-<p><span class="tag ev">已证实</span>香港民主派活动人士黄之锋因"勾结外国势力"国安罪被判囚10年，法官裁定"罪行重大"。他此前已因另一起国安案服刑近六年，新刑期意味着须服刑至2036年、出狱时约40岁；法律学者对BBC中文称，此案反映《香港国安法》可被"反复动用"。<br />
-<span class="so">→ 刑期叠加使"已服刑期"不再构成释放预期，在押者议价空间归零。</span><span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/cm5ynepe9578o/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a> · <a href="https://cn.nytimes.com/china/20261105/joshua-wong-hong-kong-sentenced/?utm_source=RSS">纽约时报中文网</a> · <a href="https://www.npr.org/2026/11/05/g-s1-152032/hong-kong-activist-wong-sentenced">NPR</a></span></p>
-<p><span class="tag sig">单一来源</span>中国监管机构否决软银以54亿美元收购ABB机器人业务的交易。ABB表示交易遭中国反垄断审查否决；中国是ABB机器人业务最大市场，该公司为中国客户生产的机器绝大部分在华制造。<br />
-<span class="so">→ 在华营收占比成了并购审查的杠杆，外资剥离敏感业务须先过中国这一关。</span><span class="src">来源：<a href="https://cn.nytimes.com/business/20261106/softbank-robotics-china-block/?utm_source=RSS">纽约时报中文网</a></span></p>
-<p><span class="tag sig">单一来源</span>据中国科技网等报道，遥感五十一号07-09星由长征二号丙火箭发射成功，为长征系列第675次飞行；报道称长二丙已服役44年，为现役最久型号。<br />
-<span class="so">→ 老型号高频复用，说明发射排期受产能约束而非新火箭进度。</span><span class="src">来源：<a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE8zTGZSNDVwOFJYYXNvaDVvQ3ZNeXF1NTFBQUJEeHRzVFZ2Q1RwUE9jd2NPNHZNZFY5d2ExMHBDTG1zY3FmSG5Rd2hUaUZ5a2swSHpFX1ZHa2ViazE1REszVTZXR0p3VGdNenR5QWh2ZWw?oc=5">Google News 中文</a></span></p>
-<p><span class="tag sig">单一来源</span>中央气象台发布预警，北京、河北等地将出现中到大雪或雨夹雪，河北发布暴雪橙色预警；北京城区是否见雪，官方称"立冬雪或现身城区"。<br />
-<span class="so">→ 首场雨雪落在周末，华北交通与供暖调度的压力集中到下周一。</span><span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiXEFVX3lxTE85b2U5MVFDUl82WlNLSHoyU1ZUb01ERlIwamtKLXRiUmNRQTdIaWlxSGxwZVhwaThRVWVJbi15cFdoLWJXZzFJaUkwQVM4VW9ITzFtVjF2UWdLTXR3?oc=5">Google News 中文</a></span></p>
+<p><strong><span class="tag ev">已证实</span>第二艘国产大型邮轮“爱达·花城号”交付</strong></p>
+<p>新华社报道交付完成，国产邮轮进入“双船时代”。<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxPSHpQeE1CZXpVTW5FQ1BDcV95bVk1Y054dTNyUHo1MzVfRC1mRW50WUxWbVZXVlltYVlRYUZUbUZoemJUT2JCV0xhbEk2OGpwUFEtdWtYdUI4aWYwV1UydWdNbGhLUjBGbi1TNEItSXctSEU2WTJ2ZlFYRXp6M3pDUlhPNmFJdw?oc=5">新华网</a></span></p>
+<blockquote class="soq"><p>→ 造船业高端订单议价权上移，欧洲船厂让出的份额被固化。</p>
+</blockquote>
+<p><strong><span class="tag ev">已证实</span>遥感五十一号07-09星一箭三星发射成功</strong></p>
+<p>长二丙火箭执行，长征系列第 <strong>675</strong> 次飞行。<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE8zTGZSNDVwOFJYYXNvaDVvQ3ZNeXF1NTFBQUJEeHRzVFZ2Q1RwUE9jd2NPNHZNZFY5d2ExMHBDTG1zY3FmSG5Rd2hUaUZ5a2swSHpFX1ZHa2ViazE1REszVTZXR0p3VGdNenR5QWh2ZWw?oc=5">中国科技网</a></span></p>
+<blockquote class="soq"><p>→ 遥感星座补网节奏未受外部扰动，数据服务采购方可按原周期排期。</p>
+</blockquote>
+<p><strong><span class="tag ev">已证实</span>第九届进博会开幕，丁薛祥出席</strong></p>
+<p>副总理出席开幕式并会见外方政要。<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE51cmU3UGZQcFZNUVJWcHZhSXA1QmdjYm1TQ0dXNTB3ZUJiQ1BFM29mbTI2YnhTN2RxT1BqVWJSRjBzc0xGcnRpUDZyTVhzUC1hMkYwOThaVjYtVVF0Wkw4SEJ3dU1GRUs1OS0wN29RUzA0bEtl?oc=5">党建网</a></span></p>
+<blockquote class="soq"><p>→ 展期采购意向是四季度进口数据的先行项，看签约额而非到场人数。</p>
+</blockquote>
+<p><strong><span class="tag ev">已证实</span>水利部通报治黄80年：建成水利工程5.4万余个</strong></p>
+<p>国新办发布会披露，黄河连续 <strong>27</strong> 年不断流。<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMib0FVX3lxTE5yUDU2bTVJOTQ2TXk3aVB0SFZmamRjVmtyd1djTVprSlpIaVdqMU9vMVp5aC12Y1I4V09CMmowNGZNdGRGVHBjelY2TzZ0YjRrbTZxbTVnT0xuY09USVVFazFsWDdWaWY1YjZ0Z2JVYw?oc=5">泉州网</a></span></p>
+<blockquote class="soq"><p>→ 流域用水指标分配趋紧，沿黄高耗水项目审批口径会更硬。</p>
+</blockquote>
+<p><strong><span class="tag sig">单一来源</span>陕西商南刑案致3死2伤，嫌犯自杀身亡</strong></p>
+<p>警方动用无人机、<strong>500</strong> 余人进山搜捕，嫌犯孙某军已死亡。<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE52MUpmVHg3eHhRdDlQM2NQY1VQajZaT0ZuU2RWa3I0am5VdnZxZmFqaWlXdkUtRUNyUzBCZ0NKRFFSZjVic1J5ejAxaEVQOTdMMkUyUVRXZVRyVnE4c1ZOdmNqdWpuMjItRTdlR1h6YWg?oc=5">中华网</a></span></p>
+<blockquote class="soq"><p>→ 嫌犯死亡即结案，后续只剩追责与赔偿，无审判程序可看。</p>
+</blockquote>
+<hr />
 <h2>国际</h2>
-<p><span class="tag ev">已证实</span>巴拉圭总统圣地亚哥·培尼亚在银行危机后辞职，数小时后国会通过弹劾。与政府关联的数字银行Ueno Bank倒闭冻结数百万民众储蓄；此前政府曾授权该行大幅扩张业务，下议院已投票支持弹劾审理。<br />
-<span class="so">→ 存款冻结先于弹劾，储户赔付顺序将决定下一届政府合法性。</span><span class="src">来源：<a href="https://www.theguardian.com/world/2026/nov/05/paraguay-president-santiago-pena-resigns">卫报</a> · <a href="https://www.npr.org/2026/11/05/nx-s1-6030842/paraguay-president-impeached-bank-collapse">NPR</a> · <a href="https://www.bbc.co.uk/news/articles/c6p9g39vln3yo?at_medium=RSS&amp;at_campaign=rss">BBC World</a></span></p>
-<p><span class="tag ev">已证实</span>法国爆发数年来最大规模抗议，内政部估计全国60万人参与，工会称人数远高于此；多家工会加入反对生活成本上涨的罢工。<br />
-<span class="so">→ 内政部与工会口径差一倍，人数之争本身是下一轮谈判的筹码。</span><span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/ckx2qzv835pgo?at_medium=RSS&amp;at_campaign=rss">BBC World</a> · <a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxPTUNHazBUU1dRMnFWUUstOGlQTzdrN3Z5eGNZRjZkTjZZcUtmRVlpRmZ2NDlPbmlWYzBMNjRkcUNuWWJ4VXVmYWFLSktxeFRzUS13eXFyb0VUN0lsMW9WNjRfdWEtV3dOWGxPa2g3aHVVQmV1YlllQkxBN2ZPdzJrMkFvcWJmaURuV2ZacG9JWDJLWERJ?oc=5">CNN via Google News</a></span></p>
-<p><span class="tag ev">已证实</span>欧洲多国航空与机场连续第二周遭虚假炸弹威胁，至少21个航班受影响，英国政府称之为"恶意虚假威胁"。<br />
-<span class="so">→ 威胁未造成伤亡但迫使航班改降，航空保险与安检成本先涨。</span><span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/cmpqg08nz3pqo?at_medium=RSS&amp;at_campaign=rss">BBC World</a> · <a href="https://news.google.com/rss/articles/CBMijAFBVV95cUxPd1dQVzVYREM5dVl3NWhjSVFwT2k5N3JtcjVwUXppaXBYZWhicVVTRU5UTDFTQ2pZNjJRZmt5R2YwcXdwSVB3TWFFUUtNWmdycXdFdVp1QUt3OXFWZnREUnRDR1otUXBsbVlBd1BIMWliX0hMM0NsQ0t3VDRhNTVaX212cDFHbllyd1o0SQ?oc=5">纽约时报 via Google News</a></span></p>
-<p><span class="tag sig">单一来源</span>一名英国医护人员在刚果（金）感染埃博拉后被转运回英国，病情稳定，将转入"高后果"传染病专科病房。<br />
-<span class="so">→ 转运路径公开，欧洲输入性病例预案进入实操检验。</span><span class="src">来源：<a href="https://www.theguardian.com/world/2026/nov/04/british-healthcare-worker-ebola-evacuated-drc-to-uk-document-shows">卫报</a></span></p>
-<p><span class="tag sig">单一来源</span>一名伊朗高级官员向路透表示，伊朗已通过卡塔尔向美国转交核问题提案；另有报道称特朗普威胁"摧毁"伊朗，德黑兰提出七项条件。<br />
-<span class="so">→ 卡塔尔做中间人，海湾国家把自己变成不可替代的传话通道。</span><span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiywFBVV95cUxOSlJZVlphdWhPcDNGc1E5eDVNdDdMQkJNTXVDS0RYSVRqaC1tblFqQy1FekRQdldnV0FsMU5RdnVHNEI3UEZWMC1MY1l5cnRtcjBlcDlpUXdvX0hXbV91S1UxajV1TEx1VmJ2SzNLNElXSjc3YkdmYWw4VGNXZEl5NXR4RFNjRXBxeEZMLWpBT1Z5X2JRc3NEdkdMZDljQ0dkZXZRbzc3U1NmNkhnaFN5QzNhVmRzSmhsM0Q5VzU3Mm11OWZBa3M1V1lvaw?oc=5">Reuters via Google News</a></span></p>
-<p><span class="tag ev">已证实</span>以色列总统赫尔佐格将于周日提名组阁人选，此前多数议员表态支持艾森科特而非内塔尼亚胡。<br />
-<span class="so">→ 提名权落到议会多数一侧，内塔尼亚胡的组阁优先权被程序性绕开。</span><span class="src">来源：<a href="https://www.aljazeera.com/news/2026/11/6/israels-herzog-to-name-a-candidate-to-form-government-on-sunday?traffic_source=rss">半岛电视台</a></span></p>
+<p><strong><span class="tag ev">已证实</span>黄之锋因“勾结外国势力”被判10年</strong></p>
+<p>法官裁定“罪行重大”，此前已因另案服刑近六年，出狱时约 <strong>40</strong> 岁。<span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/cm5ynepe9578o/trad?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://www.npr.org/2026/11/05/g-s1-152032/hong-kong-activist-wong-sentenced">NPR</a></span></p>
+<blockquote class="soq"><p>→ 国安法“反复动用”路径被验证，在押人员获释时间表失去参考价值。</p>
+</blockquote>
+<p><strong><span class="tag ev">已证实</span>澳门首宗国安案宣判，区锦新囚12年半</strong></p>
+<p>审理不公开，法官与指派律师身份不明，外界仅靠政府新闻稿获知。<span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/cw62yyejjrlro/trad?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://www.bbc.co.uk/news/articles/cmdx33v9vvr2o?at_medium=RSS&amp;at_campaign=rss">BBC World</a></span></p>
+<blockquote class="soq"><p>→ 澳门司法透明度参照系被重置，葡语系商界合规成本上升。</p>
+</blockquote>
+<p><strong><span class="tag ev">已证实</span>巴拉圭总统培尼亚辞职，随即遭弹劾</strong></p>
+<p>数字银行 Ueno 倒闭冻结民众存款，众议院在其辞职数分钟后通过弹劾。<span class="src">来源：<a href="https://www.npr.org/2026/11/05/nx-s1-6030842/paraguay-president-impeached-bank-collapse">NPR</a> · <a href="https://www.theguardian.com/world/2026/nov/05/paraguay-president-santiago-pena-resigns">卫报</a></span></p>
+<blockquote class="soq"><p>→ 台湾在南美仅存邦交国之一进入权力真空，援助承诺面临重谈。</p>
+</blockquote>
+<p><strong><span class="tag ev">已证实</span>法国爆发数年来最大规模抗议</strong></p>
+<p>内政部估 <strong>60</strong> 万人上街，工会称远高于此，诉求为生活成本。<span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/ckx2qzv835pgo?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxPTUNHazBUU1dRMnFWUUstOGlQTzdrN3Z5eGNZRjZkTjZZcUtmRVlpRmZ2NDlPbmlWYzBMNjRkcUNuWWJ4VXVmYWFLSktxeFRzUS13eXFyb0VUN0lsMW9WNjRfdWEtV3dOWGxPa2g3aHVVQmV1YlllQkxBN2ZPdzJrMkFvcWJmaURuV2ZacG9JWDJLWERJ?oc=5">CNN</a></span></p>
+<blockquote class="soq"><p>→ 财政赤字已无腾挪空间，马克龙在预算案上只能让步。</p>
+</blockquote>
+<p><strong><span class="tag ev">已证实</span>欧洲多国机场再遭虚假炸弹威胁</strong></p>
+<p>至少 <strong>21</strong> 个航班受影响，一周内第二次。<span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/cmpqg08nz3pqo?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://news.google.com/rss/articles/CBMijAFBVV95cUxPd1dQVzVYREM5dVl3NWhjSVFwT2k5N3JtcjVwUXppaXBYZWhicVVTRU5UTDFTQ2pZNjJRZmt5R2YwcXdwSVB3TWFFUUtNWmdycXdFdVp1QUt3OXFWZnREUnRDR1otUXBsbVlBd1BIMWliX0hMM0NsQ0t3VDRhNTVaX212cDFHbllyd1o0SQ?oc=5">纽约时报</a></span></p>
+<blockquote class="soq"><p>→ 航司改签与安保成本上升，欧洲短途航线票价承压。</p>
+</blockquote>
+<p><strong><span class="tag sig">单一来源</span>伊朗经卡塔尔向美国转交核提案</strong></p>
+<p>一名伊朗高级官员向路透社透露，美方选举前夜刚对伊实施新一轮打击。<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiywFBVV95cUxOSlJZVlphdWhPcDNGc1E5eDVNdDdMQkJNTXVDS0RYSVRqaC1tblFqQy1FekRQdldnV0FsMU5RdnVHNEI3UEZWMC1MY1l5cnRtcjBlcDlpUXdvX0hXbV91S1UxajV1TEx1VmJ2SzNLNElXSjc3YkdmYWw4VGNXZEl5NXR4RFNjRXBxeEZMLWpBT1Z5X2JRc3NEdkdMZDljQ0dkZXZRbzc3U1NmNkhnaFN5QzNhVmRzSmhsM0Q5VzU3Mm11OWZBa3M1V1lvaw?oc=5">路透社</a></span></p>
+<blockquote class="soq"><p>→ 霍尔木兹豁免名单已含中国，谈判走向直接决定中国进口成本。</p>
+</blockquote>
+<hr />
 <h2>数据与日程</h2>
-<p>标普500录得近两年最惨单日跌幅，韩国股市触发熔断。<br />
-<span class="so">→ 亚洲开盘先于美国消化，A股AI算力链周一承压。</span><span class="src">来源：<a href="https://cn.nytimes.com/business/20261106/stocks-midterms-artificial-intelligence/?utm_source=RSS">纽约时报中文网</a> · <a href="https://www.bbc.com/zhongwen/articles/cqlyeen0z8x2o/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a></span></p>
-<p>法国抗议内政部口径60万人、工会口径远高于此。<br />
-<span class="so">→ 人数差决定工会是否再发起一轮，观察下周罢课是否跟进。</span><span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/ckx2qzv835pgo?at_medium=RSS&amp;at_campaign=rss">BBC World</a></span></p>
-<p>新西兰11月7日（周六）举行大选，生活成本为首要议题。<br />
-<span class="so">→ 结果周一亚洲时段出炉，纽元与乳制品出口政策先反应。</span><span class="src">来源：<a href="https://www.bbc.co.uk/news/videos/cr86zxe1q5j3o?at_medium=RSS&amp;at_campaign=rss">BBC World</a></span></p>
+<p><strong>韩国股市触发熔断，亚太科技股同步下挫</strong></p>
+<p>美股近两年最惨单日跌幅后，亚洲市场周五跟跌。<span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/cqlyeen0z8x2o/trad?at_medium=RSS&amp;at_campaign=rss">BBC</a></span></p>
+<blockquote class="soq"><p>→ 周一 A 股开盘的 AI 算力板块是第一个可观察的传导点。</p>
+</blockquote>
+<p><strong>以色列总统赫尔佐格周日提名组阁人选</strong></p>
+<p>多数议员支持艾森科特而非内塔尼亚胡。<span class="src">来源：<a href="https://www.aljazeera.com/news/2026/11/6/israels-herzog-to-name-a-candidate-to-form-government-on-sunday?traffic_source=rss">半岛电视台</a></span></p>
+<blockquote class="soq"><p>→ 组阁授权归属决定以黎边境是否再升级，看提名后 48 小时。</p>
+</blockquote>
+<p><strong>北京周末雨雪降温，河北发布暴雪橙色预警</strong></p>
+<p>中央气象台提示北京、河北有中到大雪或雨夹雪。<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiXEFVX3lxTE85b2U5MVFDUl82WlNLSHoyU1ZUb01ERlIwamtKLXRiUmNRQTdIaWlxSGxwZVhwaThRVWVJbi15cFdoLWJXZzFJaUkwQVM4VW9ITzFtVjF2UWdLTXR3?oc=5">天气网</a></span></p>
+<blockquote class="soq"><p>→ 周末进京航班与高铁大概率延误，返程票改签窗口提前开。</p>
+</blockquote>
+<hr />
 <h2>两个判断</h2>
 <h3>判断一 · 往回看（因果）</h3>
-<p>民主党夺回两院，直接触发条件是共和党在通胀与"不受欢迎的战争"上失去中间选民信任，多名内部人士向《纽约时报》描述的败因集中在总统本人支持度低迷。但市场反应的对象不是选举，是选举揭示的一个此前被忽略的变量：AI基础设施的资本开支建立在"联邦不干预"的默认假设上。民主党不需要通过任何法案，只要让众议院委员会发出传票、让监管机构启动听证，折现率就会重估。这解释了为什么跌幅集中在大型科技股而非全市场，也解释了为什么韩国先熔断——韩国半导体出口对美国数据中心订单的敞口最直接。真正在算的账是：谁能在2027财年预算前把数据中心项目从"待审"变成"已批"。<span class="src">来源：<a href="https://cn.nytimes.com/usa/20261106/trump-midterms-losses-republicans/?utm_source=RSS">纽约时报中文网</a></span></p>
+<p><strong>市场跌的不是选举，是“分裂政府”的监管算法。</strong></p>
+<p>（判断）此前市场给 AI 板块的定价，隐含假设是共和党控制的国会会压制监管、放行数据中心。民主党拿下两院后，这个假设被一次性撤销：审查概率上升，资本开支回收周期变长，估值分母被抬高。</p>
+<p>（判断）真正触发抛售的是“不确定性无法在两年内消除”——分裂政府意味着监管方向由国会听证和调查节奏决定，而不是由一份可预期的法案决定。韩国熔断说明杠杆资金先撤，这与基本面无关，与持仓结构有关。</p>
+<p>（判断）共和党内部把败因归给特朗普本人，意味着未来两年税改、预算这类需要党内一致的议题反而更难推进，僵局被制度化。</p>
+<hr />
 <h3>判断二 · 往前看（预测）</h3>
-<p>如果民主党如NPR所述把调查权优先用于政府滥权与总统亲信腐败、而非立即推动AI立法，那么在2027年1月20日（新国会就任后第20天）之前，应该看到标普500中AI与数据中心相关个股收复本次跌幅的一半以上，同时众议院至少一个委员会就英伟达对华业务发出正式传票或听证通知。可观察的检验点是：黄仁勋是否出席众议院领导人要求的闭门简报会——若出席，说明调查路径走的是对华技术出口而非国内AI监管，市场会重新定价；若拒绝出席并引发传票，则监管风险溢价继续留在板块里。<span class="src">来源：<a href="https://cn.nytimes.com/usa/20261106/house-republicans-nvidia-jensen-huang-china/?utm_source=RSS">纽约时报中文网</a></span></p>
+<p><strong>弹劾表决是最快的可证伪节点。</strong></p>
+<p>如果众议院领导层确实已把弹劾赫格塞思排上日程，那么在 <strong>2026 年 11 月 20 日</strong>之前，应该看到众议院正式发出表决通知，且至少 <strong>3</strong> 名共和党议员公开表态不排除赞成票。</p>
+<p>（判断）若到该日期仍只有口头放风、无正式程序文件，则说明民主党的优先项是调查而非弹劾，防长职位风险被市场高估。</p>
+<p>（判断）反向指标同样清晰：若共和党议员集体背书赫格塞思，则特朗普对党团的控制力仍在，跛脚鸭叙事需要下调。</p>
+<hr />
 <h2>纠偏</h2>
-<p>今天多条中文聚合标题把"民主党夺回参议院"写成既成事实，但BBC中文的实时更新页只列出改选席位结构（众议院435席全改、参议院100席中35席改选），未逐州确认结果；NPR称"尚未全部call"。本简报采用"赢下多数"表述，具体席位差未核实。另，区锦新案与黄之锋案均无独立旁听核实，事实部分全部来自官方新闻稿转述。<span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/c5rmyrm0n8k8o/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a> · <a href="https://www.npr.org/2026/11/05/g-s1-152046/up-first-newsletter-democrats-congress-control-house-senate-trump-reaction">NPR</a></span></p>
+<p><strong>“民主党胜选=对华缓和”是错误映射。</strong></p>
+<p>（判断）条目中没有任何一条给出民主党国会在关税或出口管制上的具体立法安排。NPR 的报道明确说，外交主导权仍在特朗普手中，国会能改的有限。<span class="src">来源：<a href="https://www.npr.org/2026/11/05/nx-s1-6028977/democrats-foreign-policy-iran-war-ukraine">NPR</a></span></p>
+<p>（判断）把中期选举读成对华转向，是把“制衡总统”误读成“改变对华政策”。目前可核查的只有监管与调查两条线。</p>
+<hr />
 <h2>本期未覆盖</h2>
-<ul>
-<li>特朗普签行政令将椭圆形办公室列为国家纪念物、限制后任总统改动——条目只有一句，无法判断法律效力与适用范围。<span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/cmy0eeg101djo?at_medium=RSS&amp;at_campaign=rss">BBC World</a></span></li>
-<li>加州州长减免548名死囚刑期——缺具体减免形式（减刑/赦免）与适用条件。<span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/cqrkyyd2j8mvo?at_medium=RSS&amp;at_campaign=rss">BBC World</a></span></li>
-<li>美国司法部起诉宾州州立大学无证学生学费政策——诉状文本未读。<span class="src">来源：<a href="https://www.aljazeera.com/news/2026/11/6/us-justice-department-sues-penn-state-over-undocumented-students-tuition?traffic_source=rss">半岛电视台</a></span></li>
-<li>伊朗豁免印度、中国、卡塔尔、伊拉克船只通过霍尔木兹海峡——豁免条件与对价不明，涉及中国能源进口，信息不足不敢写。<span class="src">来源：<a href="https://www.aljazeera.com/news/2026/11/6/why-is-iran-exempting-india-china-qatar-iraq-from-hormuz-restrictions?traffic_source=rss">半岛电视台</a></span></li>
-<li>印尼窃听丑闻庭审部署数千军力、第四名高级警官列为嫌疑人——政治裂痕的具体走向缺细节。<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxOX2Z6S2RHWk5UUnUwWXQtV0VPZ2RpTm9hNjR3d2RKM0ZtdzMwdGNOcEhsSk1sUEI3TGlTdkJMcEJFQ0FkZ0pDYnVjLXdhd0dweWVUcDdxVkV4cUNsUE9nTGk4QUZtZ2l2WXktZmZPemFKU0J1WHJYTGoyRDlKRnQyc2hNaEoyWTFMeTBUTUlpcnRCWW9VTnA2MllDdjZ3QUVBRGxRVlRUYmpRWFFh?oc=5">AP via Google News</a></span></li>
-<li>中国进博会（丁薛祥出席开幕式）与乌镇世界互联网大会成果——只有通稿标题，无具体签约额或成果清单。<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE51cmU3UGZQcFZNUVJWcHZhSXA1QmdjYm1TQ0dXNTB3ZUJiQ1BFM29mbTI2YnhTN2RxT1BqVWJSRjBzc0xGcnRpUDZyTVhzUC1hMkYwOThaVjYtVVF0Wkw4SEJ3dU1GRUs1OS0wN29RUzA0bEtl?oc=5">Google News 中文</a> · <a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxQZVZTcVRCME1xS0N1SkJ0SFJwS255RmlEYUhpVTRlaHN0cV94ZnhYVS1seGxZcG5xd3Q5ZV9QQW52dmw4TDF0RkF3VThXQnNSQ282MU1mc2Y3bG1FbEIzMTZEYmFsNXExZ3hQMmxqTzBteWdmbElWT2NMdDRsMFVDcXZoUU9iZw?oc=5">Google News 中文</a></span></li>
-</ul><nav class="back"><a href="../index.html">← 返回最新一期</a></nav>
+<p><strong>英伟达黄仁勋被要求出席闭门简报会</strong>——众议院三名共和党领导人要求其说明与一名中国高管往来，该高管被认定向中国情报机构输送信息。仅单一来源，且“认定”依据未公开，不敢写成事实。<span class="src">来源：<a href="https://cn.nytimes.com/usa/20261106/house-republicans-nvidia-jensen-huang-china/?utm_source=RSS">纽约时报中文网</a></span></p>
+<p><strong>中国否决软银 54 亿美元收购 ABB 机器人业务</strong>——仅纽约时报中文网一条，监管决定原文未读到，卡在未读原文。</p>
+<p><strong>台湾遣返程万军事件</strong>——BBC 明确表示无法独立核实双方说法，卡在信源互斥。</p>
+<p><strong>伊朗对华霍尔木兹豁免的具体条件</strong>——半岛电视台分析文章未给出协议文本，卡在口径不明。</p><nav class="back"><a href="../index.html">← 返回最新一期</a></nav>
 </body>
 </html>
