@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>每日简报 · 2026-11-09</title>
+<style>
+  :root {
+    --fg:#000000; --fg-soft:#141414; --bg:#ffffff; --muted:#5c5c60;
+    --line:#dcdcdf; --line-soft:#ededf0; --accent:#b3352b; --pill:rgba(120,120,128,.10);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fg:#e9e9eb; --fg-soft:#c6c6ca; --bg:#111112; --muted:#8e8e93;
+      --line:#26262a; --line-soft:#1d1d20; --accent:#e37a6e; --pill:rgba(150,150,160,.14);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0 auto; padding: 26px 20px 76px; max-width: 720px;
+    background: var(--bg); color: var(--fg);
+    font: 16.5px/1.8 -apple-system, BlinkMacSystemFont, "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  }
+  @media (max-width: 480px) {
+    body { font-size: 16px; padding: 22px 16px 64px; }
+  }
+  h1 {
+    font-size: 1.5em; font-weight: 700; line-height: 1.32;
+    letter-spacing: -.015em; margin: 0 0 .12em;
+  }
+  h2 {
+    position: relative;
+    font-size: .95em; font-weight: 650; letter-spacing: .1em; color: var(--fg-soft);
+    margin: 2.8em 0 1.05em; padding: 0 0 .5em .8em;
+    border-bottom: 1px solid var(--line);
+  }
+  h2::before {
+    content: ""; position: absolute; left: 0; top: .16em; bottom: .62em;
+    width: 3px; border-radius: 2px; background: var(--accent); opacity: .55;
+  }
+  h3 { font-size: 1.02em; font-weight: 650; margin: 1.7em 0 .55em; }
+  p { margin: 1.05em 0; }
+  li { margin: .55em 0; }
+  strong { font-weight: 650; }
+  a {
+    color: var(--accent); text-decoration: none;
+    border-bottom: 1px solid rgba(128,128,128,.34);
+  }
+  a:hover { border-bottom-color: var(--accent); }
+  blockquote {
+    margin: 1.2em 0; padding: .7em 1em; color: var(--fg-soft);
+    border-left: 3px solid var(--line); font-size: .95em;
+  }
+  /* 「> ▍→ 后果句」：黑色正文 + 红色竖线，从事实里跳出来 */
+  blockquote.soq {
+    margin: .85em 0 .2em; padding: .3em 0 .3em .95em;
+    border-left: 3px solid var(--accent);
+    color: var(--fg); font-size: .96em; line-height: 1.75; font-weight: 500;
+  }
+  blockquote.soq p { margin: .15em 0; }
+  /* 「> ▍推断」：整段推断，用不同底色再区分一层 */
+  blockquote.soi {
+    margin: .9em 0; padding: .85em 1em;
+    border-left: 3px solid #6b6b70; background: rgba(120,120,128,.07);
+    color: var(--fg); font-size: .96em; line-height: 1.78;
+  }
+  blockquote.soi p { margin: .3em 0; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
+  code {
+    background: var(--pill); padding: .12em .4em;
+    border-radius: 4px; font-size: .88em;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: .9em; margin: 1.2em 0; }
+  th, td { border: 1px solid var(--line); padding: .5em .65em; text-align: left; vertical-align: top; }
+
+  /* 顶部时间戳 */
+  .stamp {
+    color: var(--muted); font-size: .78em; letter-spacing: .03em;
+    margin: 0 0 1.5em; display: flex; align-items: center; gap: .5em;
+  }
+  .stamp::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); flex: none;
+  }
+
+  /* 可信度标签 */
+  .tag {
+    display: inline-block; font-size: .75em; font-weight: 500; line-height: 1.6;
+    padding: .06em .5em; border-radius: 4px; margin-right: .45em;
+    vertical-align: .1em; white-space: nowrap;
+    background: var(--pill); color: var(--muted);
+  }
+  .tag.ev  { color: #2f7d4f; background: rgba(47,125,79,.13); }
+  .tag.off { color: #3a6ea5; background: rgba(58,110,165,.13); }
+  .tag.chk { color: #96660f; background: rgba(150,102,15,.15); }
+  @media (prefers-color-scheme: dark) {
+    .tag.ev  { color: #79d3a2; background: rgba(121,211,162,.15); }
+    .tag.off { color: #8dbdee; background: rgba(141,189,238,.15); }
+    .tag.chk { color: #e2b562; background: rgba(226,181,98,.16); }
+  }
+
+  /* 「→」后果句 */
+  .so {
+    display: block; margin: .55em 0 .15em; padding: .1em 0 .1em .8em;
+    border-left: 2px solid var(--accent);
+    color: var(--fg-soft); font-size: .95em; line-height: 1.7;
+  }
+
+  /* 新闻列表：去符号，用细分隔线 */
+  ul.news { list-style: none; padding: 0; margin: 0; }
+  ul.news > li {
+    margin: 0; padding: 1.1em 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  ul.news > li:first-child { border-top: none; padding-top: .15em; }
+  ul.news > li > p { margin: 0; }
+
+  /* 来源 */
+  .src {
+    display: block; margin-top: .55em;
+    font-size: .76em; color: var(--muted); letter-spacing: .03em;
+  }
+  .src a {
+    color: var(--muted); border-bottom: 1px dotted rgba(128,128,128,.45);
+  }
+  .src a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* 归档 */
+  nav.archive {
+    margin-top: 3.4em; padding-top: 1.4em;
+    border-top: 1px solid var(--line);
+  }
+  nav.archive h2 { margin: 0 0 .9em; border: none; padding: 0; }
+  .arcrow {
+    display: flex; align-items: baseline; gap: 1em;
+    padding: .55em 0; border-bottom: 1px solid var(--line-soft);
+  }
+  .arcrow:last-child { border-bottom: none; }
+  .ym { color: var(--muted); font-size: .8em; white-space: nowrap; min-width: 6.6em; }
+  .chips { display: flex; flex-wrap: wrap; gap: .4em; }
+  .chips a {
+    display: inline-block; min-width: 2em; text-align: center;
+    padding: .06em .35em; border-radius: 5px;
+    font-size: .86em; font-variant-numeric: tabular-nums;
+    color: var(--fg-soft); background: var(--pill); border-bottom: none;
+  }
+  .chips a:hover { color: #fff; background: var(--accent); }
+  .empty { color: var(--muted); font-size: .86em; }
+
+  nav.back { margin-top: 3.4em; font-size: .9em; }
+</style>
+</head>
+<body>
+<p class="stamp">2026-11-09 07:47 更新 · 北京时间</p>
+<h1>每日简报 · 2026-11-09</h1>
+<h2>一句话</h2>
+<p><strong>美国中期选举民主党拿下两院，市场先给 AI 监管定价，全球科技股单日重挫、韩国股市熔断。</strong><br />
+这是本轮"选举→监管→估值"传导链第一次被真金白银检验，而不是被评论员检验。</p>
+<h2>今日主线</h2>
+<h3>发生了什么</h3>
+<p>美国中期选举结果落定，<strong>民主党取得两院多数</strong>，特朗普进入跛脚鸭阶段。市场随即对"数据中心建设与 AI 产业可能面临更严格审查"作出反应：<strong>美股遭遇近两年来最惨重单日跌幅</strong>，标普 500 单日变化被媒体单独制图；<strong>韩国股市触发熔断</strong>。同期，众议院三名共和党领导人要求英伟达 CEO <strong>黄仁勋</strong>自愿出席闭门简报会，说明其与一名被认定向中国情报机构输送信息的中国高管的往来；英伟达方面则确认正就黄仁勋的私人关系展开调查。<span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/ckreyrxvg3xyo/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a> · <a href="https://cn.nytimes.com/usa/20261105/trump-new-role-lame-duck/?utm_source=RSS">纽约时报中文网</a> · <a href="https://cn.nytimes.com/business/20261106/stocks-midterms-artificial-intelligence/?utm_source=RSS">纽约时报中文网</a> · <a href="https://www.bbc.com/zhongwen/articles/cqlyeen0z8x2o/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a> · <a href="https://cn.nytimes.com/usa/20261106/house-republicans-nvidia-jensen-huang-china/?utm_source=RSS">纽约时报中文网</a> · <a href="https://www.aljazeera.com/news/2026/11/8/us-chipmaker-nvidia-investigates-ceo-jensen-huang-over-affair?traffic_source=rss">半岛电视台</a></span></p>
+<h3>为什么重要</h3>
+<blockquote class="soi"><p>▍推断：<strong>这轮下跌定价的不是"AI 变差"，是"AI 的许可成本变贵"。</strong> 数据中心要过电网接入、土地环评、地方补贴三关，全在州与县一级；联邦层面的审查加码只是叠加项，真正卡住项目的是地方听证排期。民主党拿下两院后，能直接做的是传票、听证、预算附加条款——这些不改变项目能不能建，但改变建多快、融资成本多高。市场把"监督权"直接读成"现金流推迟"，这才是跌幅的量级来源。</p>
+</blockquote>
+<h3>接下来看什么</h3>
+<ul>
+<li>众议院对黄仁勋的闭门简报会是否成行、是否转为公开听证</li>
+<li>英伟达内部调查结论与是否影响其对华业务安排</li>
+<li>新一届国会对华政策与对台军售的监督节奏是否实质变化</li>
+<li>数据中心相关的地方听证与限电、环评排期是否出现集中延期</li>
+</ul>
+<hr />
+<h2>国内</h2>
+<p><strong>① 中国否决软银 54 亿美元收购 ABB 机器人业务</strong></p>
+<p><span class="tag ev">已证实</span>ABB 表示，将其机器人部门出售给软银的交易遭中国监管机构否决。中国是 ABB 最大机器人市场，该公司为中国客户生产的机器绝大部分在当地制造<span class="src">来源：<a href="https://cn.nytimes.com/business/20261106/softbank-robotics-china-block/?utm_source=RSS">纽约时报中文网</a></span></p>
+<blockquote class="soq"><p>▍→ 外资在华做机器人，退出路径先被卡住。</p>
+</blockquote>
+<hr />
+<p><strong>② 黄之锋因"勾结外国势力"被判 10 年</strong></p>
+<p><span class="tag sig">单一来源</span>法官裁定其"罪行重大"。黄之锋此前已因另一起国安案件被定罪、服刑近六年，法律专家称新判决旨在削弱其影响力<span class="src">来源：<a href="https://cn.nytimes.com/china/20261105/joshua-wong-hong-kong-sentenced/?utm_source=RSS">纽约时报中文网</a></span></p>
+<blockquote class="soq"><p>▍→ 量刑口径确立，后续同类案件参照此标尺。</p>
+</blockquote>
+<hr />
+<p><strong>③ 我国成功发射卫星互联网低轨 29 组卫星</strong></p>
+<p><span class="tag off">官方口径</span>新华网客户端报道此次发射成功，未披露具体轨道参数与卫星数量细节<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxQYTh2OEoyTl82ODVGYTFmM2o2QlRnUU5PNGx0NVh6bXVVY1RVTW8tQ1JpRGhqOGpJN1NSU3RLRHN3LXh2dmNJYlNXVDlhcG10TTFUUFRYcU9MaHJUbXlZRVU1aFJDQjdQUG80VW1tOGNpczZ2TUZsRl9qb2p4ZVQxdGpIT0R4UVJ4SGMtUnU3YkREOXFtVXB1RXlR?oc=5">新华网客户端</a></span></p>
+<blockquote class="soq"><p>▍→ 组网节奏决定终端芯片与地面站的订单排期。</p>
+</blockquote>
+<hr />
+<p><strong>④ 寒潮蓝色预警：赣浙闽局地降温 10 至 12℃</strong></p>
+<p><span class="tag off">官方口径</span>天气网发布寒潮蓝色预警，江西、浙江、福建等地局地气温降幅可达 <strong>10 至 12℃</strong><span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiXEFVX3lxTFAweUtYUWV2VzVydkVoTXBqVXJ1WGNFd3ZCY3dQRW1QSU1GVTV1d2ZaMXlsbWxsbFhsVGVKZWM3TXVsZm5hTGd1SGR1WTVtQTBwSTgybDF4ZGJITDB2?oc=5">天气网</a></span></p>
+<blockquote class="soq"><p>▍→ 南方电网负荷与冬装零售同时提前启动。</p>
+</blockquote>
+<hr />
+<p><strong>⑤ 泡泡玛特收入随 Labubu 热度回落</strong></p>
+<p><span class="tag sig">单一来源</span>随着收藏玩具兴趣减弱，泡泡玛特收入随之下降，BBC 中文以"销量急挫"描述这一变化<span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/c6r7yg9xkdy8o/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a></span></p>
+<blockquote class="soq"><p>▍→ 单一 IP 依赖的估值模型要重算，看 Q4 复购率。</p>
+</blockquote>
+<hr />
+<h2>国际</h2>
+<p><strong>⑥ 以色列总统授权埃森科特组建新政府</strong></p>
+<p><span class="tag ev">已证实</span>赫尔佐格将组阁授权交给反对派领导人甘迪·埃森科特，内塔尼亚胡的执政地位受挫。主要政党已推荐埃森科特组阁<span class="src">来源：<a href="https://www.npr.org/2026/11/07/g-s1-152536/netanyahu-israel-government-eisenkot-herzog">NPR</a> · <a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxQX3dmN21ZZVh3M2NlT2d5Z2VXb0Y1dTgyXzloOTdfRHR1UERIaWJaQUdva0tIVEgtTmtNenZYM3QwalA2ZndXT205cmJVUm4wSTJwQzYweGFzOXBpSmx0X0pnY09LYUF4QlFMUVlmRUlDZ0sxb0FXNEF6V2FGWmZ3am8wMndyQQ?oc=5">新华网</a></span></p>
+<blockquote class="soq"><p>▍→ 组阁谈判决定加沙后续安排由谁签字。</p>
+</blockquote>
+<hr />
+<p><strong>⑦ 埃及两列车相撞，7 死逾百伤</strong></p>
+<p><span class="tag ev">已证实</span>事故发生在开罗以南约 30 英里的 al-Ayyat，两列同向列车相撞后多节车厢脱轨，总统下令立即调查。伤亡数字各源不一（4 死至 7 死、88 至 125 伤）<span class="src">来源：<a href="https://www.theguardian.com/world/2026/nov/08/egypt-two-trains-deadly-collision">卫报</a> · <a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE9QdlBab2ItSUp5c3liN3oxaWxrVlpsV1AxbzFMNWpwNUNNdGVyclZZTXNSNDBCLWFsVEZ6X01vRS1qbHhrc0pnbWV2OF9NUEhpQUhJRDJVWGR2VFM2ZEdITWQ4OUFYZUlp?oc=5">中国新闻网</a></span></p>
+<blockquote class="soq"><p>▍→ 伤亡口径未统一，铁路更新预算的谈判筹码变了。</p>
+</blockquote>
+<hr />
+<p><strong>⑧ 波兰克拉科夫枪击案 6 死，按恐怖主义方向调查</strong></p>
+<p><span class="tag ev">已证实</span>枪手在克拉科夫主广场随机开枪致 6 人死亡，警方其后在其家中发现另外三具遗体；一名在附近午餐的外科医生协助救治受伤警员，同事称其"无疑挽救了那名警员的生命"<span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/c64g1n74j259o/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a> · <a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxQRFlEVHJNZ2F1WUk1dlB6MGxoWm1kRjBmaWdDV2VzaUY2TWg3bFhtcVhGNGswQllzd0lXdkh1aW14ZFBJS3lVWldKTl9HTXBiM3FOY1h1U3NKZ0JEdFJGTDB0ZFhVcDhiSzRMd0NJajFUUzFBMWJ3YmRyYjdZOTAtV25RWjlJS3h5LU9jMHlzSVRzQQ?oc=5">CBS News</a></span></p>
+<blockquote class="soq"><p>▍→ 波兰枪支许可与大型活动安保规则将收紧。</p>
+</blockquote>
+<hr />
+<p><strong>⑨ 欧洲将出席阿布扎比美方主持的俄乌三方会谈</strong></p>
+<p><span class="tag ev">已证实</span>法国外长确认欧洲官员将参加本周阿布扎比会谈，为 2 月以来首轮三方谈判，此举无视克里姆林宫的反对<span class="src">来源：<a href="https://www.npr.org/2026/11/08/nx-s1-6034014/europe-join-us-brokered-ukraine-talks-abu-dhabi-russia">NPR</a> · <a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxNUDdWejBEMHl5NXlnaGxydmFWeVkxb0hTTHRWWjBYLXBqdmtoMGtxOXJzUGtVYld2TUZWZ1NEOGJGM2lVbDhpS3o5YVVobFQxNjNVR2dqU3dSZWlpS2FVampFdl9FSjRwVWkyZ2lSanZ1WHU0OWdacUo2SVNBbHpGdjJpNHQ0bG9qZ1h1YV9Pb285eTFzN0dtamdTR3hQYmMxanJ4RkhoREFWLVRqcFJ3Q1Rkd3QwVndvaUEyY2RESVZSMllvNzlzQVQ0dHFocTZP?oc=5">POLITICO.eu</a></span></p>
+<blockquote class="soq"><p>▍→ 欧洲坐上桌，停火条件的定价权从双边转三方。</p>
+</blockquote>
+<hr />
+<p><strong>⑩ 伊朗下"两日"外交最后通牒，美方称谈判有进展则不打</strong></p>
+<p><span class="tag sig">单一来源</span>伊方要求华盛顿在两日内接受其方案，否则面临"地狱"；特朗普则表示若谈判取得进展，再次打击"可能性极低"，并称双方正在沟通<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxOTHpFQnJrS2J5UGR4S3M3SjZIVUJudmE0Rnd2OTVuajlHTmh1T01IUGN0Rk43VXdfRU51Qngxa0V3Q01tSTdTQkozenhjQ0xPUS1YSkFYYzctX3A1Mm5KOUN1aDhwdUNuNnZtdGdMbmpxUXp6SzZGZml5MFVRdXRnMnFxWHhPR2kwR1ZncUZEZVNJc3FncGfSAZsBQVVfeXFMT0M1d21OTVBXOWpVTkRVZFlieHRJQVA3a3c0akdpV01uUUdnQmpxLXZ1amozeFFtZS1yOFFGdTIwMjFka2RqN3ZBXzd5RkJrdVU4UHpHeDdkY3VsNVhuWlFIOHpGWXhGZWFQWEN4VURtUnduSEFFbU5wTnF0bDZ0NVVvTFdBTjBadC1SQ3dHUmVOd2ZUNXRTVUVQUEU?oc=5">The Hill</a> · <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE10R3ROMUtlMS1XMThxMGs3S1hmVDkza1dGWGdpWEdQYi1RVVpSR2haRjhiTE40Q0ozTmJWbTJ5TW50dzIwTzV2dFV1U0p4dWs4MFo0?oc=5">第一财经</a></span></p>
+<blockquote class="soq"><p>▍→ 霍尔木兹通行费风险，直接进中国到岸油价。</p>
+</blockquote>
+<hr />
+<p><strong>⑪ 伊拉克 Khor Mor 气田遭无人机袭击停产</strong></p>
+<p><span class="tag sig">单一来源</span>路透援引消息人士称，该气田在遭无人机袭击后暂停生产；此前一天该气田刚恢复运营<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMixwFBVV95cUxOSjc4dFNBUmN3UHp3Uk5FLUhNOElWeTVLRDNzSHZsSTAyUWZ4elN0eHdYUVJ5MDZBb0Y3MDNaNzlWbTRHMnctUFY5dGdNWWtKUnZTdHRPeXl1UUhlUE9mdTU0d2ZWTk9Hak9HaHVXaVBJQ3BoVXdfZnFxelF2aUc1MEV1U0JFQ1lDQ0s3RXhtRnk2dmoxZ2h4a3FRazE4Y3VpbGlDYW1zdE1DcDYxU3R4aE9zOWxkdTNuRVFxMzRlTDEtMDNHRmpr?oc=5">路透</a></span></p>
+<blockquote class="soq"><p>▍→ 伊拉克发电用气缺口扩大，区域电价先动。</p>
+</blockquote>
+<hr />
+<h2>数据与日程</h2>
+<p><strong>⑫ 新西兰大选无明确赢家，谈判或需数周</strong></p>
+<p><span class="tag ev">已证实</span>无政党取得多数，总理拉克森将领导看守政府，称"接下来三周大家先歇一歇"<span class="src">来源：<a href="https://www.npr.org/2026/11/08/nx-s1-6033999/no-clear-winner-in-new-zealand-election-as-leaders-prepare-for-weeks-of-talks">NPR</a></span></p>
+<blockquote class="soq"><p>▍→ 组阁期内新西兰政策空转，乳制品贸易谈判延后。</p>
+</blockquote>
+<hr />
+<p><strong>⑬ 南非地方选举：ANC 全国得票较 2021 年低近 14 个百分点</strong></p>
+<p><span class="tag ev">已证实</span>计票达 80% 时的数据，昔日解放运动面临惨败，将进入艰难联合谈判<span class="src">来源：<a href="https://www.theguardian.com/world/2026/nov/06/anc-faces-defeat-south-african-local-elections">卫报</a> · <a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxOUGk4NUNWQnF4Z0N2MkZJbzNlcV9qMHF1TG5MQ1lPTmU0UXdvS0FVVEZMamNIMTlqbEZtZ2VadERSd2xOanB3YWxpRkU2aXNVa0c3Yk5BODRqdmM4VUxBbnY4VDlMYURmeUFoMkNDVEs2aGxRMDRSR0tMQ0djb1ZnTi05d1hhS3A4Z0xhMDVVRGw3Znc?oc=5">Politico</a></span></p>
+<blockquote class="soq"><p>▍→ 联合政府难产，南非基建与矿业许可审批放缓。</p>
+</blockquote>
+<hr />
+<p><strong>⑭ 巴拉圭前总统因银行倒闭被控，60% 国民无法取款</strong></p>
+<p><span class="tag ev">已证实</span>圣地亚哥·培尼亚被国会弹劾后数分钟即被拘押，现处软禁；Ueno 银行停摆致全国约 <strong>60%</strong> 人口无法动用账户<span class="src">来源：<a href="https://www.theguardian.com/world/2026/nov/07/ousted-paraguay-president-under-house-arrest-after-banking-crisis-leaves-60-of-country-unable-to-access-accounts">卫报</a> · <a href="https://www.bbc.co.uk/news/articles/c68jzzvjgdy9o?at_medium=RSS&amp;at_campaign=rss">BBC World</a></span></p>
+<blockquote class="soq"><p>▍→ 存款保险缺位，南美小国主权风险溢价重估。</p>
+</blockquote>
+<hr />
+<h2>两个判断</h2>
+<h3>判断一 · 往回看（因果）</h3>
+<blockquote class="soi"><p>▍推断：<strong>这轮科技股抛售的触发条件是"监督权换手"，不是"AI 需求见顶"。</strong> 民主党拿下两院后能立刻动用的工具是传票、听证、预算附加条款，这些不改变数据中心能不能建，只改变建多快、融资多贵。市场把"监督权"直接折算成"现金流推迟"，所以跌幅集中在资本开支最重的环节，而不是应用层。同一时间众议院共和党人要求黄仁勋闭门说明对华往来，说明对华技术管制已经从"出口清单"扩展到"高管关系"——这条线一旦成立，英伟达的中国收入折价会被重新计算，而不是等财报。真正在算的账是：2027 年资本开支指引会不会被听证会拖成"待定"。</p>
+</blockquote>
+<h3>判断二 · 往前看（预测）</h3>
+<blockquote class="soi"><p>▍推断：<strong>如果这轮下跌是监管定价而非情绪，那么在 2027 年 3 月 31 日之前，应该看到至少一个州级机构（公用事业委员会或州议会）出台针对数据中心用电接入或环评的新规，且英伟达在下一份季报中下调或"待定化"其数据中心相关资本开支指引。</strong> 若到期只有听证会记录、无任何州级新规落地，且英伟达指引未变，则说明这轮抛售是选举情绪而非现金流重估，届时科技股应已完成修复。</p>
+</blockquote>
+<hr />
+<h2>纠偏</h2>
+<ul>
+<li><strong>伤亡数字口径不一</strong>：埃及列车事故各源给出 4 死至 7 死、88 至 125 伤，本简报采用"7 死逾百伤"并标注区间，未核实到埃及铁路局原始通报。</li>
+<li><strong>黄仁勋相关报道存在两类事实</strong>：众议院要求其出席简报会（纽约时报）与英伟达内部调查其私人关系（半岛电视台）是两件事，不可合并为"因间谍案被调查"。</li>
+<li><strong>伊朗"两日最后通牒"仅 The Hill 一家</strong>，与特朗普"可能性极低"的表态并列时，读者易误读为双方已接近协议；实际是威胁与让步同时存在。</li>
+</ul>
+<h2>本期未覆盖</h2>
+<ul>
+<li><strong>华为在纽约受审</strong>（NPR）：案件涉及窃取技术与规避制裁，但条目只有导语，未读到起诉书与庭审进展，不敢写实质。</li>
+<li><strong>法国血库冷藏设备遭黑客攻击</strong>（BBC 中文）：无正式归因，攻击者身份在俄、伊、青少年之间未定，写"谁干的"就是编。</li>
+<li><strong>NewJeans 秘密合同</strong>（纽约时报中文网）：涉及具体合同条款与监管介入，条目为特稿摘要，缺可核查的条款原文。</li>
+<li><strong>中国新闻奖与长江韬奋奖揭晓</strong>（光明网）：属行业评奖，硬信息不足，且与今日主线无传导关系。</li>
+</ul><nav class="back"><a href="../index.html">← 返回最新一期</a></nav>
+</body>
+</html>
