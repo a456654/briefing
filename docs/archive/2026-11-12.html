@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>每日简报 · 2026-11-12</title>
+<style>
+  :root {
+    --fg:#000000; --fg-soft:#141414; --bg:#ffffff; --muted:#5c5c60;
+    --line:#dcdcdf; --line-soft:#ededf0; --accent:#b3352b; --pill:rgba(120,120,128,.10);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fg:#e9e9eb; --fg-soft:#c6c6ca; --bg:#111112; --muted:#8e8e93;
+      --line:#26262a; --line-soft:#1d1d20; --accent:#e37a6e; --pill:rgba(150,150,160,.14);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0 auto; padding: 26px 20px 76px; max-width: 720px;
+    background: var(--bg); color: var(--fg);
+    font: 16.5px/1.8 -apple-system, BlinkMacSystemFont, "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  }
+  @media (max-width: 480px) {
+    body { font-size: 16px; padding: 22px 16px 64px; }
+  }
+  h1 {
+    font-size: 1.5em; font-weight: 700; line-height: 1.32;
+    letter-spacing: -.015em; margin: 0 0 .12em;
+  }
+  h2 {
+    position: relative;
+    font-size: .95em; font-weight: 650; letter-spacing: .1em; color: var(--fg-soft);
+    margin: 2.8em 0 1.05em; padding: 0 0 .5em .8em;
+    border-bottom: 1px solid var(--line);
+  }
+  h2::before {
+    content: ""; position: absolute; left: 0; top: .16em; bottom: .62em;
+    width: 3px; border-radius: 2px; background: var(--accent); opacity: .55;
+  }
+  h3 { font-size: 1.02em; font-weight: 650; margin: 1.7em 0 .55em; }
+  p { margin: 1.05em 0; }
+  li { margin: .55em 0; }
+  strong { font-weight: 650; }
+  a {
+    color: var(--accent); text-decoration: none;
+    border-bottom: 1px solid rgba(128,128,128,.34);
+  }
+  a:hover { border-bottom-color: var(--accent); }
+  blockquote {
+    margin: 1.2em 0; padding: .7em 1em; color: var(--fg-soft);
+    border-left: 3px solid var(--line); font-size: .95em;
+  }
+  /* 「> ▍→ 后果句」：黑色正文 + 红色竖线，从事实里跳出来 */
+  blockquote.soq {
+    margin: .85em 0 .2em; padding: .3em 0 .3em .95em;
+    border-left: 3px solid var(--accent);
+    color: var(--fg); font-size: .96em; line-height: 1.75; font-weight: 500;
+  }
+  blockquote.soq p { margin: .15em 0; }
+  /* 「> ▍推断」：整段推断，用不同底色再区分一层 */
+  blockquote.soi {
+    margin: .9em 0; padding: .85em 1em;
+    border-left: 3px solid #6b6b70; background: rgba(120,120,128,.07);
+    color: var(--fg); font-size: .96em; line-height: 1.78;
+  }
+  blockquote.soi p { margin: .3em 0; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
+  code {
+    background: var(--pill); padding: .12em .4em;
+    border-radius: 4px; font-size: .88em;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: .9em; margin: 1.2em 0; }
+  th, td { border: 1px solid var(--line); padding: .5em .65em; text-align: left; vertical-align: top; }
+
+  /* 顶部时间戳 */
+  .stamp {
+    color: var(--muted); font-size: .78em; letter-spacing: .03em;
+    margin: 0 0 1.5em; display: flex; align-items: center; gap: .5em;
+  }
+  .stamp::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); flex: none;
+  }
+
+  /* 可信度标签 */
+  .tag {
+    display: inline-block; font-size: .75em; font-weight: 500; line-height: 1.6;
+    padding: .06em .5em; border-radius: 4px; margin-right: .45em;
+    vertical-align: .1em; white-space: nowrap;
+    background: var(--pill); color: var(--muted);
+  }
+  .tag.ev  { color: #2f7d4f; background: rgba(47,125,79,.13); }
+  .tag.off { color: #3a6ea5; background: rgba(58,110,165,.13); }
+  .tag.chk { color: #96660f; background: rgba(150,102,15,.15); }
+  @media (prefers-color-scheme: dark) {
+    .tag.ev  { color: #79d3a2; background: rgba(121,211,162,.15); }
+    .tag.off { color: #8dbdee; background: rgba(141,189,238,.15); }
+    .tag.chk { color: #e2b562; background: rgba(226,181,98,.16); }
+  }
+
+  /* 「→」后果句 */
+  .so {
+    display: block; margin: .55em 0 .15em; padding: .1em 0 .1em .8em;
+    border-left: 2px solid var(--accent);
+    color: var(--fg-soft); font-size: .95em; line-height: 1.7;
+  }
+
+  /* 新闻列表：去符号，用细分隔线 */
+  ul.news { list-style: none; padding: 0; margin: 0; }
+  ul.news > li {
+    margin: 0; padding: 1.1em 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  ul.news > li:first-child { border-top: none; padding-top: .15em; }
+  ul.news > li > p { margin: 0; }
+
+  /* 来源 */
+  .src {
+    display: block; margin-top: .55em;
+    font-size: .76em; color: var(--muted); letter-spacing: .03em;
+  }
+  .src a {
+    color: var(--muted); border-bottom: 1px dotted rgba(128,128,128,.45);
+  }
+  .src a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* 归档 */
+  nav.archive {
+    margin-top: 3.4em; padding-top: 1.4em;
+    border-top: 1px solid var(--line);
+  }
+  nav.archive h2 { margin: 0 0 .9em; border: none; padding: 0; }
+  .arcrow {
+    display: flex; align-items: baseline; gap: 1em;
+    padding: .55em 0; border-bottom: 1px solid var(--line-soft);
+  }
+  .arcrow:last-child { border-bottom: none; }
+  .ym { color: var(--muted); font-size: .8em; white-space: nowrap; min-width: 6.6em; }
+  .chips { display: flex; flex-wrap: wrap; gap: .4em; }
+  .chips a {
+    display: inline-block; min-width: 2em; text-align: center;
+    padding: .06em .35em; border-radius: 5px;
+    font-size: .86em; font-variant-numeric: tabular-nums;
+    color: var(--fg-soft); background: var(--pill); border-bottom: none;
+  }
+  .chips a:hover { color: #fff; background: var(--accent); }
+  .empty { color: var(--muted); font-size: .86em; }
+
+  nav.back { margin-top: 3.4em; font-size: .9em; }
+</style>
+</head>
+<body>
+<p class="stamp">2026-11-12 07:57 更新 · 北京时间</p>
+<h1>每日简报 · 2026-11-12</h1>
+<h2>一句话</h2>
+<p><strong>中国前10个月货物贸易顺差首次突破1万亿美元，出口引擎在关税与地缘摩擦中仍未失速。</strong><br />
+这一数字由绿色能源产品与AI数据中心相关出口拉动，超过去年创下的同期纪录。</p>
+<hr />
+<h2>今日主线</h2>
+<h3>发生了什么</h3>
+<p><strong>中国前10个月货物贸易顺差达1.04万亿美元</strong>，超过2025年同期创下的纪录速度。增长主要来自全球对绿色能源产品（如风力涡轮机）的强劲需求，以及人工智能数据中心建设带动的相关设备出口。报道配图为连云港港口装载出口至阿曼的风力涡轮机。来源：<span class="src">来源：<a href="https://cn.nytimes.com/business/20261110/china-trade-surplus-trillion/">纽约时报中文网</a></span></p>
+<p>同期，<strong>王毅同美国国务卿鲁比奥通电话</strong>，为近月来两国外交高层又一次直接接触。来源：<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMib0FVX3lxTFBWQ3RBUHUwbzllRUs0RFdWQ1M4d1pIX1NVTGZFdzhJc1ZKTzFxb1hySjJkTjJjWjREa0xqYktGTkt2S2pkTG9iLTJidElpQjViajRyUi1Nb3o0SURYWTh6ZWFBYi00X1QwWlhOdENwSQ?oc=5">人民网</a></span></p>
+<h3>为什么重要</h3>
+<blockquote class="soi"><p>▍推断：<strong>顺差破万亿的真正含义不是"卖得多"，而是"买得少"。</strong> 进口端疲弱叠加出口端绿色产品与算力硬件的结构性需求，使顺差被动放大。这会给贸易伙伴提供加征关税的新口实，也会让人民币汇率管理多一层外部压力。王毅与鲁比奥的通话时点值得注意——顺差数据公布前后，双方需要给下一轮经贸接触设定基调。</p>
+</blockquote>
+<h3>接下来看什么</h3>
+<ul>
+<li><strong>11月下旬</strong>：APEC峰会期间中日、中美是否安排领导人会晤，外交部已就此回应媒体询问<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTE1OaVhmaXc3WUFOOU91cUFDWWlzc0cweUpnOUpJcTJsYmdFV1pnRk15a0p6Y2hFQUpMRjhhMk00S0RXMFBDU29VY1FvWVp1bE9CNVV4SlVOOGE5anhJQkE?oc=5">京报网</a></span></li>
+<li><strong>12月</strong>：全年顺差是否突破1.2万亿美元，以及欧盟是否启动新的贸易救济调查</li>
+<li><strong>英伟达对Anthropic的百亿美元投资</strong>在IPO后的落地节奏，是否受黄仁勋事件拖累<span class="src">来源：<a href="https://cn.nytimes.com/business/20261111/anthropic-ipo-nvidia/">纽约时报中文网</a></span></li>
+</ul>
+<hr />
+<h2>国内</h2>
+<p><strong>① 前10月顺差破万亿美元</strong></p>
+<p><span class="tag ev">已证实</span><strong>2026年前10个月中国货物贸易顺差1.04万亿美元</strong>，超去年纪录。增长由绿色能源产品出口和AI数据中心相关设备拉动。来源：<span class="src">来源：<a href="https://cn.nytimes.com/business/20261110/china-trade-surplus-trillion/">纽约时报中文网</a></span></p>
+<blockquote class="soq"><p>▍→ 欧盟贸易救济调查概率上升，出口企业先备合规成本。</p>
+</blockquote>
+<hr />
+<p><strong>② 王毅与鲁比奥通话</strong></p>
+<p><span class="tag off">官方口径</span><strong>王毅同美国国务卿鲁比奥通电话</strong>，内容未披露细节。这是两国高层近期又一次直接外交接触。来源：<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMib0FVX3lxTFBWQ3RBUHUwbzllRUs0RFdWQ1M4d1pIX1NVTGZFdzhJc1ZKTzFxb1hySjJkTjJjWjREa0xqYktGTkt2S2pkTG9iLTJidElpQjViajRyUi1Nb3o0SURYWTh6ZWFBYi00X1QwWlhOdENwSQ?oc=5">人民网</a></span></p>
+<blockquote class="soq"><p>▍→ 通话本身不改变关税，但为元首会晤排期铺路。</p>
+</blockquote>
+<hr />
+<p><strong>③ 王沪宁会见古巴外长</strong></p>
+<p><span class="tag off">官方口径</span><strong>王沪宁会见古巴党和政府特使、外长罗德里格斯</strong>。古巴是西半球对华关系最紧密的国家之一。来源：<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTFBUSDdLVU15ZENZUFcwZGF1VU9xUXpVVDhKc3N6UDc2Y1Y2NDJNRmpCaXNwamJXazR0ZlE1ZGdBdmRLekM0cTdFNThLVE5vV2VKRWE3T0lIVUhLVVRCSHc3UHgtNUN1czVn?oc=5">中国新闻网</a></span></p>
+<blockquote class="soq"><p>▍→ 古巴能源短缺，中方援助规模是观察指标。</p>
+</blockquote>
+<hr />
+<p><strong>④ 五中全会精神宣讲进统战部</strong></p>
+<p><span class="tag off">官方口径</span><strong>学习贯彻党的二十届五中全会精神中央宣讲团在中央统战部宣讲</strong>，多地同步开展宣讲活动。来源：<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxQQzNmMUJhLTV1cjhSc2xhSWw5RDYtazVCMDlZaW1QYk1SMzFhaVU0blIzQTZmVUJyV29kWjh6WlNKQmVsMDRWbzliTmlIS2NhcDMzb3phaGNTQndaUzRwQ29fR3EyQmZUbjlDZmxBb1A3S1M0NGlOMnh4OG9sWFZUdDBEOA?oc=5">新华网</a></span></p>
+<blockquote class="soq"><p>▍→ 宣讲节奏通常对应政策文件落地前的动员期。</p>
+</blockquote>
+<hr />
+<p><strong>⑤ 一带一路转向产业协作</strong></p>
+<p><span class="tag sig">单一来源</span><strong>"一带一路"合作从货物贸易向产业协作延伸</strong>，教育部称已在共建国家建成<strong>36所鲁班工坊、40个中文工坊</strong>；国家发改委表示将扩大贸易投资合作、推进"小而美"项目。来源：<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiZkFVX3lxTE00aHNydWNiQ2NFcmpzVzdkWi0xRUVPQjRpQ0wzTjNxVmlTTlBFeWFaV1RuQTYwQno3RWdGTVlPN3FBd3pXS1ZWX2x5M1pkeE9STmJtWUV3eGpkSTZNV1p6M3dXa2UxZw?oc=5">东方财富</a></span></p>
+<blockquote class="soq"><p>▍→ 职教出海先于产能出海，用工本地化是前置条件。</p>
+</blockquote>
+<hr />
+<h2>国际</h2>
+<p><strong>⑥ 俄乌达成大规模换俘</strong></p>
+<p><span class="tag ev">已证实</span>阿布扎比三方会谈结束，<strong>俄乌同意大规模交换战俘</strong>，为2022年开战以来最大人道释放。会谈聚焦欧洲安全框架，未取得突破。美方特使将于周四分别会见普京与泽连斯基。来源：<span class="src">来源：<a href="https://www.npr.org/2026/11/11/g-s1-152954/russia-ukraine-war-talks">NPR</a> · <a href="https://www.bbc.co.uk/news/articles/ck792we7zrz4o?at_medium=RSS&amp;at_campaign=rss">BBC</a></span></p>
+<blockquote class="soq"><p>▍→ 换俘是唯一可交付成果，停火框架仍无时间表。</p>
+</blockquote>
+<hr />
+<p><strong>⑦ 西班牙14年来首次总罢工</strong></p>
+<p><span class="tag ev">已证实</span><strong>西班牙爆发14年来首次全国总罢工</strong>，数百万人参与，抗议住房成本与生活费用。巴塞罗那出现冲突。罢工由主要工会发起，发生在全国大选前。来源：<span class="src">来源：<a href="https://www.npr.org/2026/11/11/nx-s1-6037314/spain-general-strike">NPR</a> · <a href="https://www.bbc.co.uk/news/articles/cwvg25nypmrvo?at_medium=RSS&amp;at_campaign=rss">BBC</a></span></p>
+<blockquote class="soq"><p>▍→ 住房议题成选举主轴，欧元区通胀预期添变数。</p>
+</blockquote>
+<hr />
+<p><strong>⑧ 民主党翻转密西西比参院席位</strong></p>
+<p><span class="tag ev">已证实</span><strong>斯科特·科洛姆赢得密西西比州参议院席位</strong>，成为该州140多年来首位黑人联邦参议员。这是民主党在中期选举后翻转的第8个参院席位。来源：<span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/cw7vppyr80eeo?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://www.aljazeera.com/news/2026/11/11/democrat-scott-colom-wins-closely-watched-us-senate-race-in-mississippi?traffic_source=rss">半岛电视台</a></span></p>
+<blockquote class="soq"><p>▍→ 参院版图变化影响后续人事与预算表决。</p>
+</blockquote>
+<hr />
+<p><strong>⑨ 海格塞斯弹劾动议遭冻结</strong></p>
+<p><span class="tag ev">已证实</span>共和党众议员马西牵头的<strong>国防部长海格塞斯弹劾动议被共和党人阻止</strong>，遭"事实冻结"。特朗普表态支持海格塞斯。来源：<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMingFBVV95cUxQOUNTblQwSWYzQUFNX2RhZXpBQ0xRTnhKMTM1Vk0tLXpWaE44NWhCU1F4cDZqam5hcHJ2d3pJSmlvTU5pckxsT0pzMXNkdmJDVlRkWEdmZU5PV3VFR05yTUdIcXJCbzVuejhUbTBhQjdWbDFYLUU0T3dBX2dBaldnYlo4c1Q4SU9ZWmY0WjBvSFh6aDBNNkt4OWJFaVEtd9IBoAFBVV95cUxON1FZYTY5anJBaWxhYm1vcWpzbUVCeFprRXlEZFNiNlNxdFRabklNa09qbjZxNlpWbDM2V2d4Z2ZxTnBvbmFHMzNuWTV6YXhobTZuT2F0QnJZRFFtWkRnZ0JRM2Y3bS1WTlYwQUFPYVo5Ui1lUS1UN0NGZUpMTlI1RGlleXdOYTdST1hxRkRnUWdyRFdxX2dyckpmekxGOEhp?oc=5">美国之音</a> · <a href="https://www.npr.org/2026/11/11/g-s1-152949/up-first-newsletter-pete-hegseth-jim-jordan-iran-backed-trio-us-bases">NPR</a></span></p>
+<blockquote class="soq"><p>▍→ 五角大楼人事短期稳定，但党内裂痕已公开。</p>
+</blockquote>
+<hr />
+<p><strong>⑩ 伊朗关联三人被控策划英基地袭击</strong></p>
+<p><span class="tag ev">已证实</span>美司法部指控<strong>三名伊朗关联人员策划近20起袭击</strong>，包括针对英国境内驻美军基地的阴谋。另有一名美军士兵在英国因涉俄间谍指控被扣。来源：<span class="src">来源：<a href="https://www.npr.org/2026/11/10/nx-s1-6036786/uk-iran-airbase-russia-spy">NPR</a> · <a href="https://www.bbc.com/zhongwen/articles/cmx20xpn40zyo/trad?at_medium=RSS&amp;at_campaign=rss">BBC</a></span></p>
+<blockquote class="soq"><p>▍→ 美军海外基地警戒升级，驻在国安保成本转移。</p>
+</blockquote>
+<hr />
+<p><strong>⑪ 伊朗称霍尔木兹海峡"永不回退"</strong></p>
+<p><span class="tag sig">单一来源</span>伊朗议会议长<strong>加利巴夫称霍尔木兹海峡"永远不会回到战前状态"</strong>，德黑兰正等待美方对其七项条件的正式回应。同期消息称伊朗攻击了阿曼迪达马尔岛的航运导航系统。来源：<span class="src">来源：<a href="https://www.aljazeera.com/news/2026/11/11/strait-of-hormuz-will-never-return-to-pre-war-status-ghalibaf">半岛电视台</a> · <a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxQMFB3XzM5cVFXcFdvTWhfdVJSY21DLVNHRE81YXh1Ykt3MlY0M29GY05FbFEwd2hMT3lTR1duaVV6UGdac003SWM2cTJpb1FqX2UzdnZqNW5YSEpEOGd2dmZ2VW5XOTZzcGlSNGl5dENGNFQ4c2JGYU9yaXV2RU84QXVRQVVtR3EtYmpaNXRKM3d2ZHJVdzlzOWxrMktEVVZYZzJVeVVzcmtMM0JLYmxsZVQ5YlRWN2tRd0UyM2dUXy04eW5PWlE?oc=5">路透</a></span></p>
+<blockquote class="soq"><p>▍→ 航运保险费率难降，绕行成本固化进油价。</p>
+</blockquote>
+<hr />
+<h2>数据与日程</h2>
+<p><strong>⑫ 欧佩克：产量接近战前水平</strong></p>
+<p><span class="tag sig">单一来源</span><strong>欧佩克称原油产量接近伊朗战争前水平</strong>，沙特报告产量升至数月最高，尽管航运仍受干扰。来源：<span class="src">来源：<a href="https://www.aljazeera.com/news/2026/11/11/oil-production-near-pre-iran-war-levels-opec-says">半岛电视台</a></span></p>
+<blockquote class="soq"><p>▍→ 供给恢复压制油价，但海峡风险溢价未消。</p>
+</blockquote>
+<hr />
+<p><strong>⑬ 刚果埃博拉病例破1.1万</strong></p>
+<p><span class="tag sig">单一来源</span><strong>刚果（金）埃博拉疫情累计病例超1.1万</strong>，为该国有史以来最严重疫情。肯尼亚已出院最后一名患者，进入42天无疫倒计时。来源：<span class="src">来源：<a href="https://www.npr.org/2026/11/11/nx-s1-6037304/ebola-congo-outbreak">NPR</a> · <a href="https://www.bbc.co.uk/news/articles/cwe9kzv0g0v7o?at_medium=RSS&amp;at_campaign=rss">BBC</a></span></p>
+<blockquote class="soq"><p>▍→ 疫苗与防护物资采购窗口打开，关注WHO调拨。</p>
+</blockquote>
+<hr />
+<p><strong>⑭ 意大利等三国逾六千校收炸弹威胁</strong></p>
+<p><span class="tag ev">已证实</span><strong>意大利逾6000所学校及苏格兰、北爱尔兰多校收到炸弹威胁邮件</strong>，当局判定为恶作剧，无公共风险。来源：<span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/cwz0k79pr8z2o?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxObUg1MUdUTG4wV2hURXN2OXN5aWp0cHNUMTEycXN3a3BBejZraTBGd1dyS2tjdFR4a2JZbkVGVjVMNXo2VUhwZjJlQnpsTFhJR0R6bjh5WENRMzdZVmRlUHpwLVUzdzRZMEdhUmg0Ymw0bFNYbkViNmk5R1RpNExid1R5a2RBQ2xjSVl5NGdQMy1pT0w3WXBMTWtRc2VHN2RZMjNkb1JxYw?oc=5">NBC</a></span></p>
+<blockquote class="soq"><p>▍→ 欧洲校园安防预算与邮件溯源能力受检验。</p>
+</blockquote>
+<hr />
+<h2>两个判断</h2>
+<h3>判断一 · 往回看（因果）</h3>
+<blockquote class="soi"><p>▍推断：<strong>万亿顺差的机制是"出口升级+进口收缩"同时发生，而非单纯外需旺盛。</strong> 绿色能源产品（风电、光伏）和AI数据中心配套设备是两条高景气出口线，恰好踩在全球能源转型与算力基建的资本开支周期上；与此同时，国内投资与消费需求偏弱压低了进口增速，顺差因此被双向放大。各方真正在算的账是：中方希望用出口韧性换取谈判空间，美欧则把顺差视为加征关税的统计依据。这也解释了为何王毅与鲁比奥的通话发生在数据公布窗口——双方都需要在下一轮经贸接触前摸清对方底线。</p>
+</blockquote>
+<h3>判断二 · 往前看（预测）</h3>
+<blockquote class="soi"><p>▍推断：<strong>如果顺差破万亿真的会触发贸易伙伴的救济动作，那么在2027年3月31日之前，应该看到欧盟委员会对中国绿色能源产品（风电或光伏组件）发起新的反补贴或反倾销调查立案。</strong> 观察指标是欧盟官方公报的立案公告，而非政客表态或媒体放风。若到期只有产业界的申诉书而无正式立案，说明顺差的政治传导被高估，欧盟更可能选择谈判而非对抗。</p>
+</blockquote>
+<hr />
+<h2>纠偏</h2>
+<ul>
+<li><strong>"黄仁勋间谍案"多条报道存在信源重叠</strong>：BBC中文、纽约时报中文网的多篇报道均指向同一组匿名情报来源，目前无司法起诉或官方确认，本简报未将其列入15条正文，仅在此标注为待核实题材。</li>
+<li><strong>"伊朗攻击阿曼岛屿导航系统"</strong>目前仅路透一家转述"消息人士"，属<span class="tag chk">待核实</span>，正文第⑪条已按单一来源处理，未与"海峡永不回退"合并为已证实事件。</li>
+</ul>
+<hr />
+<h2>本期未覆盖</h2>
+<ul>
+<li><strong>黄仁勋与英伟达公司治理危机</strong>：条目充足（[21][25][26][27][30]），但核心事实依赖匿名情报来源与未公开调查，无法达到"可核查"标准，故不写入正文。建议关注英伟达董事会是否发布正式声明或SEC文件。</li>
+<li><strong>台湾"九合一"选举与陆配参选资格争议</strong>：[6][7][8][9]信息充分但属选举周期报道，缺乏当日硬新闻锚点，留待选举结果出炉后处理。</li>
+<li><strong>COP31气候峰会</strong>：[75][78]仅有领导人表态，缺具体承诺文本或资金数字，不足以支撑一条可核查条目。</li>
+<li><strong>美国防长海格塞斯弹劾的后续程序</strong>：众议院冻结后参议院动向未明，待有正式表决日程再报。</li>
+</ul><nav class="back"><a href="../index.html">← 返回最新一期</a></nav>
+</body>
+</html>
