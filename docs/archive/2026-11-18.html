@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>每日简报 · 2026-11-18</title>
+<style>
+  :root {
+    --fg:#000000; --fg-soft:#141414; --bg:#ffffff; --muted:#5c5c60;
+    --line:#dcdcdf; --line-soft:#ededf0; --accent:#b3352b; --pill:rgba(120,120,128,.10);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fg:#e9e9eb; --fg-soft:#c6c6ca; --bg:#111112; --muted:#8e8e93;
+      --line:#26262a; --line-soft:#1d1d20; --accent:#e37a6e; --pill:rgba(150,150,160,.14);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0 auto; padding: 26px 20px 76px; max-width: 720px;
+    background: var(--bg); color: var(--fg);
+    font: 16.5px/1.8 -apple-system, BlinkMacSystemFont, "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  }
+  @media (max-width: 480px) {
+    body { font-size: 16px; padding: 22px 16px 64px; }
+  }
+  h1 {
+    font-size: 1.5em; font-weight: 700; line-height: 1.32;
+    letter-spacing: -.015em; margin: 0 0 .12em;
+  }
+  h2 {
+    position: relative;
+    font-size: .95em; font-weight: 650; letter-spacing: .1em; color: var(--fg-soft);
+    margin: 2.8em 0 1.05em; padding: 0 0 .5em .8em;
+    border-bottom: 1px solid var(--line);
+  }
+  h2::before {
+    content: ""; position: absolute; left: 0; top: .16em; bottom: .62em;
+    width: 3px; border-radius: 2px; background: var(--accent); opacity: .55;
+  }
+  h3 { font-size: 1.02em; font-weight: 650; margin: 1.7em 0 .55em; }
+  p { margin: 1.05em 0; }
+  li { margin: .55em 0; }
+  strong { font-weight: 650; }
+  a {
+    color: var(--accent); text-decoration: none;
+    border-bottom: 1px solid rgba(128,128,128,.34);
+  }
+  a:hover { border-bottom-color: var(--accent); }
+  blockquote {
+    margin: 1.2em 0; padding: .7em 1em; color: var(--fg-soft);
+    border-left: 3px solid var(--line); font-size: .95em;
+  }
+  /* 「> ▍→ 后果句」：黑色正文 + 红色竖线，从事实里跳出来 */
+  blockquote.soq {
+    margin: .85em 0 .2em; padding: .3em 0 .3em .95em;
+    border-left: 3px solid var(--accent);
+    color: var(--fg); font-size: .96em; line-height: 1.75; font-weight: 500;
+  }
+  blockquote.soq p { margin: .15em 0; }
+  /* 「> ▍推断」：整段推断，用不同底色再区分一层 */
+  blockquote.soi {
+    margin: .9em 0; padding: .85em 1em;
+    border-left: 3px solid #6b6b70; background: rgba(120,120,128,.07);
+    color: var(--fg); font-size: .96em; line-height: 1.78;
+  }
+  blockquote.soi p { margin: .3em 0; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
+  code {
+    background: var(--pill); padding: .12em .4em;
+    border-radius: 4px; font-size: .88em;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: .9em; margin: 1.2em 0; }
+  th, td { border: 1px solid var(--line); padding: .5em .65em; text-align: left; vertical-align: top; }
+
+  /* 顶部时间戳 */
+  .stamp {
+    color: var(--muted); font-size: .78em; letter-spacing: .03em;
+    margin: 0 0 1.5em; display: flex; align-items: center; gap: .5em;
+  }
+  .stamp::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); flex: none;
+  }
+
+  /* 可信度标签 */
+  .tag {
+    display: inline-block; font-size: .75em; font-weight: 500; line-height: 1.6;
+    padding: .06em .5em; border-radius: 4px; margin-right: .45em;
+    vertical-align: .1em; white-space: nowrap;
+    background: var(--pill); color: var(--muted);
+  }
+  .tag.ev  { color: #2f7d4f; background: rgba(47,125,79,.13); }
+  .tag.off { color: #3a6ea5; background: rgba(58,110,165,.13); }
+  .tag.chk { color: #96660f; background: rgba(150,102,15,.15); }
+  @media (prefers-color-scheme: dark) {
+    .tag.ev  { color: #79d3a2; background: rgba(121,211,162,.15); }
+    .tag.off { color: #8dbdee; background: rgba(141,189,238,.15); }
+    .tag.chk { color: #e2b562; background: rgba(226,181,98,.16); }
+  }
+
+  /* 「→」后果句 */
+  .so {
+    display: block; margin: .55em 0 .15em; padding: .1em 0 .1em .8em;
+    border-left: 2px solid var(--accent);
+    color: var(--fg-soft); font-size: .95em; line-height: 1.7;
+  }
+
+  /* 新闻列表：去符号，用细分隔线 */
+  ul.news { list-style: none; padding: 0; margin: 0; }
+  ul.news > li {
+    margin: 0; padding: 1.1em 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  ul.news > li:first-child { border-top: none; padding-top: .15em; }
+  ul.news > li > p { margin: 0; }
+
+  /* 来源 */
+  .src {
+    display: block; margin-top: .55em;
+    font-size: .76em; color: var(--muted); letter-spacing: .03em;
+  }
+  .src a {
+    color: var(--muted); border-bottom: 1px dotted rgba(128,128,128,.45);
+  }
+  .src a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* 归档 */
+  nav.archive {
+    margin-top: 3.4em; padding-top: 1.4em;
+    border-top: 1px solid var(--line);
+  }
+  nav.archive h2 { margin: 0 0 .9em; border: none; padding: 0; }
+  .arcrow {
+    display: flex; align-items: baseline; gap: 1em;
+    padding: .55em 0; border-bottom: 1px solid var(--line-soft);
+  }
+  .arcrow:last-child { border-bottom: none; }
+  .ym { color: var(--muted); font-size: .8em; white-space: nowrap; min-width: 6.6em; }
+  .chips { display: flex; flex-wrap: wrap; gap: .4em; }
+  .chips a {
+    display: inline-block; min-width: 2em; text-align: center;
+    padding: .06em .35em; border-radius: 5px;
+    font-size: .86em; font-variant-numeric: tabular-nums;
+    color: var(--fg-soft); background: var(--pill); border-bottom: none;
+  }
+  .chips a:hover { color: #fff; background: var(--accent); }
+  .empty { color: var(--muted); font-size: .86em; }
+
+  nav.back { margin-top: 3.4em; font-size: .9em; }
+</style>
+</head>
+<body>
+<p class="stamp">2026-11-18 07:59 更新 · 北京时间</p>
+<h1>每日简报 · 2026-11-18</h1>
+<h2>一句话</h2>
+<p><strong>特朗普、习近平、普京将在深圳首次三方会晤，同日美国封堵中企东南亚租算力通道。</strong><br />
+两件事撞在同一天：一边是外交场面，一边是技术管制的实际收紧。</p>
+<h2>今日主线</h2>
+<h3>发生了什么</h3>
+<p><strong>特朗普</strong>11月17日抵达马尼拉，开启三天亚洲行，随后转赴<strong>深圳</strong>，与<strong>习近平</strong>、<strong>普京</strong>举行三国领导人首次三方会晤。白宫方面称议题包括核扩散与伊朗问题；特朗普本人称计划讨论乌克兰，与白宫先前公布的口径不一致。随行官员<strong>15人以上</strong>，包括国务卿<strong>鲁比奥</strong>、财长<strong>贝森特</strong>。普京已抵深圳，由<strong>蔡奇</strong>接机。<span class="src">来源：<a href="https://cn.nytimes.com/world/20261115/trump-putin-xi-china-nuclear-proliferation/?utm_source=RSS">纽约时报</a> · <a href="https://www.npr.org/2026/11/17/nx-s1-6042448/trump-to-meet-chinese-leader-xi-jinping-and-russias-vladimir-putin-for-joint-summit">NPR</a> · <a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE05NnNyOG9Rbkh5d1I4eVFWeVpfc3NiOHJRVVFxdUdGczBfZEZBaDVVcnVrSXBLVTNvUWc0LXpPZ1BMVjNSTnZ0cS11alFmLXJ3aTMwSmxyeFh0UVpiY1cxUmJkcHlmVUQwN1doREpSeTVLcGJzc1pvQ0dOUG5UZw?oc=5">新华网</a></span></p>
+<p>同一时间窗口，美方推进新规，封堵中国企业通过东南亚数据中心远程租用<strong>英伟达</strong>先进芯片的路径。此前中企以"只租算力、不买硬件"绕开直接出口限制，该政策在特朗普政府内部曾引发争论。<span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/cmpdwn010nyvo/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a> · <a href="https://cn.nytimes.com/usa/20261117/trump-china-ai-chip-loophole/?utm_source=RSS">纽约时报</a></span></p>
+<h3>为什么重要</h3>
+<blockquote class="soi"><p>▍推断：<strong>这两件事不是巧合，是同一套筹码的两面。</strong> 三方会晤给北京的是"大国协调"的场面，芯片新规给的是"技术天花板"的实体。美方在会谈前把管制落地，等于先把手里的牌摊在桌上——谈得成，管制是让步空间；谈不成，管制已经是既成事实。对北京而言，深圳主场的外交收益是可见的，但算力获取成本上升是即时的。真正被挤压的是第三国：马来西亚、新加坡的数据中心从"中立基础设施"变成管制节点，它们的商业模型要重新算账。</p>
+</blockquote>
+<h3>接下来看什么</h3>
+<ul>
+<li>三方会晤后是否有联合文件，以及文件里"核"与"乌克兰"各自的措辞</li>
+<li>芯片新规的生效日期与豁免条款，是否给存量合同留过渡期</li>
+<li>贝森特与卢特尼克的分歧是否影响新规执行口径<span class="src">来源：<a href="https://cn.nytimes.com/usa/20261117/bessent-lutnick-china/?utm_source=RSS">纽约时报</a></span></li>
+<li>深圳期间中加是否签署关税下调文件<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxNV20yaTdxeVd6WmktN2g1TXpaZi1QOTZCY1htajhhbjk1TXdwZmc2cWd4cXNDaFN1bTE2SkZKN3FiSHIyMzU5RmdUTndoc0Zmak9UcXAxeDJkTDNzVlNuYTdjMUQ4YmFTZzFRWHJjRlRUWnRNbUJXMWg5bGFCOG1lM05feVI?oc=5">FT</a></span></li>
+</ul>
+<hr />
+<h2>国内</h2>
+<p><strong>① 神舟二十四号船箭转运至发射区</strong></p>
+<p>船箭组合体已转运至发射区，计划近日择机发射，将首次搭载<strong>外籍航天员</strong>。来源：<span class="tag ev">已证实</span><span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE9NamFXM1hUd1hYb0JCZTF5Y21UR1lOVEROelFmWnYyTF9yVHpZZG5VWkdSY2hWTWlDbF9kUFNsNThySTYxSUp0QXpNV3ZrZ0RjcVBIdDg3QVh2RmFweUEwODRUazlnSnF2?oc=5">中国新闻网</a> · <a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE9NamFXM1hUd1hYb0JCZTF5Y21UR1lOVEROelFmWnYyTF9yVHpZZG5VWkdSY2hWTWlDbF9kUFNsNThySTYxSUp0QXpNV3ZrZ0RjcVBIdDg3QVh2RmFweUEwODRUazlnSnF2?oc=5">新华网</a></span></p>
+<blockquote class="soq"><p>▍→ 外籍航天员上站，合作国的在轨实验排期要重排。</p>
+</blockquote>
+<hr />
+<p><strong>② 习近平在深圳一日六场双边会见</strong></p>
+<p>APEC 期间习近平单日安排六场会见，越南国家主席<strong>苏林</strong>、智利总统<strong>卡斯特</strong>已抵深圳。越方提出希望深圳人形机器人尽快进入越南。来源：<span class="tag off">官方口径</span><span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTFB6bVU0TnZpUTV6ejBOc3RwLThKMnFONEVkTTUtM1hnb0w1QW5vUUZQMHpuV1BqZTFVNVdKLW1fZUp4NGFtdmlhaUt0c0JiT0g3SUJLT3UyVTREaGxRN1BDcQ?oc=5">光明网</a> · <a href="https://news.google.com/rss/articles/CBMifkFVX3lxTFByOXhKVUhUQWw1SmdubUZZSm5UWGlhTGEyNHdtQmFZeFRuYml6N3RXRkpGUndQbXFQUTVfeEtYbTZLWWJIM2JITl9CSDlMQW5UcGMwWnF5SUtLdC1xblFZdEFibGdOTE1EbnYxWnk5aGpyOUpCQ2RQaVJsZXFWQQ?oc=5">中国新闻网</a></span></p>
+<blockquote class="soq"><p>▍→ 机器人出口清单和越南的采购预算，是这条的落点。</p>
+</blockquote>
+<hr />
+<p><strong>③ 二十届五中全会精神宣讲铺开，聚焦基层治理</strong></p>
+<p><strong>陈文清</strong>在人民日报撰文，主题为深化党建引领基层治理和基层政权建设；多省宣讲团首场报告会已举行。来源：<span class="tag off">官方口径</span><span class="src">来源：<a href="https://news.google.com/rss/articles/CBMib0FVX3lxTFBkdmtWY3N6WmVVUHlIcW9XZHZsWEdNTzVjOEV4NEsyVVZiSklQWUkyM0ZfR0d1RVpraUROVmVlV1lMOHJZLUFweWJodUlsdnZHbk1YZTJvOE50QWppTWxnMW1LVDlrTDExM21Xa1pHMA?oc=5">人民网</a></span></p>
+<blockquote class="soq"><p>▍→ 基层编制与经费口径，年底前会在省级文件里显形。</p>
+</blockquote>
+<hr />
+<p><strong>④ 最高法系统传达司法保障指示</strong></p>
+<p>围绕"为中国式现代化提供司法保障"，最高法、人民日报同步发文，提及 <strong>2023年1月至2026年9月</strong> 的司法数据口径。来源：<span class="tag off">官方口径</span><span class="src">来源：<a href="https://news.google.com/rss/articles/CBMickFVX3lxTFBoSTRZazZITmxkd2IwSXpFWGx0ZngxSkNEWFRrd2dBd19qVTJvV2QxR3hwdHg0aTRoQWpIcGRZYXlFVG5GdUN3NlNqS1JxQ01UWjloYlVQYWhBVi12UUgzenVrdnlpY01ZMEFNTFRZZjFHQQ?oc=5">人民网</a></span></p>
+<blockquote class="soq"><p>▍→ 涉企案件审理周期，是明年营商评估的硬指标。</p>
+</blockquote>
+<hr />
+<p><strong>⑤ 第二十三届中国国际农交会意向合作近万项</strong></p>
+<p>农交会闭幕口径为达成意向合作<strong>近万项</strong>；广西团首日意向签约 <strong>8770万元</strong>。来源：<span class="tag sig">单一来源</span><span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxNU2FWcktIcUsyRDgwVWVyYWpxUXFJWF9kaXItNWJnTGZnY19XczktaVU2SDJCYkNKUjB6b3VFbzd4MnJ4ZEUxNEFzR3BVVmZ5eWhqMEQ4TzdrdXJGOVNiek5qSjU4Sk5ybndCWFNKQmpTYWZ5RTdDd195V0hpbzdkbk5R?oc=5">新华网</a></span></p>
+<blockquote class="soq"><p>▍→ 意向转合同率不公布，这个数字不能当订单看。</p>
+</blockquote>
+<hr />
+<h2>国际</h2>
+<p><strong>⑥ 乌克兰袭击克里米亚大桥，桥体部分坍塌</strong></p>
+<p>乌方称此次导弹与无人机联合打击筹划数周，泽连斯基称"前所未有"；俄方称击落多架无人机。大桥是俄对克里米亚控制的标志性工程。来源：<span class="tag ev">已证实</span><span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/cw772jk4rvmxo?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://www.npr.org/2026/11/17/g-s1-153946/russia-ukraine-war">NPR</a></span></p>
+<blockquote class="soq"><p>▍→ 俄南部补给线改道，克里米亚物资成本上升。</p>
+</blockquote>
+<hr />
+<p><strong>⑦ 伊朗第三次打击巴林美军目标，美方报复</strong></p>
+<p>伊朗无人机袭击巴林境内美军雷达设施，美方打击伊朗境内目标作为回应，两个月平静期结束。科威特称其防空正在拦截无人机。来源：<span class="tag ev">已证实</span><span class="src">来源：<a href="https://www.npr.org/2026/11/17/nx-s1-6044255/us-iran-war-latest-bahrain">NPR</a> · <a href="https://www.aljazeera.com/news/2026/11/17/kuwait-reports-drone-attacks-as-iran-us-trade-attacks-on-qeshm-and-bahrain?traffic_source=rss">半岛电视台</a> · <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxQU2lESUxmdF9UMGE1eWlZcmZkUFJtNWxyNm5kZWM0cTExSGtIZXRxNTZNTjR3OXlqeFlQMjlWYWdjenZnazlJRUo1NlRndVRZWWY0VFVBcUJybG1NRTRhVkdtZFd4SUZiVlFPRWNLcmFVQjlYM3lZUUFlbUhuT0JJckg5cjNYZ2xEMlNjNVhuMVliMkRnWlFXVw?oc=5">AP</a></span></p>
+<blockquote class="soq"><p>▍→ 霍尔木兹航运保费先动，中国原油进口成本跟着走。</p>
+</blockquote>
+<hr />
+<p><strong>⑧ 英伟达季度业绩强劲，黄仁勋不回归</strong></p>
+<p>英伟达公布强劲季报，同时确认<strong>黄仁勋</strong>不重返公司。其女<strong>黄敏珊</strong>留任引发内部担忧，员工称多名高管因其离职。来源：<span class="tag ev">已证实</span><span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/cm2kl50vkwkdo?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://cn.nytimes.com/business/20261117/nvidia-jensen-madison-huang/?utm_source=RSS">纽约时报</a></span></p>
+<blockquote class="soq"><p>▍→ 亚洲客户关系失去对接人，订单谈判周期会拉长。</p>
+</blockquote>
+<hr />
+<p><strong>⑨ 英国制裁八家以色列定居点企业</strong></p>
+<p>英国对支持约旦河西岸非法定居点的<strong>8家</strong>以色列公司实施制裁，称目的是保护两国方案；澳大利亚同步制裁相关个人与公司。来源：<span class="tag ev">已证实</span><span class="src">来源：<a href="https://www.aljazeera.com/video/newsfeed/2026/11/17/aje-onl-nf_uk-sanctions-eight-israeli-settlement-firms-171126?traffic_source=rss">半岛电视台</a> · <a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxOcXk4clBMd2ltVDE1T2tJSlJRLUs5dTIzUTVXVVRkVWNMUTRzMEVFR2ZvVHNUelRhZXB5WDZGU2lmV2p3VDIzSWNwdVVRbnl3Y0JCWXQ1VnAtRmQwZWxsdU9GSDJ1ajh3U1pCRDMwRDdTblBYMUs4RE1udnNzSkU1alhwQm1QNHo3aF91M0Zod1JsNVV4RllPcHdkdEoySUxsRkhIZ2x5STF2LWdEbWF4M1czUUNySWJDdGc?oc=5">路透</a></span></p>
+<blockquote class="soq"><p>▍→ 欧洲企业对定居点供应链的合规审查会先收紧。</p>
+</blockquote>
+<hr />
+<p><strong>⑩ 美国失去麻疹消除状态，26年来首次</strong></p>
+<p>美国报告 <strong>5400 例以上</strong>病例、<strong>10 例</strong>麻疹相关死亡，为 1990 年代初以来首次。来源：<span class="tag sig">单一来源</span><span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/c977p71jx0xxo?at_medium=RSS&amp;at_campaign=rss">BBC</a></span></p>
+<blockquote class="soq"><p>▍→ 疫苗犹豫的代价变成可统计数字，各州接种政策要动。</p>
+</blockquote>
+<hr />
+<p><strong>⑪ 美军间谍案：英方移交美军事羁押</strong></p>
+<p>一名驻英美军士兵因涉嫌为俄罗斯从事间谍活动被英国警方逮捕，英方依现有国际协议将调查移交美方，现由美军羁押。来源：<span class="tag ev">已证实</span><span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/c6x284ez38vdo?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://news.google.com/rss/articles/CBMixAFBVV95cUxOMjlNbGFEMk45QzUtNDZSZzhnZ0oxLVU3dGVRVkpHQTIzQTlTbWl3ZE1Nb2trdHcyT0pZXzZnMW9UMFgwel9qbUpyelM5OFlOS19MeWVDeWVwWW9wMmpXd0N1cTNtbHBiejFQSE9NV3NrYld3RWZDcXEwdmZwNVdiY3daUGp4SXNMbzdvTTZlTlhuNHBhTTRsNjY3MmF5THpZcWxqNGdHemk1cWFuaVI4WGhpaDFoLWJpd2d6Zk5Qa1dtVG5m?oc=5">NBC</a></span></p>
+<blockquote class="soq"><p>▍→ 北约内部涉俄案件的司法管辖边界被这次先例推开。</p>
+</blockquote>
+<hr />
+<h2>数据与日程</h2>
+<p><strong>⑫ 美国麻疹：5400 例、10 死</strong></p>
+<p>病例数为 1990 年代初以来最高，消除状态被撤销。来源：<span class="tag sig">单一来源</span><span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/c977p71jx0xxo?at_medium=RSS&amp;at_campaign=rss">BBC</a></span></p>
+<blockquote class="soq"><p>▍→ 关注后续是否出现州级强制接种立法提案。</p>
+</blockquote>
+<hr />
+<p><strong>⑬ 农交会意向合作近万项</strong></p>
+<p>第二十三届中国国际农交会闭幕口径，广西团首日签约 8770 万元。来源：<span class="tag sig">单一来源</span><span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxNU2FWcktIcUsyRDgwVWVyYWpxUXFJWF9kaXItNWJnTGZnY19XczktaVU2SDJCYkNKUjB6b3VFbzd4MnJ4ZEUxNEFzR3BVVmZ5eWhqMEQ4TzdrdXJGOVNiek5qSjU4Sk5ybndCWFNKQmpTYWZ5RTdDd195V0hpbzdkbk5R?oc=5">新华网</a></span></p>
+<blockquote class="soq"><p>▍→ 看明年一季度实际履约金额，而非意向数。</p>
+</blockquote>
+<hr />
+<p><strong>⑭ 日程：三方会晤与芯片新规同窗口</strong></p>
+<p>特朗普亚洲行三天，深圳三方会晤为行程重点；美方芯片租算力新规同期推进。来源：<span class="tag ev">已证实</span><span class="src">来源：<a href="https://www.npr.org/2026/11/17/nx-s1-6043702/trump-arrives-philippines">NPR</a> · <a href="https://cn.nytimes.com/usa/20261117/trump-china-ai-chip-loophole/?utm_source=RSS">纽约时报</a></span></p>
+<blockquote class="soq"><p>▍→ 会晤通稿与新规生效日期，谁先出谁定调。</p>
+</blockquote>
+<hr />
+<h2>两个判断</h2>
+<h3>判断一 · 往回看（因果）</h3>
+<blockquote class="soi"><p>▍推断：<strong>管制先落地、会晤后登场，是刻意排序，不是日程巧合。</strong> 美方在深圳会谈前把"租算力"通道堵上，逻辑是把不可逆的动作放在可谈判的动作之前——一旦会谈出现让步需求，管制本身就成了可以"部分松绑"的筹码，而不是需要新争取的目标。这解释了为什么新规在政府内部争论已久却选在此刻推进：争论的焦点从来不是要不要管，而是什么时候拿出来用。另一条线是人事：贝森特转鹰、与卢特尼克摩擦公开化，说明对华技术政策的主导权正在从商务部向财政部倾斜，而财政部更在意金融与宏观稳定，这意味着后续管制可能更偏向"精准卡点"而非"全面脱钩"。北京这边的算盘则是把深圳主场做成可见的外交资产，用双边会见数量和多边出席规格对冲技术端的坏消息。</p>
+</blockquote>
+<h3>判断二 · 往前看（预测）</h3>
+<blockquote class="soi"><p>▍推断：<strong>如果芯片新规是真执行而非姿态，那么在 2027 年 2 月 28 日之前，应该看到至少一家东南亚数据中心运营商公开披露因合规审查而中止或缩减对华算力合约。</strong> 观察点很具体：马来西亚柔佛、新加坡的数据中心园区运营方，以及英伟达在季报或电话会中对"第三国部署"的口径变化。若到期只有政策文本而无任何运营商层面的合约调整披露，说明执行端留了实质性后门，这轮管制应被视为谈判筹码而非产业政策。</p>
+</blockquote>
+<hr />
+<h2>纠偏</h2>
+<ul>
+<li><strong>"三方会晤讨论乌克兰"目前只有特朗普单方说法</strong>，白宫先前公布议题为核扩散与伊朗，两者不一致，不宜采信任一版本为定论。</li>
+<li><strong>黄仁勋离职原因</strong>在条目中仅表述为"丑闻爆发后突然离职"，具体性质未核实，本简报不作定性。</li>
+<li><strong>农交会"近万项意向合作"</strong>为展会方口径，无独立核实，且意向不等于合同。</li>
+</ul>
+<h2>本期未覆盖</h2>
+<ul>
+<li><strong>中加关税下调的具体清单与幅度</strong>：FT、WSJ 均提及，但条目未给出税目与税率，无法判断影响面。</li>
+<li><strong>美国联邦政府停摆/ FAA 停飞后续</strong>：条目仅提及"ground stop 影响数千航班"，缺恢复时间与原因，不敢写。</li>
+<li><strong>中国战机产能扩张</strong>：南华早报条目只有标题式提问，无数据，不构成可核查事实。</li>
+<li><strong>联合国秘书长人选博弈</strong>：涉及特朗普态度，但条目为评论性转述，缺具体投票日程。</li>
+<li><strong>台湾九合一选情</strong>：多条为分析稿，缺民调机构与样本口径，且属预测性内容，本期不纳入硬信息。</li>
+</ul><nav class="back"><a href="../index.html">← 返回最新一期</a></nav>
+</body>
+</html>
