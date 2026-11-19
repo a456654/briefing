@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>每日简报 · 2026-11-20</title>
+<style>
+  :root {
+    --fg:#000000; --fg-soft:#141414; --bg:#ffffff; --muted:#5c5c60;
+    --line:#dcdcdf; --line-soft:#ededf0; --accent:#b3352b; --pill:rgba(120,120,128,.10);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fg:#e9e9eb; --fg-soft:#c6c6ca; --bg:#111112; --muted:#8e8e93;
+      --line:#26262a; --line-soft:#1d1d20; --accent:#e37a6e; --pill:rgba(150,150,160,.14);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0 auto; padding: 26px 20px 76px; max-width: 720px;
+    background: var(--bg); color: var(--fg);
+    font: 16.5px/1.8 -apple-system, BlinkMacSystemFont, "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  }
+  @media (max-width: 480px) {
+    body { font-size: 16px; padding: 22px 16px 64px; }
+  }
+  h1 {
+    font-size: 1.5em; font-weight: 700; line-height: 1.32;
+    letter-spacing: -.015em; margin: 0 0 .12em;
+  }
+  h2 {
+    position: relative;
+    font-size: .95em; font-weight: 650; letter-spacing: .1em; color: var(--fg-soft);
+    margin: 2.8em 0 1.05em; padding: 0 0 .5em .8em;
+    border-bottom: 1px solid var(--line);
+  }
+  h2::before {
+    content: ""; position: absolute; left: 0; top: .16em; bottom: .62em;
+    width: 3px; border-radius: 2px; background: var(--accent); opacity: .55;
+  }
+  h3 { font-size: 1.02em; font-weight: 650; margin: 1.7em 0 .55em; }
+  p { margin: 1.05em 0; }
+  li { margin: .55em 0; }
+  strong { font-weight: 650; }
+  a {
+    color: var(--accent); text-decoration: none;
+    border-bottom: 1px solid rgba(128,128,128,.34);
+  }
+  a:hover { border-bottom-color: var(--accent); }
+  blockquote {
+    margin: 1.2em 0; padding: .7em 1em; color: var(--fg-soft);
+    border-left: 3px solid var(--line); font-size: .95em;
+  }
+  /* 「> ▍→ 后果句」：黑色正文 + 红色竖线，从事实里跳出来 */
+  blockquote.soq {
+    margin: .85em 0 .2em; padding: .3em 0 .3em .95em;
+    border-left: 3px solid var(--accent);
+    color: var(--fg); font-size: .96em; line-height: 1.75; font-weight: 500;
+  }
+  blockquote.soq p { margin: .15em 0; }
+  /* 「> ▍推断」：整段推断，用不同底色再区分一层 */
+  blockquote.soi {
+    margin: .9em 0; padding: .85em 1em;
+    border-left: 3px solid #6b6b70; background: rgba(120,120,128,.07);
+    color: var(--fg); font-size: .96em; line-height: 1.78;
+  }
+  blockquote.soi p { margin: .3em 0; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
+  code {
+    background: var(--pill); padding: .12em .4em;
+    border-radius: 4px; font-size: .88em;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: .9em; margin: 1.2em 0; }
+  th, td { border: 1px solid var(--line); padding: .5em .65em; text-align: left; vertical-align: top; }
+
+  /* 顶部时间戳 */
+  .stamp {
+    color: var(--muted); font-size: .78em; letter-spacing: .03em;
+    margin: 0 0 1.5em; display: flex; align-items: center; gap: .5em;
+  }
+  .stamp::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); flex: none;
+  }
+
+  /* 可信度标签 */
+  .tag {
+    display: inline-block; font-size: .75em; font-weight: 500; line-height: 1.6;
+    padding: .06em .5em; border-radius: 4px; margin-right: .45em;
+    vertical-align: .1em; white-space: nowrap;
+    background: var(--pill); color: var(--muted);
+  }
+  .tag.ev  { color: #2f7d4f; background: rgba(47,125,79,.13); }
+  .tag.off { color: #3a6ea5; background: rgba(58,110,165,.13); }
+  .tag.chk { color: #96660f; background: rgba(150,102,15,.15); }
+  @media (prefers-color-scheme: dark) {
+    .tag.ev  { color: #79d3a2; background: rgba(121,211,162,.15); }
+    .tag.off { color: #8dbdee; background: rgba(141,189,238,.15); }
+    .tag.chk { color: #e2b562; background: rgba(226,181,98,.16); }
+  }
+
+  /* 「→」后果句 */
+  .so {
+    display: block; margin: .55em 0 .15em; padding: .1em 0 .1em .8em;
+    border-left: 2px solid var(--accent);
+    color: var(--fg-soft); font-size: .95em; line-height: 1.7;
+  }
+
+  /* 新闻列表：去符号，用细分隔线 */
+  ul.news { list-style: none; padding: 0; margin: 0; }
+  ul.news > li {
+    margin: 0; padding: 1.1em 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  ul.news > li:first-child { border-top: none; padding-top: .15em; }
+  ul.news > li > p { margin: 0; }
+
+  /* 来源 */
+  .src {
+    display: block; margin-top: .55em;
+    font-size: .76em; color: var(--muted); letter-spacing: .03em;
+  }
+  .src a {
+    color: var(--muted); border-bottom: 1px dotted rgba(128,128,128,.45);
+  }
+  .src a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* 归档 */
+  nav.archive {
+    margin-top: 3.4em; padding-top: 1.4em;
+    border-top: 1px solid var(--line);
+  }
+  nav.archive h2 { margin: 0 0 .9em; border: none; padding: 0; }
+  .arcrow {
+    display: flex; align-items: baseline; gap: 1em;
+    padding: .55em 0; border-bottom: 1px solid var(--line-soft);
+  }
+  .arcrow:last-child { border-bottom: none; }
+  .ym { color: var(--muted); font-size: .8em; white-space: nowrap; min-width: 6.6em; }
+  .chips { display: flex; flex-wrap: wrap; gap: .4em; }
+  .chips a {
+    display: inline-block; min-width: 2em; text-align: center;
+    padding: .06em .35em; border-radius: 5px;
+    font-size: .86em; font-variant-numeric: tabular-nums;
+    color: var(--fg-soft); background: var(--pill); border-bottom: none;
+  }
+  .chips a:hover { color: #fff; background: var(--accent); }
+  .empty { color: var(--muted); font-size: .86em; }
+
+  nav.back { margin-top: 3.4em; font-size: .9em; }
+</style>
+</head>
+<body>
+<p class="stamp">2026-11-20 07:56 更新 · 北京时间</p>
+<h1>每日简报 · 2026-11-20</h1>
+<h2>一句话</h2>
+<p><strong>中美俄元首在深圳首次三方会晤并发表"和平宣言"，但乌克兰与伊朗两条战线当天同时恶化。</strong><br />
+宣言文本落在核风险与防扩散对话上，没有停火条款；同日普京拒谈有限停火，伊朗在霍尔木兹海峡升级袭船。</p>
+<hr />
+<h2>今日主线</h2>
+<h3>发生了什么</h3>
+<p><strong>特朗普、习近平、普京</strong>在深圳举行首次三方会晤，会后发表"中俄美元首和平宣言"，承诺就"减少核风险、防止核扩散"展开对话，并就<strong>联合国改革、能源稳定、国际刑事法院管辖权</strong>等议题达成四点共识。会晤地点为深圳<strong>麒麟山莊</strong>，距 APEC 主会场约 <strong>30 分钟</strong>车程。习近平亲自到宝安国际机场迎接特朗普，为其担任中国领导人十多年来<strong>首次</strong>亲赴机场迎接外国政要。同日，习近平与日本首相<strong>高市早苗</strong>仅简短握手，气氛紧张，无解冻迹象。<span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/c38x04eppnpdo/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a> · <a href="https://www.bbc.co.uk/news/articles/c623j4ln97x7o?at_medium=RSS&amp;at_campaign=rss">BBC World</a> · <a href="https://www.npr.org/2026/11/18/nx-s1-6040432/trump-xi-and-putin-shenzhen-china-russia-usa">NPR</a> · <a href="https://www.bbc.com/zhongwen/articles/cqn0dy4ppxp7o/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a> · <a href="https://cn.nytimes.com/china/20261119/xi-trump-china-arrival/?utm_source=RSS">纽约时报中文网</a> · <a href="https://cn.nytimes.com/world/20261119/xi-jinping-china-sanae-takaichi-japan/?utm_source=RSS">纽约时报中文网</a></span></p>
+<h3>为什么重要</h3>
+<blockquote class="soi"><p>▍推断：<strong>这份宣言的价值不在内容，在形式——它把"三方共管"做成了一个可重复的会议机制，但没有配套的执行与核查条款。</strong> 四点共识里，"核对话"是唯一有后续抓手的一项，其余（联合国改革、能源稳定、ICC 管辖权）都是分歧最大、最难落地的话题，写进宣言更像是各取所需的措辞交换。真正被改变的是<strong>议题的所有权</strong>：乌克兰与伊朗原本是美欧与当事方的双边议程，现在被搬进一个中美俄三方桌面，欧洲与乌克兰被排除在签字桌之外——这正是柏林那边欧洲盟友急着宣示"统一谈判立场"的原因。对北京而言，主办这场会晤的收益是可见的：深圳作为科技中心被推到镜头前，习近平以主场身份同时接待两个核大国。但代价同样可见——<strong>黄仁勋间谍丑闻</strong>与对华 AI 芯片出口争议在会晤同期发酵，美方众议院委员会披露半年内批准对华出售近 <strong>90 万颗</strong> AI 芯片，加州同步对英伟达启动涉华调查。峰会的光环与芯片管制的收紧，是同一周的两面。<span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/ckzd9nln5e6go?at_medium=RSS&amp;at_campaign=rss">BBC World</a> · <a href="https://www.aljazeera.com/economy/2026/11/19/us-signed-off-on-sales-of-nearly-900000-ai-chips-to-china-in-six-months?traffic_source=rss">半岛电视台</a> · <a href="https://www.bbc.co.uk/news/articles/cqn70vxp5p4no?at_medium=RSS&amp;at_campaign=rss">BBC World</a></span></p>
+</blockquote>
+<h3>接下来看什么</h3>
+<ul>
+<li><strong>宣言是否有第二份文件</strong>：核对话若只有措辞没有时间表与参与方名单，则视为无实质进展。</li>
+<li><strong>欧洲—乌克兰—俄罗斯三方渠道是否启动</strong>：柏林峰会宣称的"统一立场"能否转成具体谈判日期。</li>
+<li><strong>霍尔木兹海峡袭船是否触发油价与航运保险费率跳升</strong>，这是判断伊朗议题是否失控的最快指标。</li>
+<li><strong>英伟达相关调查的正式文书</strong>：加州检方是否立案，决定这轮芯片争议是政治表态还是法律程序。</li>
+</ul>
+<hr />
+<h2>国内</h2>
+<p><strong>① 深圳为 APEC 停课并劝居家办公</strong></p>
+<p>为承办 APEC 峰会，深圳学校本周停课，地方政府指示企业员工居家办公，多条道路封闭，安保严密，大量居民离城。<span class="src">来源：<a href="https://cn.nytimes.com/china/20261119/a-tropical-chinese-city-is-half-empty-and-ready-for-the-summit/?utm_source=RSS">纽约时报中文网</a></span></p>
+<blockquote class="soq"><p>▍→ 一周停摆的成本落在本地中小商户与服务业的现金流上。</p>
+</blockquote>
+<hr />
+<p><strong>② 习近平机场亲迎特朗普，十多年来首次</strong></p>
+<p>习近平在宝安国际机场迎接特朗普，握手拥抱；这是其任内首次亲赴机场迎接外国政要，被解读为对此前访美礼遇的回报。<span class="src">来源：<a href="https://cn.nytimes.com/china/20261119/xi-trump-china-arrival/?utm_source=RSS">纽约时报中文网</a> · <a href="https://cn.nytimes.com/world/20261119/xi-trump-hug-shenzhen/?utm_source=RSS">纽约时报中文网</a></span></p>
+<blockquote class="soq"><p>▍→ 礼遇规格成了可交易的筹码，下次轮到美方定价。</p>
+</blockquote>
+<hr />
+<p><strong>③ 阿里被指为英伟达涉军芯片链条一环</strong></p>
+<p>知情人士称，阿里巴巴是 Megaspeed 公司的客户与财务支持者，后者处于英伟达"间谍门"中心；阿里还联合创办了一个与中国军方关系密切的 AI 实验室。<span class="src">来源：<a href="https://cn.nytimes.com/technology/20261119/nvidia-alibaba-china-military/?utm_source=RSS">纽约时报中文网</a></span></p>
+<blockquote class="soq"><p>▍→ 云厂商的算力采购记录会被当作出口管制的证据链。</p>
+</blockquote>
+<hr />
+<p><strong>④ 美方半年批准近 90 万颗 AI 芯片对华出售</strong></p>
+<p>美国众议院委员会在审查前英伟达 CEO 黄仁勋涉华间谍指控期间，公布芯片出口数据：六个月内批准对华出售近 <strong>90 万颗</strong> AI 芯片。<span class="src">来源：<a href="https://www.aljazeera.com/economy/2026/11/19/us-signed-off-on-sales-of-nearly-900000-ai-chips-to-china-in-six-months?traffic_source=rss">半岛电视台</a></span></p>
+<blockquote class="soq"><p>▍→ 数字公开后，许可口径只会收紧，不会放宽。</p>
+</blockquote>
+<hr />
+<p><strong>⑤ 加州对英伟达启动涉华 AI 芯片调查</strong></p>
+<p>英伟达全球总部所在的加州对其启动涉华 AI 芯片调查，时点在前 CEO 黄仁勋离任之后。<span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/cqn70vxp5p4no?at_medium=RSS&amp;at_campaign=rss">BBC World</a></span></p>
+<blockquote class="soq"><p>▍→ 州级调查可发传票，比国会听证更快逼出文件。</p>
+</blockquote>
+<hr />
+<h2>国际</h2>
+<p><strong>⑥ 国际法院裁定缅甸对罗兴亚实施种族灭绝</strong></p>
+<p>国际法院（ICJ）作出史无前例的裁决，认定缅甸 2017 年军事行动中对罗兴亚人"具有灭绝种族意图"，该行动致数千人死亡。<span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/c804wzp20ddvo?at_medium=RSS&amp;at_campaign=rss">BBC World</a> · <a href="https://www.npr.org/2026/11/19/g-s1-154340/un-court-myanmar-genocide-rohingya">NPR</a> · <a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE5qLUhZWS1IeE93REZvbWFfdUpvcnEyOG1kZjU5M2dMV3N2TFFtZEZsVll5eUx4MWxhcTRaWFlqSndxaVhtRWNrel94QVVCcWgtSGdvd2xvRHZNdm9rNDhJbmhpeWNmSW41bnRZaHo1a0xuRTZmODVXc3Yxemh3QQ?oc=5">Google News/NYT</a></span></p>
+<blockquote class="soq"><p>▍→ 判例指向以色列，美国制裁法官的风险随之上升。</p>
+</blockquote>
+<hr />
+<p><strong>⑦ 五国拟在卢旺达设移民"遣返中心"</strong></p>
+<p>德国、奥地利、荷兰、丹麦、希腊宣布计划在卢旺达设立离岸中心，安置无权留欧者，该政策被批"严重道德失当"。<span class="src">来源：<a href="https://www.theguardian.com/world/2026/nov/16/eu-states-immigration-return-hubs-rwanda">卫报</a></span></p>
+<blockquote class="soq"><p>▍→ 欧盟内部庇护责任进一步外包，法律挑战会先卡住执行。</p>
+</blockquote>
+<hr />
+<p><strong>⑧ 普京拒谈有限停火，称回应将"更痛苦"</strong></p>
+<p>克里米亚大桥遭袭后，普京表示俄不会就有限停火谈判，并誓言对乌袭击作出"痛苦得多"的回应。<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMickFVX3lxTE0yNHJ2ekFIeGFSWktPUmVMSF85amtLLV9kQ1RRSXRBUVNVZDFndHRFcUd1aDByY0VQeG91TzFlMDVJdU85aWJ6V2g5cDBQaGg3Q0JUTjhlMkt3a2c0S1Q3UHZURkZWcHFZZGVGM1NoLURSQQ?oc=5">Google News/CBS</a> · <a href="https://www.bbc.co.uk/news/articles/cm879dqn3e1jo?at_medium=RSS&amp;at_campaign=rss">BBC World</a></span></p>
+<blockquote class="soq"><p>▍→ 峰会宣言与战场升级同日并存，停火窗口在收窄。</p>
+</blockquote>
+<hr />
+<p><strong>⑨ 伊朗在霍尔木兹海峡升级袭船</strong></p>
+<p>伊朗转取攻势，袭击霍尔木兹海峡船只，并对波斯湾周边数国实施空袭。同期胡塞武装袭击利雅得，沙特主权财富基金大楼受损。<span class="src">来源：<a href="https://www.npr.org/2026/11/19/nx-s1-6044206/irans-attacks-on-ships-in-the-strait-of-hormuz-escalate">NPR</a> · <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNdUt2S1FLQ01XdnQwd3NpX3U1Skg0UFAyVWxkWDViVXNWS0V2YWt4LU00WWZmbDZEZk9hb2QzLWpXY3RqTEhHZ255bnNOTEdvWnloUlI1bmszYkNaZlFIZGJlckxjSVk0aHduY0R3OXA3MW14OWRFTFo3V2RlakRvQjFhZW9Oemo1SnJPTzd4RGN5M0xGRzk5SXV3?oc=5">Google News/NYT</a></span></p>
+<blockquote class="soq"><p>▍→ 海峡风险溢价直接进中国原油到岸成本。</p>
+</blockquote>
+<hr />
+<p><strong>⑩ Anthropic 上市，成首家纯 AI 上市公司</strong></p>
+<p>Anthropic 完成 IPO，募资超 <strong>1000 亿美元</strong>，成为全球市值最高的上市公司之一，为首家纯 AI 公司上市，被视为对整个行业的检验。纳斯达克门外有抗议者被捕。<span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/c3x29ggenz12o?at_medium=RSS&amp;at_campaign=rss">BBC World</a> · <a href="https://www.npr.org/2026/11/19/g-s1-154344/up-first-newsletter-house-democrats-trump-xi-putin-anthropic">NPR</a> · <a href="https://www.aljazeera.com/video/newsfeed/2026/11/19/three-arrested-during-anthropic-ipo-protest-outside-nasdaq?traffic_source=rss">半岛电视台</a></span></p>
+<blockquote class="soq"><p>▍→ 首份季报的毛利率将重定全行业估值锚。</p>
+</blockquote>
+<hr />
+<p><strong>⑪ 美上诉法院允许终止委内瑞拉人 TPS</strong></p>
+<p>美国联邦上诉法院批准特朗普政府请求，中止下级法院恢复委内瑞拉人"临时保护身份"的命令。<span class="src">来源：<a href="https://www.aljazeera.com/news/2026/11/19/us-appeals-court-lets-trump-end-tps-deportation-protections-for-venezuelans?traffic_source=rss">半岛电视台</a> · <a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxQZGpZSEt0YktGbGc2VUV5RndhWmQwV01HYnlsMlpNQUNVUEFkbV8tSnpxcGVlaGpkU21jbGxrYUJFbU9LV0syaVU3YllOYU0yRzFOZjlXQ0lXdUN5NlZGc2FJSkxEMEFhTkRHVlByZjVOaU94azNwaml5d1ZQWmlxeDVzWnZHTnFCNkhHbEhsQTFJZHREQnc?oc=5">Google News/AP</a></span></p>
+<blockquote class="soq"><p>▍→ 数十万人的工作许可进入倒计时，用工方先受冲击。</p>
+</blockquote>
+<hr />
+<h2>数据与日程</h2>
+<p><strong>⑫ 90 万颗：美半年批准对华 AI 芯片出口量</strong></p>
+<p>美国众议院委员会公布的六个月出口许可数据显示，批准对华出售近 <strong>90 万颗</strong> AI 芯片。<span class="src">来源：<a href="https://www.aljazeera.com/economy/2026/11/19/us-signed-off-on-sales-of-nearly-900000-ai-chips-to-china-in-six-months?traffic_source=rss">半岛电视台</a></span></p>
+<blockquote class="soq"><p>▍→ 这个数字会成为下一轮管制立法的基准线。</p>
+</blockquote>
+<hr />
+<p><strong>⑬ 1000 亿美元：Anthropic IPO 募资规模</strong></p>
+<p>Anthropic 上市募资超 <strong>1000 亿美元</strong>，为首家纯 AI 上市公司。<span class="src">来源：<a href="https://www.npr.org/2026/11/19/g-s1-154344/up-first-newsletter-house-democrats-trump-xi-putin-anthropic">NPR</a></span></p>
+<blockquote class="soq"><p>▍→ 打新资金从其他科技股抽走，估值分化会加快。</p>
+</blockquote>
+<hr />
+<p><strong>⑭ 四分之一：全球无法拒绝配偶性要求的女性比例</strong></p>
+<p>联合国人口基金报告称，全球约<strong>四分之一</strong>女性在配偶或伴侣要求性行为时无拒绝能力，西非与中非近半。<span class="src">来源：<a href="https://www.theguardian.com/global-development/2026/nov/19/women-girls-rights-rape-sexual-violence-africa-marriage-unfpa">卫报</a></span></p>
+<blockquote class="soq"><p>▍→ 婚内同意入法与否，会成为援助资金的附加条件。</p>
+</blockquote>
+<hr />
+<h2>两个判断</h2>
+<h3>判断一 · 往回看（因果）</h3>
+<blockquote class="soi"><p>▍推断：<strong>三方会晤选在深圳、选在此刻，是因为三方各自都需要一个"没有输"的镜头，而不是因为有一份可执行的协议。</strong> 特朗普要的是可对内展示的"历史性会晤"与诺贝尔和平奖叙事——普京在会上主动提起该奖项；习近平要的是主场与技术叙事；普京要的是在战场升级的同时不被排除在谈判桌外。三方共同需要的，恰恰是一份<strong>不含停火条款</strong>的宣言——因为任何具体条款都会立刻暴露分歧。这也解释了为什么宣言落在"核风险对话"这种长期、低约束、可由技术官僚推进的议题上。真正的信号不是宣言写了什么，而是<strong>谁没被邀请</strong>：欧洲与乌克兰在柏林另行宣示"统一立场"，说明它们已经意识到议程被搬走了。<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxOd0F3NmtmZVpJY1JJdlBCZzUzS2xsbmJKcm5md1Y0ZWRiQkZZeE1PTUhjU19hbGx1OXlNUU5HLVMzVy1PdEVzTGtINldmR2JrTDZJSVI1Z1dlM2JUdGFtUGtDVER2VHIwdzZYNExvR01tVGdQUTM2LTY0VG1od2ltRkNVX1BjLWtxOWRmRVBubDJUU3p2SG9YNTNoLVJtMWVwLTR3?oc=5">Google News/USA Today</a></span></p>
+</blockquote>
+<h3>判断二 · 往前看（预测）</h3>
+<blockquote class="soi"><p>▍推断：<strong>如果这份宣言只是形式而非机制，那么在 2027 年 1 月 31 日之前，应该看到"核对话"没有任何一次司局级以上的正式会谈公告，同时乌克兰战场出现至少一次针对能源基础设施的大规模打击。</strong> 检验方式很具体：查中美俄三方外交部门网站，看是否发布过核对话的工作组名单或会谈纪要；若到明年 1 月底只有重复的宣言措辞而无工作组，则本轮峰会的定价应视为情绪而非机制。反向指标同样明确——若霍尔木兹袭船导致布伦特原油单周涨幅超过 10%，说明市场已把"三方共管"读成"三方都管不住"，那时宣言的信誉会被能源价格直接打折。</p>
+</blockquote>
+<hr />
+<h2>纠偏</h2>
+<ul>
+<li><strong>"历史性三方会晤"不等于"三方峰会机制"</strong>：多家报道称这是首次三方讨论，但没有任何来源显示三方同意设立常设机制或定期会晤安排。把它写成"机制化"是过度解读。</li>
+<li><strong>"和平宣言"不含停火</strong>：宣言文本涉及核风险、防扩散、联合国改革、能源稳定、ICC 管辖权，未见停火或撤军条款。中文语境里"和平宣言"四字容易被读成停战文件，需区分。</li>
+<li><strong>黄仁勋"间谍门"目前是指控与调查，不是定罪</strong>：纽约时报的表述为"知情人士称"，加州调查为启动阶段，众议院数据为许可统计。三者都不能等同于司法认定。</li>
+<li><strong>Anthropic 募资"超 1000 亿美元"仅 NPR 一处给出该口径</strong>，BBC 只说"全球市值最高上市公司之一"，未给募资额。该数字待更多来源核对。</li>
+</ul>
+<hr />
+<h2>本期未覆盖</h2>
+<ul>
+<li><strong>高市早苗在 APEC 的完整双边日程</strong>：仅见"孤单身影"与"简短握手"两处描述，日方是否与美方单独会谈、谈了什么，条目不足，不敢写。</li>
+<li><strong>欧洲五国卢旺达遣返中心的法律文本与时间表</strong>：只有政策宣布，无协议文本、无欧盟委员会立场，无法判断可执行性。</li>
+<li><strong>美国会民主党提名杰弗里斯为议长候选人</strong>：仅 NPR 一句提及，缺票数与党内反对情况，不足以判断众议院控制权走向。</li>
+<li><strong>以色列在加沙中部发动新一轮地面攻势</strong>：仅半岛电视台视频条目一句描述，缺伤亡、范围与以军声明，无法核实规模。</li>
+<li><strong>中国三季度结婚登记与出生相关数据</strong>：本期条目中完全没有，属应当覆盖但无来源的空白。</li>
+</ul><nav class="back"><a href="../index.html">← 返回最新一期</a></nav>
+</body>
+</html>
