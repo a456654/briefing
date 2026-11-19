@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>每日简报 · 2026-11-19</title>
+<style>
+  :root {
+    --fg:#000000; --fg-soft:#141414; --bg:#ffffff; --muted:#5c5c60;
+    --line:#dcdcdf; --line-soft:#ededf0; --accent:#b3352b; --pill:rgba(120,120,128,.10);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fg:#e9e9eb; --fg-soft:#c6c6ca; --bg:#111112; --muted:#8e8e93;
+      --line:#26262a; --line-soft:#1d1d20; --accent:#e37a6e; --pill:rgba(150,150,160,.14);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0 auto; padding: 26px 20px 76px; max-width: 720px;
+    background: var(--bg); color: var(--fg);
+    font: 16.5px/1.8 -apple-system, BlinkMacSystemFont, "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  }
+  @media (max-width: 480px) {
+    body { font-size: 16px; padding: 22px 16px 64px; }
+  }
+  h1 {
+    font-size: 1.5em; font-weight: 700; line-height: 1.32;
+    letter-spacing: -.015em; margin: 0 0 .12em;
+  }
+  h2 {
+    position: relative;
+    font-size: .95em; font-weight: 650; letter-spacing: .1em; color: var(--fg-soft);
+    margin: 2.8em 0 1.05em; padding: 0 0 .5em .8em;
+    border-bottom: 1px solid var(--line);
+  }
+  h2::before {
+    content: ""; position: absolute; left: 0; top: .16em; bottom: .62em;
+    width: 3px; border-radius: 2px; background: var(--accent); opacity: .55;
+  }
+  h3 { font-size: 1.02em; font-weight: 650; margin: 1.7em 0 .55em; }
+  p { margin: 1.05em 0; }
+  li { margin: .55em 0; }
+  strong { font-weight: 650; }
+  a {
+    color: var(--accent); text-decoration: none;
+    border-bottom: 1px solid rgba(128,128,128,.34);
+  }
+  a:hover { border-bottom-color: var(--accent); }
+  blockquote {
+    margin: 1.2em 0; padding: .7em 1em; color: var(--fg-soft);
+    border-left: 3px solid var(--line); font-size: .95em;
+  }
+  /* 「> ▍→ 后果句」：黑色正文 + 红色竖线，从事实里跳出来 */
+  blockquote.soq {
+    margin: .85em 0 .2em; padding: .3em 0 .3em .95em;
+    border-left: 3px solid var(--accent);
+    color: var(--fg); font-size: .96em; line-height: 1.75; font-weight: 500;
+  }
+  blockquote.soq p { margin: .15em 0; }
+  /* 「> ▍推断」：整段推断，用不同底色再区分一层 */
+  blockquote.soi {
+    margin: .9em 0; padding: .85em 1em;
+    border-left: 3px solid #6b6b70; background: rgba(120,120,128,.07);
+    color: var(--fg); font-size: .96em; line-height: 1.78;
+  }
+  blockquote.soi p { margin: .3em 0; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
+  code {
+    background: var(--pill); padding: .12em .4em;
+    border-radius: 4px; font-size: .88em;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: .9em; margin: 1.2em 0; }
+  th, td { border: 1px solid var(--line); padding: .5em .65em; text-align: left; vertical-align: top; }
+
+  /* 顶部时间戳 */
+  .stamp {
+    color: var(--muted); font-size: .78em; letter-spacing: .03em;
+    margin: 0 0 1.5em; display: flex; align-items: center; gap: .5em;
+  }
+  .stamp::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); flex: none;
+  }
+
+  /* 可信度标签 */
+  .tag {
+    display: inline-block; font-size: .75em; font-weight: 500; line-height: 1.6;
+    padding: .06em .5em; border-radius: 4px; margin-right: .45em;
+    vertical-align: .1em; white-space: nowrap;
+    background: var(--pill); color: var(--muted);
+  }
+  .tag.ev  { color: #2f7d4f; background: rgba(47,125,79,.13); }
+  .tag.off { color: #3a6ea5; background: rgba(58,110,165,.13); }
+  .tag.chk { color: #96660f; background: rgba(150,102,15,.15); }
+  @media (prefers-color-scheme: dark) {
+    .tag.ev  { color: #79d3a2; background: rgba(121,211,162,.15); }
+    .tag.off { color: #8dbdee; background: rgba(141,189,238,.15); }
+    .tag.chk { color: #e2b562; background: rgba(226,181,98,.16); }
+  }
+
+  /* 「→」后果句 */
+  .so {
+    display: block; margin: .55em 0 .15em; padding: .1em 0 .1em .8em;
+    border-left: 2px solid var(--accent);
+    color: var(--fg-soft); font-size: .95em; line-height: 1.7;
+  }
+
+  /* 新闻列表：去符号，用细分隔线 */
+  ul.news { list-style: none; padding: 0; margin: 0; }
+  ul.news > li {
+    margin: 0; padding: 1.1em 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  ul.news > li:first-child { border-top: none; padding-top: .15em; }
+  ul.news > li > p { margin: 0; }
+
+  /* 来源 */
+  .src {
+    display: block; margin-top: .55em;
+    font-size: .76em; color: var(--muted); letter-spacing: .03em;
+  }
+  .src a {
+    color: var(--muted); border-bottom: 1px dotted rgba(128,128,128,.45);
+  }
+  .src a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* 归档 */
+  nav.archive {
+    margin-top: 3.4em; padding-top: 1.4em;
+    border-top: 1px solid var(--line);
+  }
+  nav.archive h2 { margin: 0 0 .9em; border: none; padding: 0; }
+  .arcrow {
+    display: flex; align-items: baseline; gap: 1em;
+    padding: .55em 0; border-bottom: 1px solid var(--line-soft);
+  }
+  .arcrow:last-child { border-bottom: none; }
+  .ym { color: var(--muted); font-size: .8em; white-space: nowrap; min-width: 6.6em; }
+  .chips { display: flex; flex-wrap: wrap; gap: .4em; }
+  .chips a {
+    display: inline-block; min-width: 2em; text-align: center;
+    padding: .06em .35em; border-radius: 5px;
+    font-size: .86em; font-variant-numeric: tabular-nums;
+    color: var(--fg-soft); background: var(--pill); border-bottom: none;
+  }
+  .chips a:hover { color: #fff; background: var(--accent); }
+  .empty { color: var(--muted); font-size: .86em; }
+
+  nav.back { margin-top: 3.4em; font-size: .9em; }
+</style>
+</head>
+<body>
+<p class="stamp">2026-11-19 08:00 更新 · 北京时间</p>
+<h1>每日简报 · 2026-11-19</h1>
+<h2>一句话</h2>
+<p><strong>特朗普抵深圳，习近平亲赴机场迎接，中俄美三方首次同场会晤今日举行。</strong><br />
+这是中国元首 <strong>46 年</strong>来首次到机场迎接外国元首，象征意义大于议程本身。</p>
+<hr />
+<h2>今日主线</h2>
+<h3>发生了什么</h3>
+<p><strong>特朗普</strong> 11 月 18 日抵达深圳，<strong>习近平</strong> 到机场迎接，为 <strong>1980 年</strong>以来中国最高领导人首次亲赴机场迎接外国元首。三方会晤定于 <strong>11 月 19 日（周四）</strong> 举行，地点为深圳 <strong>麒麟山庄</strong>，距 APEC 主会场约 <strong>30 分钟</strong>车程，三面环山、一面临水。这是特朗普、习近平、普京三人首次同场会面。会晤前一日，<strong>乌克兰</strong> 方面袭击了克里米亚一座桥梁，部分坍塌；同期美国在东南亚封堵中国企业"只租算力、不买硬件"的 AI 算力通道；白宫内部就芯片管制力度公开分歧，特朗普称不想"冒犯中国"。来源：<span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/cjy5xkw9g1zpo/trad?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://www.bbc.com/zhongwen/articles/cqn0dy4ppxp7o/trad?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://www.npr.org/2026/11/18/nx-s1-6045518/trump-china-xi-putin">NPR</a> · <a href="https://cn.nytimes.com/usa/20261118/trump-china-ai-chip-policy/?utm_source=RSS">NYT</a></span></p>
+<h3>为什么重要</h3>
+<blockquote class="soi"><p>▍推断：<strong>接机规格是给国内和第三方看的，不是给特朗普看的。</strong> 46 年首次的礼遇，成本几乎为零，收益是把"中方主导议程"这件事视觉化——三人同框的照片里，主人是谁一目了然。真正的交易在别处：美方要在算力通道上收紧，中方要在关税与投资壁垒上松口，俄方要在制裁与战场压力上找缝隙。三方各有所求，但没有任何两方的诉求是互补的，所以最可能的产出是"同意继续谈"，而非具体文件。</p>
+</blockquote>
+<h3>接下来看什么</h3>
+<ul>
+<li>会后是否有<strong>联合声明或联合记者会</strong>；没有，说明三方连措辞都没谈拢。</li>
+<li>特朗普是否在会后单方面对媒体谈<strong>芯片管制</strong>口径——这直接决定白宫内部哪一派占上风。</li>
+<li>克里米亚桥梁袭击是否被普京带入会谈，以及会后俄方对乌表态是否升级。</li>
+</ul>
+<hr />
+<h2>国内</h2>
+<p><strong>① 中韩自贸协定二阶段谈判实质性完成</strong></p>
+<p>商务部宣布，中韩自贸协定第二阶段谈判实质性完成，涵盖<strong>文化合作</strong>。有韩国媒体报道称韩国内容产业在华待遇问题出现松动迹象。来源：<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxPdlpzOHRCSVQzSjZNY2MtcFd1bTJkTGdkeUdhTThGb3JwVG5SdVM4aExOdlpVci1iZFZzcVkyanhicDg0dXNiZm8xdmhsUDB3S1JadHU5dzBMNGFNTWFZUVR4Z2lUTXVUcjgtR1d0VFVLek1KeG1pb2xYZUdpU2hqRW53TnFWeWNq?oc=5">新华网</a></span></p>
+<blockquote class="soq"><p>▍→ 文化内容准入若真松动，先受益的是韩国影视发行方，不是中方平台。</p>
+</blockquote>
+<hr />
+<p><strong>② 实践二十四号卫星发射成功</strong></p>
+<p>我国成功发射<strong>实践二十四号</strong>卫星。官方通稿未披露轨道、载荷与用途。来源：<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE40QVpycGNsdjZRekZsNWhsemtLNWxyck02amhBelZ0blRCaE1fQzZUOUNVZUxXOWlQOGNsVGo1ei1KMmpQekhGanIwTDZDNDF5Z0FPUHN4WU1ZUGpuNEhzWExUMEhyb29QTlo4dWpIQXl5UW1ILWhsVGJzTnF2UQ?oc=5">新华网</a></span></p>
+<blockquote class="soq"><p>▍→ 实践系列编号不公开用途，外界只能从后续在轨机动判断性质。</p>
+</blockquote>
+<hr />
+<p><strong>③ 三部门发布违反限消令典型案例</strong></p>
+<p>三部门联合发布典型案例，严惩违反<strong>限制消费令</strong>的犯罪行为。案例具体数量与涉案金额未在摘要中披露。来源：<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE9DZW8zckdhWndvWWZsYWJvNzVGLWYxaWRaQ3F3V0Z0Q19rc1lIRl9Qb3NNR0xiWF96dmtLdlcxR3ZTLUVnZHR2QzdmWUtUa0QtakdqNngxRHVzYXZlVzhNZUNhWmZCWENLLVE?oc=5">紫牛新闻</a></span></p>
+<blockquote class="soq"><p>▍→ 执行端收紧，失信被执行人高消费的灰色空间被压缩。</p>
+</blockquote>
+<hr />
+<p><strong>④ 中央气象台续发大风蓝色预警</strong></p>
+<p><strong>11 月 19 日 06 时</strong>中央气象台继续发布大风蓝色预警，京津冀等 <strong>17 个省区市</strong>部分地区阵风可达 <strong>7 至 9 级</strong>；北京今明两天阵风 <strong>6 至 7 级</strong>，风寒效应显著。来源：<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiXEFVX3lxTE1UclJIeERWQzh6NmxFM014Tjc1djEycUVEOGtxWGFkLUp3TzJ3eUVEOEY2N0cwYmpZVEFYX1JROFg0VU0wc2pBb3NTenhKQ2ZPd1diSzlsZVdZalZ5?oc=5">央视网</a></span></p>
+<blockquote class="soq"><p>▍→ 北方设施农业与户外施工今明两天要付额外成本。</p>
+</blockquote>
+<hr />
+<p><strong>⑤ 二十届五中全会精神宣讲铺开</strong></p>
+<p>多地开展党的二十届五中全会精神宣讲，包括北京丰台区委理论学习中心组专题研讨、新疆塔城地区宣讲等。来源：<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE9qSTVjRno2dGg4eW5DRlc0YjRvb3VYY1I4X05wTEJ3LUltT2ZpOWtqak5FUUJkcHg2SkZkbVBpdzcyaFptQmNSWmtNT2FMQ0tqZnZBSm9Wc3E0eHJ6LTBsYQ?oc=5">光明网</a></span></p>
+<blockquote class="soq"><p>▍→ 宣讲期通常伴随地方项目储备，明年一季度开工节奏看这里。</p>
+</blockquote>
+<hr />
+<h2>国际</h2>
+<p><strong>⑥ 美中俄三方会晤今日在深圳举行</strong></p>
+<p>特朗普、习近平、普京定于<strong>周四</strong>在深圳举行首次三方会晤。普京在乌克兰袭击克里米亚桥梁后仍按计划出席。来源：<span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/ck9d75x5wwwwo?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://www.npr.org/2026/11/18/nx-s1-6044242/putin-to-meet-with-trump-and-xi-after-ukrainian-attack-on-russian-bridge">NPR</a></span></p>
+<blockquote class="soq"><p>▍→ 三方无共同议程，最可能产出是"继续谈"而非文件。</p>
+</blockquote>
+<hr />
+<p><strong>⑦ 美国封堵东南亚 AI 算力租用通道</strong></p>
+<p>在先进英伟达芯片无法直接销往中国的背景下，中国企业转向"只租算力、不买硬件"模式——芯片部署在第三国数据中心，远程调用训练模型。美方正在封堵这一路径。来源：<span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/cmpdwn010nyvo/trad?at_medium=RSS&amp;at_campaign=rss">BBC</a></span></p>
+<blockquote class="soq"><p>▍→ 第三国数据中心从"中立设施"变成管制对象，租金与合规成本双升。</p>
+</blockquote>
+<hr />
+<p><strong>⑧ 白宫内部就芯片管制力度公开分歧</strong></p>
+<p>特朗普承认财政部长<strong>贝森特</strong>与商务部长<strong>卢特尼克</strong>存在分歧，焦点是堵住中国经第三国数据中心获取先进 AI 芯片的漏洞该多严。特朗普表示不想"冒犯中国"。来源：<span class="src">来源：<a href="https://cn.nytimes.com/usa/20261118/trump-china-ai-chip-policy/?utm_source=RSS">NYT</a></span></p>
+<blockquote class="soq"><p>▍→ 管制口径若软化，英伟达供应链先松一口气，国会那边会反弹。</p>
+</blockquote>
+<hr />
+<p><strong>⑨ 伊朗袭击科威特与巴林，海湾升级</strong></p>
+<p>科威特称击退了两个月来首次伊朗袭击，巴林称同样遭袭。此前美军周二空袭伊朗<strong>格什姆岛</strong>。美方否认伊朗关于击中巴林美军基地雷达系统的说法。来源：<span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/cw4gn9jeqjq7o?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://news.google.com/rss/articles/CBMivwFBVV95cUxQRk9ib2o3UUVKTlJLbldjZ2pVci1pSmhIVE9jeHhtQ0o0TEJSVDBSS3FGNEtJaHVkdHVpM2dneWJYVkhEWWdwSDQ4bjZlLUxJX242N0dPaUs3SnEzQm44eTJJdGNMaXNJbTdMOGowcDRYMm5kU0ZNSjE0S0JfTmZZdHdkT1J3NUhGWlhmdVpkVDNnZWdpa1NFNVNoYkczMFBQcmJHd0FzXzk2MWZyOGY5MDFtR1hSR2dvZTl5OVNPSdIBwgFBVV95cUxPVnhueXNsbjRSemZXczRCN1VRVjhtZnBKNzZUYUlnNW9rODlNb3pmaDVaSXNWQlF1ODFhUGVIOGNxVTJHa3prakdYVldwdGs1SS10c0xHWGFSYTQtNF9VcEo5TUQwVFplUDNWZDJpTFEyZThPOGFMbHl1eGVUckZzVDczRUYwTWltZ1JwY2Q5OUtUc3lJS2JjaUY1MHNCZHJQdG1DWTRka1RlaHp0TFhac2JFLVlwN244M0FWMEFNUTY5Zw?oc=5">美国之音</a></span></p>
+<blockquote class="soq"><p>▍→ 海湾航运保险费率是下一个先动的价格。</p>
+</blockquote>
+<hr />
+<p><strong>⑩ 国际法院将宣判缅甸罗兴亚种族灭绝案</strong></p>
+<p>国际法院就缅甸对罗兴亚人的行为作出历史性裁决，此前无任何国家被国际法院判定犯种族灭绝罪。有担忧美国可能对包括今年诺贝尔和平奖得主<strong>Navi Pillay</strong> 在内的法官实施制裁。来源：<span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/c5m2l90ez144o?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://www.theguardian.com/world/2026/nov/18/us-sanctions-icj-judges-myanmar-genocide-ruling-israel-gaza-court">卫报</a></span></p>
+<blockquote class="soq"><p>▍→ 判例一旦成立，以色列在加沙的相关案件援引成本下降。</p>
+</blockquote>
+<hr />
+<p><strong>⑪ 欧盟提议 450 亿欧元乌克兰贷款</strong></p>
+<p>欧盟提议向乌克兰提供 <strong>450 亿欧元</strong>贷款，还款安排在俄罗斯支付赔偿之后。部分成员国对此持保留态度。来源：<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxOaFhjUFo4SHBqb20yY1dQWmZZNlZhV2VvZjRQLTFoQjlYeFItaHNXX0FZVmhuazRYODFqcEk5RThWZUNpX2lPOFJrZ0M5U0hEODBZZFNndnE3U18xNWRtVGhlYmRXU3V1My16RTUybkdaSXRvc3NIOWpNdllIWG1GMjE4Z2N1bm1naUZjNXF6bVBPSF9lalVpeHdNN1FQeWRtZDBfaTh3ZXBaQQ?oc=5">路透</a></span></p>
+<blockquote class="soq"><p>▍→ "俄赔款后还"等于把风险挂在冻结资产收益上，法律争议未解。</p>
+</blockquote>
+<hr />
+<h2>数据与日程</h2>
+<p><strong>⑫ 美国麻疹：5400 例、10 死、失去消除状态</strong></p>
+<p>美国今年麻疹病例达 <strong>5400 例</strong>、死亡 <strong>10 人</strong>，时隔 <strong>26 年</strong>失去"麻疹消除状态"，为 1990 年代以来新高。来源：<span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/c5y4jmvxr9vyo/trad?at_medium=RSS&amp;at_campaign=rss">BBC</a></span></p>
+<blockquote class="soq"><p>▍→ 疫苗犹豫的代价开始出现在入境检疫与学校注册环节。</p>
+</blockquote>
+<hr />
+<p><strong>⑬ 皮尤：穆斯林人口 2035 年将超基督徒</strong></p>
+<p>皮尤研究预测，按 2020–2070 年趋势，穆斯林人口将在 <strong>2035 年</strong>前后超过基督徒，成为世界最大宗教群体。来源：<span class="src">来源：<a href="https://www.aljazeera.com/news/2026/11/18/pew-research-islam-on-track-to-become-worlds-largest-religion-by-2035?traffic_source=rss">半岛</a> · <a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxPWDdNU3AxVngwTEFQOU53OE51cC1SN21faDk1Z2pQTl8tN1lDRU44UjFDMV9Jc0tCcWs0Z2h1T2hTaWsydmhhNTZHdkFXamN1TzZYdGpfYTFCZG4wTTlVMm9YWm5KU1FCRWdvczZGZ09OZmxYeVIyNGlTbGdnZ01pTTdWQUs0b2VEU1JvMTEtc0xRdklxb3VQeVJocVJORXBMQnc2b0lrNWstNnJCNnh1RFhUVUxRcEY5SEl0MmJzVXZQdw?oc=5">华盛顿邮报</a></span></p>
+<blockquote class="soq"><p>▍→ 人口结构预测不改短期政策，但会影响 2030 年代劳动力叙事。</p>
+</blockquote>
+<hr />
+<p><strong>⑭ 旅行者一号达一光日距离</strong></p>
+<p>NASA <strong>旅行者一号</strong>距地球达 <strong>一光日</strong>，为 1977 年发射后近 <strong>50 年</strong>的里程碑。来源：<span class="src">来源：<a href="https://www.aljazeera.com/news/2026/11/18/nasas-voyager-1-hits-record-one-light-day-distance-50-years-after-launch?traffic_source=rss">半岛</a></span></p>
+<blockquote class="soq"><p>▍→ 深空通信延迟正式进入"一天一个来回"量级。</p>
+</blockquote>
+<hr />
+<h2>两个判断</h2>
+<h3>判断一 · 往回看（因果）</h3>
+<blockquote class="soi"><p>▍推断：<strong>这场峰会的真正驱动不是外交，是各自的内政时钟。</strong> 特朗普需要一张"我能搞定大国"的照片，中期选举周期里这比任何条款都值钱；习近平需要把 APEC 主场转化为"中国仍是中心"的视觉证据，同时用接机规格把礼遇成本压到最低；普京需要一次不被孤立的同框，来对冲克里米亚桥梁被袭后的被动。三方都在用这场会晤解决国内问题，而不是双边问题——这解释了为什么议程始终模糊：模糊对三方都是最优解，一旦具体化，就要有人让步。真正在算账的是白宫内部：贝森特与卢特尼克的分歧，本质是"管制换筹码"与"管制换安全"两条路线的分歧，而特朗普选择了拖延。</p>
+</blockquote>
+<h3>判断二 · 往前看（预测）</h3>
+<blockquote class="soi"><p>▍推断：<strong>如果白宫内部的分歧是真的，那么在 2026 年 12 月 31 日之前，应该看到商务部就"第三国数据中心算力租用"发布一份具体的合规指引或实体清单，而不是继续停留在口头表态。</strong> 检验方式：看联邦公报（Federal Register）上是否出现针对境外数据中心算力转售的规则文本。若到期只有官员讲话而无规则文本，说明特朗普的"不想冒犯中国"压过了卢特尼克一派，管制实际处于冻结状态——那么 2027 年初中国 AI 实验室的算力采购成本不会显著上升，此前关于"通道被封"的判断需要下调。</p>
+</blockquote>
+<hr />
+<h2>纠偏</h2>
+<ul>
+<li><strong>"46 年首次接机"</strong>：BBC 原文口径是"自 <strong>1980 年</strong>以来首次"，并注明 1980 年前华国锋、毛泽东有多次赴机场迎接的记录。不要简化为"史上首次"。</li>
+<li><strong>黄仁勋"婚外情"与英伟达人事</strong>：条目 [3]、[28]、[52]、[59] 涉及黄仁勋个人丑闻与英伟达 CEO 变动，但各来源对"是否复职""董事会立场"表述不一致，且 NPR 与 NYT 的细节无法交叉验证。本简报不将其列为独立事实条目，仅作为背景提及。</li>
+<li><strong>伊朗战况</strong>：美方中央司令部明确否认伊朗关于击中巴林美军基地雷达系统的说法，双方战报互相矛盾，本条只写"双方各执一词"层面的事实。</li>
+</ul>
+<hr />
+<h2>本期未覆盖</h2>
+<ul>
+<li><strong>台湾九合一选举</strong>：条目 [5]–[9] 提供了高雄、新竹、里长赴陆等多个切面，但缺少统一的选举日期、民调机构与样本口径，无法给出可核查的数字，故不单列。</li>
+<li><strong>Anthropic 上市</strong>：条目 [14] 称其"准备 <strong>1.4 万亿美元</strong>市值上市"，该数字量级异常，未见第二家来源确认，疑为转述误差，未采用。</li>
+<li><strong>加沙"黄线"以外地面行动</strong>：条目 [16]、[39] 有报道，但停火协议文本与"黄线"具体坐标未核实，无法判断是否构成违约。</li>
+<li><strong>中加贸易协议</strong>：条目 [27] 提到关税进一步削减，但未给出具体税目与税率，无法量化。</li>
+</ul><nav class="back"><a href="../index.html">← 返回最新一期</a></nav>
+</body>
+</html>
