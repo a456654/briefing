@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>每日简报 · 2026-11-22</title>
+<style>
+  :root {
+    --fg:#000000; --fg-soft:#141414; --bg:#ffffff; --muted:#5c5c60;
+    --line:#dcdcdf; --line-soft:#ededf0; --accent:#b3352b; --pill:rgba(120,120,128,.10);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fg:#e9e9eb; --fg-soft:#c6c6ca; --bg:#111112; --muted:#8e8e93;
+      --line:#26262a; --line-soft:#1d1d20; --accent:#e37a6e; --pill:rgba(150,150,160,.14);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0 auto; padding: 26px 20px 76px; max-width: 720px;
+    background: var(--bg); color: var(--fg);
+    font: 16.5px/1.8 -apple-system, BlinkMacSystemFont, "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  }
+  @media (max-width: 480px) {
+    body { font-size: 16px; padding: 22px 16px 64px; }
+  }
+  h1 {
+    font-size: 1.5em; font-weight: 700; line-height: 1.32;
+    letter-spacing: -.015em; margin: 0 0 .12em;
+  }
+  h2 {
+    position: relative;
+    font-size: .95em; font-weight: 650; letter-spacing: .1em; color: var(--fg-soft);
+    margin: 2.8em 0 1.05em; padding: 0 0 .5em .8em;
+    border-bottom: 1px solid var(--line);
+  }
+  h2::before {
+    content: ""; position: absolute; left: 0; top: .16em; bottom: .62em;
+    width: 3px; border-radius: 2px; background: var(--accent); opacity: .55;
+  }
+  h3 { font-size: 1.02em; font-weight: 650; margin: 1.7em 0 .55em; }
+  p { margin: 1.05em 0; }
+  li { margin: .55em 0; }
+  strong { font-weight: 650; }
+  a {
+    color: var(--accent); text-decoration: none;
+    border-bottom: 1px solid rgba(128,128,128,.34);
+  }
+  a:hover { border-bottom-color: var(--accent); }
+  blockquote {
+    margin: 1.2em 0; padding: .7em 1em; color: var(--fg-soft);
+    border-left: 3px solid var(--line); font-size: .95em;
+  }
+  /* 「> ▍→ 后果句」：黑色正文 + 红色竖线，从事实里跳出来 */
+  blockquote.soq {
+    margin: .85em 0 .2em; padding: .3em 0 .3em .95em;
+    border-left: 3px solid var(--accent);
+    color: var(--fg); font-size: .96em; line-height: 1.75; font-weight: 500;
+  }
+  blockquote.soq p { margin: .15em 0; }
+  /* 「> ▍推断」：整段推断，用不同底色再区分一层 */
+  blockquote.soi {
+    margin: .9em 0; padding: .85em 1em;
+    border-left: 3px solid #6b6b70; background: rgba(120,120,128,.07);
+    color: var(--fg); font-size: .96em; line-height: 1.78;
+  }
+  blockquote.soi p { margin: .3em 0; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
+  code {
+    background: var(--pill); padding: .12em .4em;
+    border-radius: 4px; font-size: .88em;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: .9em; margin: 1.2em 0; }
+  th, td { border: 1px solid var(--line); padding: .5em .65em; text-align: left; vertical-align: top; }
+
+  /* 顶部时间戳 */
+  .stamp {
+    color: var(--muted); font-size: .78em; letter-spacing: .03em;
+    margin: 0 0 1.5em; display: flex; align-items: center; gap: .5em;
+  }
+  .stamp::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); flex: none;
+  }
+
+  /* 可信度标签 */
+  .tag {
+    display: inline-block; font-size: .75em; font-weight: 500; line-height: 1.6;
+    padding: .06em .5em; border-radius: 4px; margin-right: .45em;
+    vertical-align: .1em; white-space: nowrap;
+    background: var(--pill); color: var(--muted);
+  }
+  .tag.ev  { color: #2f7d4f; background: rgba(47,125,79,.13); }
+  .tag.off { color: #3a6ea5; background: rgba(58,110,165,.13); }
+  .tag.chk { color: #96660f; background: rgba(150,102,15,.15); }
+  @media (prefers-color-scheme: dark) {
+    .tag.ev  { color: #79d3a2; background: rgba(121,211,162,.15); }
+    .tag.off { color: #8dbdee; background: rgba(141,189,238,.15); }
+    .tag.chk { color: #e2b562; background: rgba(226,181,98,.16); }
+  }
+
+  /* 「→」后果句 */
+  .so {
+    display: block; margin: .55em 0 .15em; padding: .1em 0 .1em .8em;
+    border-left: 2px solid var(--accent);
+    color: var(--fg-soft); font-size: .95em; line-height: 1.7;
+  }
+
+  /* 新闻列表：去符号，用细分隔线 */
+  ul.news { list-style: none; padding: 0; margin: 0; }
+  ul.news > li {
+    margin: 0; padding: 1.1em 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  ul.news > li:first-child { border-top: none; padding-top: .15em; }
+  ul.news > li > p { margin: 0; }
+
+  /* 来源 */
+  .src {
+    display: block; margin-top: .55em;
+    font-size: .76em; color: var(--muted); letter-spacing: .03em;
+  }
+  .src a {
+    color: var(--muted); border-bottom: 1px dotted rgba(128,128,128,.45);
+  }
+  .src a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* 归档 */
+  nav.archive {
+    margin-top: 3.4em; padding-top: 1.4em;
+    border-top: 1px solid var(--line);
+  }
+  nav.archive h2 { margin: 0 0 .9em; border: none; padding: 0; }
+  .arcrow {
+    display: flex; align-items: baseline; gap: 1em;
+    padding: .55em 0; border-bottom: 1px solid var(--line-soft);
+  }
+  .arcrow:last-child { border-bottom: none; }
+  .ym { color: var(--muted); font-size: .8em; white-space: nowrap; min-width: 6.6em; }
+  .chips { display: flex; flex-wrap: wrap; gap: .4em; }
+  .chips a {
+    display: inline-block; min-width: 2em; text-align: center;
+    padding: .06em .35em; border-radius: 5px;
+    font-size: .86em; font-variant-numeric: tabular-nums;
+    color: var(--fg-soft); background: var(--pill); border-bottom: none;
+  }
+  .chips a:hover { color: #fff; background: var(--accent); }
+  .empty { color: var(--muted); font-size: .86em; }
+
+  nav.back { margin-top: 3.4em; font-size: .9em; }
+</style>
+</head>
+<body>
+<p class="stamp">2026-11-22 07:51 更新 · 北京时间</p>
+<h1>每日简报 · 2026-11-22</h1>
+<h2>一句话</h2>
+<p><strong>深圳三方峰会收场，画面多于条款；真正在动的是芯片许可、霍尔木兹航运和基辅的无人机。</strong><br />
+峰会仅 <strong>80 分钟</strong>，成果是一份承诺继续对话的联合宣言，无核控、乌克兰、AI 实质条款。</p>
+<hr />
+<h2>今日主线</h2>
+<h3>发生了什么</h3>
+<p><strong>11 月 19 日（周四），习近平、普京、特朗普在深圳举行首次正式三边会晤，全程约 80 分钟。</strong> 会后发表中俄美元首和平宣言，三方承诺就"减少核风险、防止核扩散"展开对话，并就联合国改革、能源稳定、国际刑事法院管辖权等议题达成四点共识。为保障会议，深圳本周学校停课、企业居家办公、多条道路封闭。特朗普在白宫记者会上称会谈"很好"，但除联合声明外未给出具体成果。乌克兰与欧洲盟友未获席位。<span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/c38x04eppnpdo/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a> · <a href="https://cn.nytimes.com/world/20261120/trump-xi-putin/?utm_source=RSS">纽约时报中文网</a> · <a href="https://cn.nytimes.com/china/20261119/a-tropical-chinese-city-is-half-empty-and-ready-for-the-summit/?utm_source=RSS">纽约时报中文网</a> · <a href="https://www.npr.org/2026/11/20/nx-s1-6047594/trump-asia-trip-xi-putin-press-conference">NPR</a> · <a href="https://www.npr.org/2026/11/21/nx-s1-6047379/military-analyst-phillips-obrien-on-ukraine-and-europe-being-left-out-of-trumps-talks">NPR</a></span></p>
+<h3>为什么重要</h3>
+<blockquote class="soi"><p>▍推断：<strong>这场峰会的产出不是协议，是"各方都不反对继续谈"这一最低共识。</strong> 对北京，三方同框的画面本身即是国内叙事素材——央视、人民日报、光明网当日集中以"深圳时刻""大国的历史主动"定调。对华盛顿，特朗普需要一场外交画面来对冲国内权力格局变化。对莫斯科，被纳入三方框架本身即是对"被孤立"叙事的反驳。三方各取一张照片，条款留给下一轮。<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMivgFBVV95cUxQZm5DM0VQWXFzTDc0Nl9EMVVfYTcwVkhiWlNNQ1dfdHl1TkdLMnBCVFNRMmFkSkluWGsyYTh3QU10S3hjb2ZoTHFjR3FpekFncTFobzNsbERnanhLNDNJZ2pLNEdLbnkzTEE2dTRwcW9hNVpDVVdBQUxUeXlZbEVWR2JmYlZhSldiNExIMGhrbXhQd1pMb21XbXk1Q3VMdFhXSlBXeFVObFdMSjZrN2ZKU0x2aWRNX3pTbmFJUFlB0gHAAUFVX3lxTE5ZNmh1SGQwMEpHRHR1RWl5NFAyRnpxLWIzQ0MzUnIxNHNYcVFteUlzbkNTYTN1bWJUWDZ5d1dVZ2VSOXdvN2J1Sm80RS04bmw0eHpnRll1VFpZNzRkNWpEOUJTYUpWNUwxNTk2R1hDZnNoblhUQlVMb1NsMTZkQWg0czlncW1vbmNrMDNrTkFVOVAwTkdJZkNLQTUwU1lNOF9HejVIUlB2Tm44Tm1WQmRRTGZ4YnY5TXRqOUJNeU1RVg?oc=5">Google News 中文</a> · <a href="https://cn.nytimes.com/world/20261120/trump-summit-power/?utm_source=RSS">纽约时报中文网</a></span></p>
+</blockquote>
+<h3>接下来看什么</h3>
+<ul>
+<li><strong>联合宣言是否落成工作层机制</strong>：核风险对话有无具体会谈日期与层级。</li>
+<li><strong>乌克兰战线</strong>：克里米亚大桥打击与芬兰湾货船遇袭后，俄方是否升级对乌基础设施打击。<span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/c6wy0qj7w5zqo?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://www.bbc.co.uk/news/articles/cj752ddve27ko?at_medium=RSS&amp;at_campaign=rss">BBC</a></span></li>
+<li><strong>芯片许可口径</strong>：商务部对华 AI 芯片批准是否在国会压力下收紧。<span class="src">来源：<a href="https://cn.nytimes.com/business/20261120/nvidia-chips-commerce-china-huang/?utm_source=RSS">纽约时报中文网</a></span></li>
+<li><strong>霍尔木兹</strong>：伊朗"重开海峡"的条件是否被美方接住。<span class="src">来源：<a href="https://www.aljazeera.com/news/2026/11/21/iran-says-held-talks-with-qatari-mediators-urges-us-to-accept-conditions?traffic_source=rss">半岛电视台</a></span></li>
+</ul>
+<hr />
+<h2>国内</h2>
+<p><strong>① 商务部批准逾 80 万枚 AI 芯片对华出售</strong></p>
+<p><span class="tag ev">已证实</span>国会公布的机密信息显示，美国商务部今年批准向中国企业出售超过 <strong>80 万枚</strong>先进人工智能芯片，其中包括被五角大楼列入中国涉军企业名单的公司，引发议员批评。报道另称阿里巴巴是英伟达"间谍门"涉事公司 Megaspeed 的客户与财务支持者。<span class="src">来源：<a href="https://cn.nytimes.com/business/20261120/nvidia-chips-commerce-china-huang/?utm_source=RSS">纽约时报中文网</a> · <a href="https://cn.nytimes.com/technology/20261119/nvidia-alibaba-china-military/?utm_source=RSS">纽约时报中文网</a></span></p>
+<blockquote class="soq"><p>▍→ 许可口径一旦被国会锁死，国内算力采购周期立刻拉长。</p>
+</blockquote>
+<hr />
+<p><strong>② 中新启动自贸协定 4.0 版升级谈判</strong></p>
+<p><span class="tag off">官方口径</span>李强与新加坡总理黄循财会谈，双方签署关于启动双边自贸协定 <strong>4.0 版</strong>升级谈判的谅解备忘录；习近平亦会见黄循财。新方为东盟成员，谈判启动不等于达成。<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE5ZSEdjUFBiVGloSjloREZpblpwNkg3ZmxUUjlNaFdvZ2lVU2VMUlFWMUxQLURzMXdaUldGdU9wRDYzTlBwdDYtZ01yckpOT0dpZkhyZU1nUXE0S1hYQ29wdWUwS1FrQlpEeVVHd3hRai1aOGZmWmpYX280bVZvWnc?oc=5">Google News 中文</a></span></p>
+<blockquote class="soq"><p>▍→ 数字贸易与跨境数据条款，会是这轮谈判的卡点。</p>
+</blockquote>
+<hr />
+<p><strong>③ 香港拟要求小二生掌握汉语拼音输入</strong></p>
+<p><span class="tag off">官方口径</span>香港教育局提出小学二年级学生应初步掌握以"汉语拼音输入法"在电脑输入中文，取代此前仓颉输入的教学侧重。这是课程指引层面的调整，非立即生效的考试要求。<span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/cxq6e216p7ylo/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a></span></p>
+<blockquote class="soq"><p>▍→ 输入法教材与师资培训，下一学年就要重新排产。</p>
+</blockquote>
+<hr />
+<p><strong>④ 台湾九合一选举进入最后阶段</strong></p>
+<p><span class="tag sig">单一来源</span>高雄选情由柯志恩以"知识蓝"姿态追近赖瑞隆；新竹市高虹安退党以无党籍身份寻求连任，"蓝白合"示范效应受检视；学者提出台湾七年内几乎年年选举，存在"投票疲劳"。BBC 另列五大看点，含 2028 卡位。<span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/c6n4ex4y9837o/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a> · <a href="https://www.bbc.com/zhongwen/articles/cme3d27d7lnpo/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a> · <a href="https://www.bbc.com/zhongwen/articles/c63egjkzqpz2o/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a> · <a href="https://www.bbc.com/zhongwen/articles/cm8xzrg40dq1o/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a></span></p>
+<blockquote class="soq"><p>▍→ 新竹结果决定第三势力还有没有谈判筹码。</p>
+</blockquote>
+<hr />
+<p><strong>⑤ 深圳为峰会停课、居家办公</strong></p>
+<p><span class="tag ev">已证实</span>为主办 APEC 峰会，深圳学校本周停课，地方政府指示企业员工居家办公，多条道路封闭，安保严密，部分居民离城。同期官方媒体集中发布"APEC 深圳会议学习手册"。<span class="src">来源：<a href="https://cn.nytimes.com/china/20261119/a-tropical-chinese-city-is-half-empty-and-ready-for-the-summit/?utm_source=RSS">纽约时报中文网</a> · <a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE84bmJacXN4aUVkcm5FeDJpakFwODZwemlyUzI3WXJON1VnQUpBV3ZDbHZWOVFkR2lxWWZzVW4yYjY3TGdEVTlvQUpHMVNCM3NObmNDa282OW5QSGdSZWFGYlhoY1BwTkNlLVVkdzNMV1o2aXN5QkJn?oc=5">Google News 中文</a></span></p>
+<blockquote class="soq"><p>▍→ 会议成本由本地服务业与通勤者承担，账不在峰会预算里。</p>
+</blockquote>
+<hr />
+<h2>国际</h2>
+<p><strong>⑥ 国际法院裁定缅甸对罗辛亚人实施种族灭绝</strong></p>
+<p><span class="tag ev">已证实</span>国际法院裁决认定缅甸对罗辛亚少数民族的军事行动构成种族灭绝；<strong>2017 年</strong>该行动数周内致至少 <strong>1 万人</strong>死亡、<strong>75 万人</strong>逃离。有担忧称美国可能对包括今年诺贝尔和平奖得主 Navi Pillay 在内的法官实施制裁。<span class="src">来源：<a href="https://cn.nytimes.com/world/20261120/myanmar-genocide-icj-decision-/?utm_source=RSS">纽约时报中文网</a> · <a href="https://www.bbc.com/zhongwen/articles/c5n4eylmmg8po/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a> · <a href="https://www.theguardian.com/world/2026/nov/18/us-sanctions-icj-judges-myanmar-genocide-ruling-israel-gaza-court">卫报</a></span></p>
+<blockquote class="soq"><p>▍→ 该裁决的举证路径会被用于其他待审案件。</p>
+</blockquote>
+<hr />
+<p><strong>⑦ 乌克兰称打击克里米亚大桥"公平回应"</strong></p>
+<p><span class="tag sig">单一来源</span>泽连斯基称，在俄对乌桥梁发动 <strong>109 次</strong>空袭后，基辅的行动属"公平回应"；他在伦敦会见英国卫生大臣 Streeting。同期一艘驶往俄罗斯的货船在芬兰湾遭无人机袭击起火，芬兰国防军称乌方"很可能"参与。<span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/c6wy0qj7w5zqo?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://www.bbc.co.uk/news/articles/cj752ddve27ko?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxPaUFLdlZmeWprX3A2YllLMmlQSXZrYTRIazVMOEExREZuTXFCYThyVUlnR3U0TDg3dGpUeHE5SHJyanJWQUZTRHdwUG5YYTFxVXMtUU5rY1pOVzZkRUxhQ29oUEVUS0NJTWFxcUJmLW9lRE52cGs3N2FLbXZzNmVFNFpXTmZNZnI4S1pWNDB5RWV0UFhUUGlCTVUwNjlWZDMxcXhxS0FvZUdNNWN4UU9jMEw4bWVaOVB0TlE?oc=5">Google News World</a></span></p>
+<blockquote class="soq"><p>▍→ 芬兰湾航运保险费率，下周就会先动。</p>
+</blockquote>
+<hr />
+<p><strong>⑧ 波兰称俄导弹落入其领土，特朗普称"失误"</strong></p>
+<p><span class="tag sig">单一来源</span>波兰方面称俄罗斯导弹击中其领土；特朗普将其称为"mistake"。一名瑞典"鹰狮"飞行员因天气恶劣未能击落飞越波兰上空的疑似俄导弹。北约第四条是否被触发未明。<span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxPS2NDX2gya2JxN0FLNlFBSjdJcXNqczVsWGJrNHdGVHoxNEF6a2hrSnlKc2hkVC0wSGROWkMzcXgyN0YtaHdMX0k0U043RE5BSkRXVGtlQ3h1Ym9iVk9uaVFnV0YyZEw0a3ZjRWxvUkZ6NHNGVWJSc1dDcEU5aUtrODZ5YTRQMVQ5UTA2WHd5U0ZGUkhybGllQXNseGR0ZHl4dC1JdGtPa2FGT3MzNzhXdkxrSU9XcENkLUE?oc=5">华盛顿邮报</a> · <a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxPS2NDX2gya2JxN0FLNlFBSjdJcXNqczVsWGJrNHdGVHoxNEF6a2hrSnlKc2hkVC0wSGROWkMzcXgyN0YtaHdMX0k0U043RE5BSkRXVGtlQ3h1Ym9iVk9uaVFnV0YyZEw0a3ZjRWxvUkZ6NHNGVWJSc1dDcEU5aUtrODZ5YTRQMVQ5UTA2WHd5U0ZGUkhybGllQXNseGR0ZHl4dC1JdGtPa2FGT3MzNzhXdkxrSU9XcENkLUE?oc=5">基辅独立报</a></span></p>
+<blockquote class="soq"><p>▍→ 若华沙要求磋商，北约东翼部署节奏提前。</p>
+</blockquote>
+<hr />
+<p><strong>⑨ 丹麦指控俄策划暗杀，驱逐武官</strong></p>
+<p><span class="tag ev">已证实</span>丹麦指控俄罗斯策划暗杀一名美乌双重身份说唱歌手，俄使馆否认，俄国防武官被驱逐。冯德莱恩称俄威胁"越来越不像混合战"。丹麦正推动欧盟收紧对俄旅行限制。<span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/cmde1lj4yjxno?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://news.google.com/rss/articles/CBMizwFBVV95cUxPRE42MWV3emVxOW9kQ2p6cjVwRUJQc3k4UDBmeWd0T1M2aWtZeFVzTVdFN1U3Q3g1UzZoendMUXFOSUZFaU9mVHVVZW50SUtxYkhRMFZwQkdINDltQURWZ2ZEWkNGQjdPQW5WRkhaeG5WWW4yRGlnd1BzcUhjZW8yVzBKM29DODJiN2o0TjZLVkxEeUN3NExtTTVCZG14ZTFicHh0YVFBeWVERTBnekJpSEgyZTRBWm8zaGFpQVJzb20tOWpmcTJtTjB6c2NnTlE?oc=5">POLITICO</a></span></p>
+<blockquote class="soq"><p>▍→ 申根对俄签证收紧，会先卡住商务与探亲流。</p>
+</blockquote>
+<hr />
+<p><strong>⑩ 伊朗称"重开海峡不难"，美方条件未接</strong></p>
+<p><span class="tag sig">单一来源</span>伊朗外长称已与卡塔尔调解方会谈，若美方接受"合理条件"，重开海峡"不难"；伊方称浓缩铀不会运出国。特朗普称寻求"永久性协议"，并称下一步动作可能要到 <strong>2027 年</strong>。阿联酋正以高风险方式经霍尔木兹转运石油。<span class="src">来源：<a href="https://www.aljazeera.com/news/2026/11/21/iran-says-held-talks-with-qatari-mediators-urges-us-to-accept-conditions?traffic_source=rss">半岛电视台</a> · <a href="https://news.google.com/rss/articles/CBMia0FVX3lxTE16VExhOUdYdzBETUZ0a3VVeHZCNURuQU1wTGEwcVV0OEU4SlEwMVdjUHJhY2Qtd2NOMHZqZVJDWk54WExJcElrWkxmZFJ4UFVFaHhFZkhQdkpUa1pSVG93RXhPYW9KbU9aYmpF?oc=5">Google News 中文</a> · <a href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxNTGgwZTZaQWNtSzNpRDhQajRHRHFFTDhiVXczZmUtaFJiMVdTMFcwN1dWV053c1lGY2hiUnJrNnc3X1JoREFHLWNYTG52bVk5cXhMSDlCU2NkcDVCeWhQamZsX3JXdVBYdzJSdWQ1NDlKaTE4ZzIxc3U1SE1lcnhjdm45TktHVzBMTmI4?oc=5">CBS</a> · <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxPbmRRX05leU91eDNOcGU0ZjVxQ0N2MVpwQ3lCZXFsNUVDcDlySkJ5RFZfLTR5QkwyUF91TzFkSDNpYTlPMzZTaFhfWmJ4TEpKTVAzTEJhNGVYRFltRmRMVDJfdUVpcFoyYnRRRGNEX3ZKRU96bjVxYjZEQ2V0WWFZOXhDb3dTT2FfTGpVTWtjX1JLeVpXUzN3OFlSdm5DdXJ1YzlHSnNJa3pjT0FDX3c?oc=5">WSJ</a></span></p>
+<blockquote class="soq"><p>▍→ 海峡每多封一周，亚洲炼厂现货采购成本抬一档。</p>
+</blockquote>
+<hr />
+<p><strong>⑪ 联合国"杀手机器人"谈判只谈出再谈两年</strong></p>
+<p><span class="tag ev">已证实</span>日内瓦联合国框架下关于自主武器的磋商结束，未达成有约束力规则，仅同意将讨论延长 <strong>两年</strong>；人道组织警告军事 AI 进展远快于外交。<span class="src">来源：<a href="https://www.npr.org/2026/11/21/nx-s1-6047916/killer-robots-un-drones">NPR</a> · <a href="https://www.npr.org/2026/11/21/g-s1-154914/nations-at-un-talks-on-ai-killer-robots-agree-to-more-talks-but-no-firm-commitment-to-rein-them-in">NPR</a></span></p>
+<blockquote class="soq"><p>▍→ 无规则即默认许可，采购预算会先于条约落地。</p>
+</blockquote>
+<hr />
+<h2>数据与日程</h2>
+<p><strong>⑫ 三方峰会 80 分钟，四点共识</strong></p>
+<p><span class="tag ev">已证实</span>会晤全程约 <strong>80 分钟</strong>，成果为和平宣言与四点共识（核风险对话、联合国改革、能源稳定、国际刑事法院管辖权），无核控与乌克兰实质条款。<span class="src">来源：<a href="https://cn.nytimes.com/world/20261120/trump-xi-putin/?utm_source=RSS">纽约时报中文网</a> · <a href="https://www.bbc.com/zhongwen/articles/c38x04eppnpdo/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a></span></p>
+<blockquote class="soq"><p>▍→ 80 分钟谈不出条款，说明三方都没准备让。</p>
+</blockquote>
+<hr />
+<p><strong>⑬ 缅甸案：1 万人死亡、75 万人逃离</strong></p>
+<p><span class="tag ev">已证实</span>国际法院裁决所依据的 2017 年军事行动，数周内致至少 <strong>1 万人</strong>死亡、<strong>75 万人</strong>逃往孟加拉国。<span class="src">来源：<a href="https://cn.nytimes.com/world/20261120/myanmar-genocide-icj-decision-/?utm_source=RSS">纽约时报中文网</a></span></p>
+<blockquote class="soq"><p>▍→ 赔偿与追责程序启动后，缅甸外资合规审查加码。</p>
+</blockquote>
+<hr />
+<p><strong>⑭ 全球四分之一已婚女性无法拒绝性要求</strong></p>
+<p><span class="tag ev">已证实</span>联合国人口基金报告称，全球约 <strong>四分之一</strong>女性在丈夫或伴侣要求时无权拒绝性行为；西非与中非近半数，女童受影响最重。<span class="src">来源：<a href="https://www.theguardian.com/global-development/2026/nov/19/women-girls-rights-rape-sexual-violence-africa-marriage-unfpa">卫报</a></span></p>
+<blockquote class="soq"><p>▍→ 该指标会进入下一轮性别平等援助的分配口径。</p>
+</blockquote>
+<hr />
+<h2>两个判断</h2>
+<h3>判断一 · 往回看（因果）</h3>
+<blockquote class="soi"><p>▍推断：<strong>三方峰会选在深圳、选在 APEC 周、只开 80 分钟，是三方各自国内账本算出来的交集，不是关系回暖。</strong> 对北京，APEC 主办权是现成的舞台，把双边会见"升级"为三方同框，边际成本几乎为零，收益是国内叙事——官媒当日统一以"深圳时刻""历史性同框"定调，这是给国内看的。对特朗普，他刚在国内面临权力格局变化，需要一张与核大国领导人并肩的照片来证明自己仍是"重量级"，所以白宫记者会上除联合声明外拿不出别的。对普京，被纳入三方框架本身就是对"被孤立"的反驳，代价只是签一份不约束任何人的宣言。三方真正在算的账各不相同，唯一的公约数是"不反对继续谈"。这也解释了为什么成果清单里全是程序性议题——核风险对话、联合国改革、能源稳定、国际刑事法院管辖权——没有一项涉及可核查的让步。乌克兰和欧洲被排除在外，不是疏忽，是这种"最低共识"结构的必然结果：多一个当事方，就多一个否决点。</p>
+</blockquote>
+<h3>判断二 · 往前看（预测）</h3>
+<blockquote class="soi"><p>▍推断：<strong>如果国会对华 AI 芯片许可的施压是真的，那么在 2027 年 3 月 31 日之前，应该看到美国商务部对"涉军企业名单"内中国实体的 AI 芯片出口许可出现至少一次公开的暂停或撤回，并伴随一份书面政策说明。</strong> 观察指标有三：一是商务部工业与安全局（BIS）是否发布修订后的许可审查指引；二是国会相关委员会是否就"80 万枚"这一数字举行公开听证并要求商务部官员出席；三是英伟达下一季财报电话会是否首次把"对华许可不确定性"列为风险项。若到明年一季度末只有议员声明和媒体追问、而无任何许可层面的动作，说明这轮曝光是政治表态而非政策转向，此前市场对"对华算力供给收紧"的定价就是抢跑。</p>
+</blockquote>
+<hr />
+<h2>纠偏</h2>
+<ul>
+<li><strong>"三方峰会达成四点共识"不等于"三方达成协议"。</strong> 共识内容是"继续对话"与议题清单，无约束力条款，不宜读作关系缓和信号。</li>
+<li><strong>"美国批准 80 万枚芯片"是今年累计口径，不是单笔交易。</strong> 报道未拆分型号、买家与时间分布，不能据此推算单季供给量。</li>
+<li><strong>伊朗"击中 F-16"与美军中央司令部否认并存，此事未核实。</strong> 卡在双方各执一词、无第三方影像或残骸证据，本简报不采信任何一方。</li>
+<li><strong>高雄、新竹选情数字来自单一媒体叙述，无民调机构原始数据。</strong> 只作趋势参考，不作预测依据。</li>
+</ul>
+<hr />
+<h2>本期未覆盖</h2>
+<ul>
+<li><strong>欧盟与英国"里程碑协议"的具体条款</strong>：多家转述称达成，但关税、人员流动、监管互认的细节未读到原文，不敢写。</li>
+<li><strong>俄罗斯导弹落入波兰的北约反应层级</strong>：第四条是否启动、是否有正式磋商请求，目前只有波方与媒体转述。</li>
+<li><strong>COP31 化石燃料僵局的谈判文本</strong>：只知道陷入僵局，各方提案内容未获取。</li>
+<li><strong>Anthropic IPO 的定价与认购结构</strong>：仅有"史上最大 IPO""排除中国投资者"两点，估值与基石名单未核实。</li>
+<li><strong>美国 ICE 强制喂食事件的官方回应</strong>：卫报为独家，设施方与国土安全部均未见公开声明。</li>
+</ul>
+<hr />
+<h2>本周对账</h2>
+<p>本周为首次运行，无往期可对账。</p>
+<hr />
+<h2>本周一件事</h2>
+<p><strong>80 分钟的峰会，和它照不亮的地方</strong></p>
+<p>本周最值得想清楚的事，不是三方峰会说了什么，而是它为什么只能说出这么点东西。</p>
+<p>先把事实摆清：11 月 19 日深圳，习近平、普京、特朗普首次以三方形式同台，全程约 80 分钟，成果是一份承诺就"减少核风险、防止核扩散"展开对话的和平宣言，外加联合国改革、能源稳定、国际刑事法院管辖权四点共识。核武器控制、乌克兰战争、AI 威胁，三项都没进展。乌克兰和欧洲盟友不在场〔[NPR](https://www.npr.org/2026/11/21/nx-s1-6047379/military-analyst-phillips-obrien-on-ukraine-and-europe<span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/c38x04eppnpdo/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a> · <a href="https://cn.nytimes.com/world/20261120/trump-xi-putin/?utm_source=RSS">纽约时报中文网</a></span></p><nav class="back"><a href="../index.html">← 返回最新一期</a></nav>
+</body>
+</html>
