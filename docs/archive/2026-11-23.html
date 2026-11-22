@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>每日简报 · 2026-11-23</title>
+<style>
+  :root {
+    --fg:#000000; --fg-soft:#141414; --bg:#ffffff; --muted:#5c5c60;
+    --line:#dcdcdf; --line-soft:#ededf0; --accent:#b3352b; --pill:rgba(120,120,128,.10);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fg:#e9e9eb; --fg-soft:#c6c6ca; --bg:#111112; --muted:#8e8e93;
+      --line:#26262a; --line-soft:#1d1d20; --accent:#e37a6e; --pill:rgba(150,150,160,.14);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0 auto; padding: 26px 20px 76px; max-width: 720px;
+    background: var(--bg); color: var(--fg);
+    font: 16.5px/1.8 -apple-system, BlinkMacSystemFont, "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  }
+  @media (max-width: 480px) {
+    body { font-size: 16px; padding: 22px 16px 64px; }
+  }
+  h1 {
+    font-size: 1.5em; font-weight: 700; line-height: 1.32;
+    letter-spacing: -.015em; margin: 0 0 .12em;
+  }
+  h2 {
+    position: relative;
+    font-size: .95em; font-weight: 650; letter-spacing: .1em; color: var(--fg-soft);
+    margin: 2.8em 0 1.05em; padding: 0 0 .5em .8em;
+    border-bottom: 1px solid var(--line);
+  }
+  h2::before {
+    content: ""; position: absolute; left: 0; top: .16em; bottom: .62em;
+    width: 3px; border-radius: 2px; background: var(--accent); opacity: .55;
+  }
+  h3 { font-size: 1.02em; font-weight: 650; margin: 1.7em 0 .55em; }
+  p { margin: 1.05em 0; }
+  li { margin: .55em 0; }
+  strong { font-weight: 650; }
+  a {
+    color: var(--accent); text-decoration: none;
+    border-bottom: 1px solid rgba(128,128,128,.34);
+  }
+  a:hover { border-bottom-color: var(--accent); }
+  blockquote {
+    margin: 1.2em 0; padding: .7em 1em; color: var(--fg-soft);
+    border-left: 3px solid var(--line); font-size: .95em;
+  }
+  /* 「> ▍→ 后果句」：黑色正文 + 红色竖线，从事实里跳出来 */
+  blockquote.soq {
+    margin: .85em 0 .2em; padding: .3em 0 .3em .95em;
+    border-left: 3px solid var(--accent);
+    color: var(--fg); font-size: .96em; line-height: 1.75; font-weight: 500;
+  }
+  blockquote.soq p { margin: .15em 0; }
+  /* 「> ▍推断」：整段推断，用不同底色再区分一层 */
+  blockquote.soi {
+    margin: .9em 0; padding: .85em 1em;
+    border-left: 3px solid #6b6b70; background: rgba(120,120,128,.07);
+    color: var(--fg); font-size: .96em; line-height: 1.78;
+  }
+  blockquote.soi p { margin: .3em 0; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
+  code {
+    background: var(--pill); padding: .12em .4em;
+    border-radius: 4px; font-size: .88em;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: .9em; margin: 1.2em 0; }
+  th, td { border: 1px solid var(--line); padding: .5em .65em; text-align: left; vertical-align: top; }
+
+  /* 顶部时间戳 */
+  .stamp {
+    color: var(--muted); font-size: .78em; letter-spacing: .03em;
+    margin: 0 0 1.5em; display: flex; align-items: center; gap: .5em;
+  }
+  .stamp::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); flex: none;
+  }
+
+  /* 可信度标签 */
+  .tag {
+    display: inline-block; font-size: .75em; font-weight: 500; line-height: 1.6;
+    padding: .06em .5em; border-radius: 4px; margin-right: .45em;
+    vertical-align: .1em; white-space: nowrap;
+    background: var(--pill); color: var(--muted);
+  }
+  .tag.ev  { color: #2f7d4f; background: rgba(47,125,79,.13); }
+  .tag.off { color: #3a6ea5; background: rgba(58,110,165,.13); }
+  .tag.chk { color: #96660f; background: rgba(150,102,15,.15); }
+  @media (prefers-color-scheme: dark) {
+    .tag.ev  { color: #79d3a2; background: rgba(121,211,162,.15); }
+    .tag.off { color: #8dbdee; background: rgba(141,189,238,.15); }
+    .tag.chk { color: #e2b562; background: rgba(226,181,98,.16); }
+  }
+
+  /* 「→」后果句 */
+  .so {
+    display: block; margin: .55em 0 .15em; padding: .1em 0 .1em .8em;
+    border-left: 2px solid var(--accent);
+    color: var(--fg-soft); font-size: .95em; line-height: 1.7;
+  }
+
+  /* 新闻列表：去符号，用细分隔线 */
+  ul.news { list-style: none; padding: 0; margin: 0; }
+  ul.news > li {
+    margin: 0; padding: 1.1em 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  ul.news > li:first-child { border-top: none; padding-top: .15em; }
+  ul.news > li > p { margin: 0; }
+
+  /* 来源 */
+  .src {
+    display: block; margin-top: .55em;
+    font-size: .76em; color: var(--muted); letter-spacing: .03em;
+  }
+  .src a {
+    color: var(--muted); border-bottom: 1px dotted rgba(128,128,128,.45);
+  }
+  .src a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* 归档 */
+  nav.archive {
+    margin-top: 3.4em; padding-top: 1.4em;
+    border-top: 1px solid var(--line);
+  }
+  nav.archive h2 { margin: 0 0 .9em; border: none; padding: 0; }
+  .arcrow {
+    display: flex; align-items: baseline; gap: 1em;
+    padding: .55em 0; border-bottom: 1px solid var(--line-soft);
+  }
+  .arcrow:last-child { border-bottom: none; }
+  .ym { color: var(--muted); font-size: .8em; white-space: nowrap; min-width: 6.6em; }
+  .chips { display: flex; flex-wrap: wrap; gap: .4em; }
+  .chips a {
+    display: inline-block; min-width: 2em; text-align: center;
+    padding: .06em .35em; border-radius: 5px;
+    font-size: .86em; font-variant-numeric: tabular-nums;
+    color: var(--fg-soft); background: var(--pill); border-bottom: none;
+  }
+  .chips a:hover { color: #fff; background: var(--accent); }
+  .empty { color: var(--muted); font-size: .86em; }
+
+  nav.back { margin-top: 3.4em; font-size: .9em; }
+</style>
+</head>
+<body>
+<p class="stamp">2026-11-23 07:54 更新 · 北京时间</p>
+<h1>每日简报 · 2026-11-23</h1>
+<h2>一句话</h2>
+<p><strong>COP31 在化石燃料措辞上谈崩，史上最长的一届气候大会以无协议收场。</strong><br />
+谈判在原定闭幕两天后才破裂，土耳其安塔利亚会场留下的是分歧记录而非文本。</p>
+<h2>今日主线</h2>
+<h3>发生了什么</h3>
+<p><strong>COP31</strong> 在土耳其安塔利亚闭幕，未能就化石燃料表述达成协议，谈判在原定结束时间两天后破裂，为历届最长。分歧核心是是否在最终文本中提及化石燃料。约 <strong>200</strong> 个国家参会。会议在资金、"超调"（overshoot）等议题上同样未收敛。<span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/cqwy06zrd26lo?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://www.npr.org/2026/11/22/nx-s1-6046195/cop31-climate-talks-close-disappointment">NPR</a> · <a href="https://www.aljazeera.com/video/inside-story/2026/11/22/why-has-the-cop31-climate-summit-failed-to-reach-agreement">半岛</a> · <a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxPWm50ZjJub3NFR1hNeTBfNTVpUm9sWG03Zi1zZnpiWDJDQXNtOC1DckFxRlp6QW94MXV3YjNzRVBEYnNqTmN0NzVVWk9xcU9wem1DYXotSGQwNldTdXBuc0ZSWUNEdlAycUtUcV9pcXdrS3g4QTV5c3ZJcHNhM2JTdkhldVhWcXJaV2hvX2FEcTd6Ui1CeEZGWWlGWGI5ZFZtRnB2R3p3ZnZHQQ?oc=5">卫报</a></span></p>
+<h3>为什么重要</h3>
+<blockquote class="soi"><p>▍推断：<strong>气候治理的产出正在从"共同文本"退化为"各自清单"。</strong> 当提及化石燃料本身都成为不可让渡的条款，多边会议的实际功能就从定规则转为记账——谁承诺了什么、谁没承诺，全部下沉到双边和区域层面。对中国意味着两件事：一是"共同但有区别的责任"这一表述的谈判杠杆变弱，因为没有共同文本可依附；二是出口端的碳成本不再由多边协调，而由欧盟 CBAM 这类单边机制逐项设定，企业面对的是清单而非公约。</p>
+</blockquote>
+<h3>接下来看什么</h3>
+<ul>
+<li>会议是否发布主席总结（cover decision），其中化石燃料措辞如何表述</li>
+<li>欧盟是否加速推进 CBAM 覆盖品类扩围</li>
+<li>主要排放国是否转向双边气候/能源协议</li>
+<li>下一届主席国是否调整议程设置规则</li>
+</ul>
+<hr />
+<h2>国内</h2>
+<p><strong>① 江西省委常委完成换届调整</strong></p>
+<p>江西省第十六次党代会后举行十六届一次全会，选举产生新一届省委常委。<strong>许南吉</strong>（原省财政厅厅长）、<strong>严允</strong>（原吉安市委书记）、<strong>陈克龙</strong>（原景德镇市委书记）升任省委常委。<span class="tag sig">单一来源</span><span class="src">来源：<a href="https://news.google.com/rss/articles/CBMi2AFBVV95cUxQUE5USGNzZGpEd0pvX3RvY1J6amVUSHdyWXRzeUZWTVNEWEJLcVk0UDB3QW1NaFlsV0VHTlBRalJrN0Mzc0ZOT1BlaFRFSEQ5eGxsYTA5eVMzZnJKOUFVQmI5cmtYbnk4akRzc1ZoWlJTTDl5OFdsQXJSN1FXSktQT1hmYmxlSi04OGhHNlIzaDBwSHVKZFhZMEJRQWJZNVA3V19lUzZrWjA2bVE1Mlg0ak9CRUZQUHliMXN6M0JwZnVkdXM0dmRrRkFCQkhyT1hGZ2JtSzVjczE?oc=5">新浪财经</a></span></p>
+<blockquote class="soq"><p>▍→ 财政厅长入常，省内转移支付分配话语权上移。</p>
+</blockquote>
+<hr />
+<p><strong>② 第二艘国产大型邮轮首航</strong></p>
+<p>第二艘国产大型邮轮完成首航，新华社报道将其定位为"激发海洋消费新活力"。首制船之后，第二艘通常承担批量化验证功能。<span class="tag off">官方口径</span><span class="src">来源：<a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE9NRzdqNmpYUllWOThFcHNicXRxblBYTXZkNGNGOVdZblNqX2ZKX3dRcFM5bTl6ZFY2RzRScTFYTjJxbEZLWkdYeW13Yk9pa0dBXzlLUEhNYXRwbWgwamdVRnlrZTBUMmkyaE9FZWFTb2J6NEpIeUZBTjIyaGJMSFE?oc=5">新华网</a></span></p>
+<blockquote class="soq"><p>▍→ 船厂排产能否连续，决定配套供应链是否敢扩产。</p>
+</blockquote>
+<hr />
+<p><strong>③ 重庆国际人才交流大会公布引才数</strong></p>
+<p>大会设 <strong>4</strong> 大类 <strong>37</strong> 场活动，称引进硕博士等 <strong>3955</strong> 名，<strong>12</strong> 个省份发布人才需求清单。<span class="tag off">官方口径</span><span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxNMWVBNjkyQjllZlhnQ1JaWGVHTkpDTktYbU84dGpzUmZ1UUdLLUliUGJqTXVwZlJRRzFTWFVGOVAtWm1PTW0tenF6N0tHZkMtMjZqLVYxVl9TRW12b1ZlcXd5V0dSZDQ3QTVtYmtnNHZQcWJKOEhwWF9hMGZNbjNQbTNMTjBYSFY0?oc=5">央视网</a></span></p>
+<blockquote class="soq"><p>▍→ 签约数与到岗数之间的差额，才是真实引才成本。</p>
+</blockquote>
+<hr />
+<p><strong>④ 香港拟要求小二掌握汉语拼音输入</strong></p>
+<p>香港教育局提出小学二年级学生应初步掌握以<strong>汉语拼音输入法</strong>在电脑输入中文，引发对打字方式影响语言学习的讨论。<span class="tag sig">单一来源</span><span class="src">来源：<a href="https://www.bbc.com/zhongwen/articles/cxq6e216p7ylo/trad?at_medium=RSS&amp;at_campaign=rss">BBC 中文</a></span></p>
+<blockquote class="soq"><p>▍→ 教材与师训先行，拼音教具采购先动。</p>
+</blockquote>
+<hr />
+<p><strong>⑤ 党内法规执行与"破除潜规则"表述</strong></p>
+<p>官方媒体"天天学习"栏目刊出表述，强调完善党内法规制度体系、增强制度执行力、大力破除潜规则。<span class="tag off">官方口径</span><span class="src">来源：<a href="https://news.google.com/rss/articles/CBMiY0FVX3lxTE9CTURWLXNUNHptRUFkbmVRN2NUcEIyZzh0X0pKczNIQUxQOFZkamVkc3RkNFJBaFBFQldZZFh4TFlvYWxlcDJ3UzdnekNjLXRCMG0zUEZ0TG5TT1U4N1U2eVhpbw?oc=5">四川新闻</a></span></p>
+<blockquote class="soq"><p>▍→ 表述层面，无具体文件，观察后续是否配套细则。</p>
+</blockquote>
+<hr />
+<h2>国际</h2>
+<p><strong>⑥ COP31 无协议收场，化石燃料成断点</strong></p>
+<p>约 <strong>200</strong> 国在安塔利亚未能就提及化石燃料达成一致，谈判超期两天破裂，为历届最长。<span class="tag ev">已证实</span><span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/cqwy06zrd26lo?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://www.npr.org/2026/11/22/nx-s1-6046195/cop31-climate-talks-close-disappointment">NPR</a> · <a href="https://www.aljazeera.com/video/inside-story/2026/11/22/why-has-the-cop31-climate-summit-failed-to-reach-agreement">半岛</a></span></p>
+<blockquote class="soq"><p>▍→ 碳成本定价权从多边会场转到欧盟单边规则。</p>
+</blockquote>
+<hr />
+<p><strong>⑦ 俄舰在利比亚班加西港遇袭沉没</strong></p>
+<p>一艘停靠班加西、返俄途中的俄军舰船遭疑似乌克兰海上无人机袭击后沉没，无一方认领。利比亚东部政府称该船系补给停靠。<span class="tag ev">已证实</span><span class="src">来源：<a href="https://www.theguardian.com/world/2026/nov/22/blast-russian-ship-suspected-drone-attack-benghazi-libya">卫报</a> · <a href="https://www.bbc.co.uk/news/articles/cr894gjz0j0yo?at_medium=RSS&amp;at_campaign=rss">BBC</a></span></p>
+<blockquote class="soq"><p>▍→ 俄黑海以外补给点暴露，护航成本上升。</p>
+</blockquote>
+<hr />
+<p><strong>⑧ 芬兰湾外又一俄船遭无人机袭击</strong></p>
+<p>芬兰国防军称周六遭袭的俄相关船只很可能由乌克兰发动，船只已被拖离；基辅未置评。<span class="tag ev">已证实</span><span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/cj752ddve27ko?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxOTER0aC05WWd6Yms5V2tJeUQyQTRuVFp0dGVHcERCbERJdmU4WjJqdEVYRVlnSEd0SDFfVm5USnBBZTZiWU1rb0RoWjhlOFZHVktlVktaVG9kbHpaZHIyVlZvRXZtLXlyX2k0QjQ5a0dUaDlON1JiakM1UW1uLXlMUS1pUWg?oc=5">FT</a></span></p>
+<blockquote class="soq"><p>▍→ 波罗的海航运保险费率面临重估。</p>
+</blockquote>
+<hr />
+<p><strong>⑨ 国际法院裁定缅甸对罗辛亚人实施种族灭绝</strong></p>
+<p>国际法院作出裁决，涉及 <strong>2017</strong> 年缅军行动，该行动数周内致至少 <strong>1 万人</strong>死亡、<strong>75 万人</strong>逃离。裁决可能对法院后续案件形成先例。<span class="tag sig">单一来源</span><span class="src">来源：<a href="https://cn.nytimes.com/world/20261120/myanmar-genocide-icj-decision-/?utm_source=RSS">纽约时报中文网</a></span></p>
+<blockquote class="soq"><p>▍→ 先例一旦成立，同类案件的举证门槛被拉低。</p>
+</blockquote>
+<hr />
+<p><strong>⑩ 美国中期选举后民主党拿下众院最大多数</strong></p>
+<p>民主党在翻转北卡一席后，众院已至少拿下 <strong>258</strong> 席，共和党至少 <strong>173</strong> 席，为 <strong>1992</strong> 年以来民主党最大众院多数。<span class="tag sig">单一来源</span><span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/c6vg29g7dlyno?at_medium=RSS&amp;at_campaign=rss">BBC</a></span></p>
+<blockquote class="soq"><p>▍→ 拨款与听证议程主导权易手，对华技术管制听证会增多。</p>
+</blockquote>
+<hr />
+<p><strong>⑪ 韩国教育部长因高考 AI 作弊风波辞职</strong></p>
+<p><strong>崔教振</strong>承认在高考期间采取的临时防 AI 作弊措施造成混乱，总统<strong>李在明</strong>已受理辞呈。有高校要求考生穿一次性围裙应考。<span class="tag ev">已证实</span><span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/cw3dgk29d37no?at_medium=RSS&amp;at_campaign=rss">BBC</a> · <a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTFB6WVFTZ18xTkduYm9JQlFMS3NPSzR3M21wanN2aXlmVURPeWxWTUp5UHlwTW14MWZrQnlFdDdYaVlCMU55V3RfS1oxeHY4SnFGTFROOFhSXzVGUmFaRmc?oc=5">京报网</a></span></p>
+<blockquote class="soq"><p>▍→ 东亚考场防作弊设备采购进入预算周期。</p>
+</blockquote>
+<hr />
+<h2>数据与日程</h2>
+<p><strong>⑫ 民主党众院席位至少 258 席</strong></p>
+<p>中期选举计票后民主党至少 <strong>258</strong> 席、共和党至少 <strong>173</strong> 席，为 <strong>1992</strong> 年以来最大差距。<span class="tag sig">单一来源</span><span class="src">来源：<a href="https://www.bbc.co.uk/news/articles/c6vg29g7dlyno?at_medium=RSS&amp;at_campaign=rss">BBC</a></span></p>
+<blockquote class="soq"><p>▍→ 委员会主席席位分配将决定管制法案排期。</p>
+</blockquote>
+<hr />
+<p><strong>⑬ COP31 超期两天，为历届最长</strong></p>
+<p>谈判在原定闭幕两天后破裂，为气候大会历史上持续时间最长的一届。<span class="tag sig">单一来源</span><span class="src">来源：<a href="https://www.bbc.co.uk/news/videos/cr1ewge81q4qo?at_medium=RSS&amp;at_campaign=rss">BBC</a></span></p>
+<blockquote class="soq"><p>▍→ 超期成本由小代表团承担，最不发达国家话语权被稀释。</p>
+</blockquote>
+<hr />
+<p><strong>⑭ 联大秘书长遴选或于周五安理会投票见分晓</strong></p>
+<p>下一任联合国秘书长遴选进入关键节点，安理会投票可能于周五揭示常任理事国是否否决哥斯达黎加籍领跑人选。<span class="tag sig">单一来源</span><span class="src">来源：<a href="https://www.theguardian.com/world/2026/nov/20/race-to-be-next-un-secretary-general-exposes-divisions-among-world-powers">卫报</a></span></p>
+<blockquote class="soq"><p>▍→ 否决权一旦动用，"五常主导"争议重回台面。</p>
+</blockquote>
+<hr />
+<h2>两个判断</h2>
+<h3>判断一 · 往回看（因果）</h3>
+<blockquote class="soi"><p>▍推断：<strong>COP31 崩在"提及"而非"承诺"，说明气候谈判的争点已从减排力度转向责任归属的文字归属。</strong> 对产油国而言，文本里出现"化石燃料"四个字，等于为未来的责任追溯和国内政治问责留下书面依据，因此宁可无协议也不能让这句话进文本；对推动方而言，没有这句话，会议成果在国内无法交代。双方的成本不对称——一方怕写进去，一方怕写不进去——所以谈判必然拖到超期，且超期也解决不了。真正在算的账是：谁先在自己的国内政治里为这份文本负责。</p>
+</blockquote>
+<h3>判断二 · 往前看（预测）</h3>
+<blockquote class="soi"><p>▍推断：<strong>如果 COP31 无协议真的改变了欧盟的定价路径，那么在 2027 年 3 月 31 日前，应该看到欧盟委员会提出 CBAM 覆盖品类扩围的立法草案。</strong> 检验标准很硬：是正式立法提案（含品类清单与生效时间），不是征求意见稿、不是议会决议。若到期只有磋商文件而无提案，说明欧盟仍在等多边框架，这轮"无协议"的市场定价就是抢跑。</p>
+</blockquote>
+<hr />
+<h2>纠偏</h2>
+<p>今日多条中文聚合标题把深圳三边会晤描述为"陷阱""重大胜利"等定性判断，均属评论而非事实。可核查的部分只有：会晤约 <strong>80</strong> 分钟，未在核武控制、乌克兰战争、AI 威胁上取得实质进展。其余归因（谁设局、谁得利）无独立信源支撑，本简报不采用。<span class="src">来源：<a href="https://cn.nytimes.com/world/20261120/trump-xi-putin/?utm_source=RSS">纽约时报中文网</a></span></p>
+<h2>本期未覆盖</h2>
+<ul>
+<li><strong>英伟达对华芯片许可</strong>：纽约时报称商务部今年批准向中国企业出售超 <strong>80 万</strong>枚先进 AI 芯片，含被列入涉军名单的公司，并涉及阿里巴巴角色。信息源为国会公布的机密材料，原始文件未读，数字口径（是否含降规版）不明，故不写入正文。<span class="src">来源：<a href="https://cn.nytimes.com/business/20261120/nvidia-chips-commerce-china-huang/?utm_source=RSS">纽约时报中文网</a></span></li>
+<li><strong>Anthropic IPO 排除中国投资者</strong>：称史上最大 IPO，细节（发行规模、估值、排除机制）未核实。</li>
+<li><strong>中日舆论战升级</strong>：报道属倾向性描述，缺可核查的具体措施清单与时间线。</li>
+<li><strong>黎曼猜想 AI 辅助证明</strong>：仅见聚合标题，无原始论文或机构声明，25 万页证明的作者归属争议无法核实。</li>
+<li><strong>伊朗在波斯湾袭击升级、巴林设施遇袭</strong>：仅见标题级信息，无伤亡与设施细节。</li>
+</ul><nav class="back"><a href="../index.html">← 返回最新一期</a></nav>
+</body>
+</html>
